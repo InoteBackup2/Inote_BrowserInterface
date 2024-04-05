@@ -1,0 +1,6 @@
+.blackBoard{
+    background-image: url('../../../assets/background.jpg');
+    background-size: cover; /* scale the image to cover the entire container */
+    background-position: center; /* position the image at the center */
+    background-repeat: no-repeat; /* do not repeat the image */
+  }
