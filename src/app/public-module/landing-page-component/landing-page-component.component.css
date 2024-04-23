@@ -1,13 +1,20 @@
-@font-face {
-    font-family: 'MyFont';
-    src: url('../../../assets/fonts/MadimiOne-Regular.ttf');
+  @keyframes inote_logo_vertical_translate {
+    0% {
+      transform: translateY(10px);
+    }
+  
+    100% {
+      transform: translateY(-10px);
+    }
   }
   
-  .title{
-    font-family: "MyFont", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size:8rem;
+  .inote_logo_animation{
+    animation: inote_logo_vertical_translate 2s  alternate-reverse infinite ease-in-out  both ;
+  }
+
+  #landing{
+    height: 90vh;
+    width: 100%;
   }
 
   
