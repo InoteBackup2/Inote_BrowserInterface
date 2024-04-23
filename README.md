@@ -1,6 +1,6 @@
 # Inote (Angular Browser interface application)
 
-## User-friendly notes management
+## User-friendly notes management 
 
 ![](./Inote_logo.png)
 
