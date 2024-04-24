@@ -1,16 +1,6 @@
-  @keyframes inote_logo_vertical_translate {
-    0% {
-      transform: translateY(10px);
-    }
+
   
-    100% {
-      transform: translateY(-10px);
-    }
-  }
-  
-  .inote_logo_animation{
-    animation: inote_logo_vertical_translate 2s  alternate-reverse infinite ease-in-out  both ;
-  }
+
 
   #landing{
     height: 90vh;

@@ -7,11 +7,13 @@ import { LandingPageComponentComponent } from './landing-page-component/landing-
 import { LoginComponentComponent } from './login-component/login-component.component';
 import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
 import { SharedPublicModuleModule } from './shared-public-module/shared-public-module.module';
+import { SubscribeComponentComponent } from './subscribe-component/subscribe-component.component';
 
 const publicRoutes:Routes = [
   {path:'home', component:LandingPageComponentComponent},
   {path:'login', component:LoginComponentComponent},
   {path:'page-not-found', component:PageNotFoundComponentComponent},
+  {path:'subscribe', component:SubscribeComponentComponent}
 ]
 
 @NgModule({
@@ -19,6 +21,7 @@ const publicRoutes:Routes = [
     LandingPageComponentComponent,
     LoginComponentComponent,
     PageNotFoundComponentComponent,
+    SubscribeComponentComponent,
   ],
   imports: [
     CommonModule,

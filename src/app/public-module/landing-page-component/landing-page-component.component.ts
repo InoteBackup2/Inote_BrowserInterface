@@ -10,10 +10,15 @@ import { Router } from '@angular/router';
   ]
 })
 export class LandingPageComponentComponent {
-  
-  constructor(private router:Router){}
 
-  goToLoginPage(){
+
+  constructor(private router: Router) { }
+
+  goToLoginPage() {
     this.router.navigate(['login']);
+  }
+
+  goToSubscribePage() {
+   this.router.navigate(['subscribe']);
   }
 }

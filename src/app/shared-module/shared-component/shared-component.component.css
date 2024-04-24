@@ -1,6 +1,37 @@
-.blackBoard{
-    background-image: url('../../../assets/background.jpg');
-    background-size: cover; /* scale the image to cover the entire container */
-    background-position: center; /* position the image at the center */
-    background-repeat: no-repeat; /* do not repeat the image */
+.blackBoard {
+  background-image: url('../../../assets/background.jpg');
+  background-size: cover;
+  /* scale the image to cover the entire container */
+  background-position: center;
+  /* position the image at the center */
+  background-repeat: no-repeat;
+  /* do not repeat the image */
+}
+
+#page {
+  height: 90vh;
+  width: 100%;
+  
+}
+
+#page_without_nav {
+  height: 100vh;
+  width: 100%;
+  
+}
+
+
+
+@keyframes inote_logo_vertical_translate {
+  0% {
+    transform: translateY(10px);
   }
+
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+.inote_logo_animation{
+  animation: inote_logo_vertical_translate 2s  alternate-reverse infinite ease-in-out  both ;
+}

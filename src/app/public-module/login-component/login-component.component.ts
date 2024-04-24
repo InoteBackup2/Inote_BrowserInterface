@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-component',
   templateUrl: './login-component.component.html',
-  styleUrls: [
+    styleUrls: [
     '../../shared-module/shared-component/shared-component.component.css'
   ]
 })
