@@ -8,6 +8,7 @@ import { LoginComponentComponent } from './login-component/login-component.compo
 import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
 import { SharedPublicModuleModule } from './shared-public-module/shared-public-module.module';
 import { SubscribeComponentComponent } from './subscribe-component/subscribe-component.component';
+import { RegisterFormComponentComponent } from './register-form-component/register-form-component.component';
 
 const publicRoutes:Routes = [
   {path:'home', component:LandingPageComponentComponent},
@@ -22,13 +23,14 @@ const publicRoutes:Routes = [
     LoginComponentComponent,
     PageNotFoundComponentComponent,
     SubscribeComponentComponent,
+    RegisterFormComponentComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(publicRoutes),
     SharedPublicModuleModule,
-    SharedModuleModule,
-    FormsModule,
+    SharedModuleModule
   ]
 })
 export class PublicModuleModule { }
