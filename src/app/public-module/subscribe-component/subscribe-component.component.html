@@ -1,32 +1,18 @@
-<section id="page_without_nav" class="bg-success bg-gradient d-flex align-items-center ">
-    <div class="container">
-        <div class="row mx-3">
-            <div class="mb-3 col-lg-6 justify-content-center text-center " data-aos="zoom-in" data-aos-delay="200">
-                <h1 class="fs-1 text-white mb-3">Création de compte</h1>
-            </div>
-            <div class=" col-lg-6 d-flex flex-column text-center" data-aos="fade-up" data-aos-delay="200">
-                <form #loginForm="ngForm">
-                    <div class="d-flex justify-content-start align-items-center">
-                        <input type="text" id="name" name="name" required class="form-control"
-                            placeholder="Nom d'utilisateur" autofocus>
+<section id="page_without_nav" class="d-flex align-items-center text-center text-white bg-success">
+    <div class="container ">
+        <div class="row row-cols-1 row-cols-lg-2 align-items-center">
+            <div class="col display-6 h1"><h1>Création de compte</h1></div>
+            <div class="col p-3 ">
+                <form action="/register" method="post" class="d-flex flex-column">
+                    <input type="text" class="form-control mb-3" placeholder="Email" required autofocus>
+                    <input type="password" class="form-control mb-3" placeholder="Mot de passe" required>
+                    <div class="d-flex align-items-start mb-3">
+                        <input type="checkbox" id="acceptInoterules" class="form-check  me-3">
+                        <label for="acceptInoterules" class="text-start">J'ai lu et accepté les conditions d'utilisation et la politique de confidentialité de Inote</label>
                     </div>
-                    <div class="d-flex justify-content-start align-items-center mt-3">
-                        <input type="password" id="password" name="password" required class="form-control"
-                            placeholder="Mot de passe">
+                    <div class="d-flex flex-grow-0 justify-content-center">
+                        <button type="submit" class=" mt-2 btn btn-secondary ms-lg-auto border border-white">Continuer</button>
                     </div>
-                    <div class="d-flex justify-content-start align-items-center mt-3">
-                        <input type="password" id="password" name="password" required class="form-control"
-                            placeholder="Confirmer le mot de passe">
-                    </div>
-                    <div class="form-check d-flex justify-content-start  mt-3">
-                        <input class="form-check-input " type="checkbox" value="" id="invalidCheck2"
-                            required>
-                        <label class="form-check-label ms-2  text-start text-white"
-                            for="invalidCheck2">
-                            J'accepte les conditions d'utilisation et la politique de confidentialité de Inote .
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-secondary mt-3 border border-white ">Continuer</button>
                 </form>
             </div>
         </div>
