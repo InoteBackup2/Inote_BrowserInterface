@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
     './subscribe-component.component.css',
     '../../shared-module/shared-component/shared-component.component.css']
 })
-export class SubscribeComponentComponent {
-
-}
+export class SubscribeComponentComponent {}

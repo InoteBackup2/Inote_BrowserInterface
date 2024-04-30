@@ -5,18 +5,19 @@ import { FooterComponentComponent } from './footer-component/footer-component.co
 import { BorderMouseNoInitialColorDirectiveDirective } from './border-mouse-no-initial-color-directive.directive';
 import { SpinLoaderComponentComponent } from './spin-loader-component/spin-loader-component.component';
 import { SharedComponentComponent } from './shared-component/shared-component.component';
-
+import { DtoModuleModule } from './dto-module/dto-module.module'
 @NgModule({
   declarations: [
     BorderMouseDirective,
     FooterComponentComponent,
     BorderMouseNoInitialColorDirectiveDirective,
     SpinLoaderComponentComponent,
-    SharedComponentComponent,
+    SharedComponentComponent
   ],
   imports: [
-    CommonModule
-  ],
+    CommonModule,
+    DtoModuleModule
+     ],
   exports:[
     FooterComponentComponent,
     BorderMouseDirective,

@@ -9,7 +9,7 @@ import { PageNotFoundComponentComponent } from './page-not-found-component/page-
 import { SharedPublicModuleModule } from './shared-public-module/shared-public-module.module';
 import { SubscribeComponentComponent } from './subscribe-component/subscribe-component.component';
 import { RegisterFormComponentComponent } from './register-form-component/register-form-component.component';
-
+import { UserService } from '../protected-module/shared-protected-module/user-module/user.service';
 const publicRoutes:Routes = [
   {path:'home', component:LandingPageComponentComponent},
   {path:'login', component:LoginComponentComponent},
@@ -27,10 +27,15 @@ const publicRoutes:Routes = [
   ],
   imports: [
     CommonModule,
+    SharedModuleModule,
     FormsModule,
     RouterModule.forChild(publicRoutes),
     SharedPublicModuleModule,
-    SharedModuleModule
-  ]
+  ],
+  
+    providers:[
+      UserService,
+    ]
+  
 })
 export class PublicModuleModule { }
