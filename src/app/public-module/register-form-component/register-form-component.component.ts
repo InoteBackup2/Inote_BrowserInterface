@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDto } from '../../shared-module/dto-module/user.dto';
+import { PublicUserDto } from '../shared-public-module/dto-module/public-user-dto.dto';
 import { PublicUserService } from '../public-user.service';
 import { catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ export class RegisterFormComponentComponent implements OnInit {
   password!: string;
 
   registering_success: boolean = false;
-  userToRegister!: UserDto;
+  userToRegister!: PublicUserDto;
 
   // Http response variables 
   msgAfterRequest!: string;
@@ -28,7 +28,7 @@ export class RegisterFormComponentComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  registerUser(user: UserDto) {
+  registerUser(user: PublicUserDto) {
     this.publicUserService.addUser(user).pipe(
       catchError(error => {
         this.statusAfterRequest = error.status;
@@ -45,7 +45,7 @@ export class RegisterFormComponentComponent implements OnInit {
 
   OnSubmit() {
     this.registerUser(
-      new UserDto("default", this.email, this.password)
+      new PublicUserDto("default", this.email, this.password)
     );
   }
 

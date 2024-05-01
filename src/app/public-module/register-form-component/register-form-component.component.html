@@ -40,7 +40,7 @@
     </div>
     <div [ngSwitch]="this.statusAfterRequest" class="mt-4 ">
         <div *ngSwitchCase=201 class="text-white">{{this.msgAfterRequest}}</div>
-        <div *ngSwitchDefault class="text-danger">{{this.msgAfterRequest}}</div>
+        <div *ngSwitchDefault class="text-danger"><strong>{{this.msgAfterRequest}}</strong></div>
     </div>
     <button type="button" (click)="goToHome()" class=" mt-2 btn btn-secondary ms-lg-auto border border-white"
         [hidden]="!this.registering_success">
