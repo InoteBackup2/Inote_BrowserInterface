@@ -34,7 +34,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSHKEY }}
           port: ${{ secrets.PORT }}
-          source: ./dist/inote-web-interface/
-          target: .
-          strip_components: 1  # kill-process:
-  
+          source: "./dist/inote-web-interface/"
+          target: "/var/www/html"
+          #strip_components: 1  # kill-process:
+          
+         
