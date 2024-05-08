@@ -44,7 +44,7 @@ jobs:
         - run: |
             mkdir ../build
             cp -TR ./dist/inote-web-interface/ ../build
-            tar -cvf devServer.tar ../build/dist/browser
+            tar -cvf devServer.tar ../build/dist/inote-web-interface
 
             
         - uses: appleboy/scp-action@master
