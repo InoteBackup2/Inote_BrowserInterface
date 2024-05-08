@@ -43,7 +43,7 @@ jobs:
 
         - run: |
             mkdir ../build
-            cp -TR ./dist/browser ../build
+            cp -TR ./dist/inote-web-interface/ ../build
             tar -cvf devServer.tar ../build/dist/browser
 
             
