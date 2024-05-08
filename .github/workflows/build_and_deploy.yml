@@ -35,6 +35,6 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           port: ${{ secrets.PORT }}
           source: ./dist/inote-web-interface/
-          target: /var/www/
+          target: .
           strip_components: 1  # kill-process:
   
