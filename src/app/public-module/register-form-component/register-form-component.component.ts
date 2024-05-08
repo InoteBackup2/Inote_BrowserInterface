@@ -11,16 +11,24 @@ import { Router } from '@angular/router';
 })
 export class RegisterFormComponentComponent implements OnInit {
 
+
   // Forms Fields
   email!: string;
   password!: string;
-
+  pseudonyme!: string;
+  activationcode!: string;
+  
   registering_success: boolean = false;
+  activation_success: boolean = false;
+
   userToRegister!: PublicUserDto;
 
   // Http response variables 
-  msgAfterRequest!: string;
-  statusAfterRequest!: number;
+  msgAfterRegisterRequest!: string;
+  statusAfterRegisterRequest!: number;
+
+  msgAfterActivationRequest!: string;
+  statusAfterActivationRequest!: number;
 
   constructor(
       private publicUserService: PublicUserService,
@@ -31,22 +39,42 @@ export class RegisterFormComponentComponent implements OnInit {
   registerUser(user: PublicUserDto) {
     this.publicUserService.addUser(user).pipe(
       catchError(error => {
-        this.statusAfterRequest = error.status;
-        this.msgAfterRequest = error.error.msg;
+        this.statusAfterRegisterRequest = error.status;
+        this.msgAfterRegisterRequest = error.error.msg;
         return throwError(error);
       })
     )
       .subscribe(response => {
-        this.statusAfterRequest = response.status;
-        this.msgAfterRequest = response.body.msg;
+        this.statusAfterRegisterRequest = response.status;
+        this.msgAfterRegisterRequest = response.body.msg;
         this.registering_success=true;
       })
   }
 
+  activateUser(activationCode:string){
+    this.publicUserService.activateUser(activationCode).pipe(
+      catchError(error => {
+        this.statusAfterActivationRequest = error.status;
+        this.msgAfterActivationRequest = error.error.msg;
+        return throwError(error);
+      })
+    )
+    .subscribe(response => {
+      this.statusAfterActivationRequest = response.status;
+      this.msgAfterActivationRequest = response.body.msg;
+      this.activation_success=true;
+    })
+  }
+
   OnSubmit() {
     this.registerUser(
-      new PublicUserDto("default", this.email, this.password)
+      new PublicUserDto(this.pseudonyme, this.email, this.password)
     );
+  }
+
+  OnSubmitActivation() {
+    
+    this.activateUser(this.activationcode);
   }
 
   goToHome() {

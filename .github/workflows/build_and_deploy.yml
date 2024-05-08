@@ -1,0 +1,54 @@
+# CI/CD pipeline for Inote API
+# atsuhikoMochizuki
+# 08/05/2024
+
+name: CI/CD pipeline for Inote API
+
+on:
+  push:
+    branches: ["main"]
+jobs:
+  # kill-process:
+  #   name: kill process
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #    - name: Stop process running on port 8080
+  #      uses: appleboy/ssh-action@v1.0.0
+  #      with:
+  #       host: ${{ secrets.HOST }}
+  #       username: ${{ secrets.USERNAME }}
+  #       key: ${{ secrets.SSHKEY }}
+  #       port: ${{ secrets.PORT }}
+  #       script: fuser -k 8080/tcp
+
+  create-folder:
+    name: create-folder
+    runs-on: ubuntu-latest
+    steps:
+     - name: Create folder on host for deployment 
+       uses: appleboy/ssh-action@v1.0.0
+       with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSHKEY }}
+        port: ${{ secrets.PORT }}
+        script: mkdir -p ./Inote_project/web_interface
+  
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    needs: create-folder
+    steps:
+        - uses: actions/checkout@v4
+        - run: npm ci && npm run build
+        
+        - uses: appleboy/scp-action@v0.1.7
+          with: 
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.SSHKEY }}
+            port: ${{ secrets.PORT }}
+            source: "dist/browser"
+            target: "./Inote_project/web_interface" 
+            strip_components: 1
+
+ 
