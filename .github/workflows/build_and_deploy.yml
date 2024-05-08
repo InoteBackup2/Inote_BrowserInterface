@@ -40,15 +40,30 @@ jobs:
     steps:
         - uses: actions/checkout@v4
         - run: npm ci && npm run build
-        
-        - uses: appleboy/scp-action@v0.1.7
-          with: 
+
+        - run: |
+            mkdir ../build
+            cp -TR . ../build
+            tar -cvf devServer.tar ../build/dist/
+
+            
+        - uses: appleboy/scp-action@master
+          with:
             host: ${{ secrets.HOST }}
             username: ${{ secrets.USERNAME }}
             key: ${{ secrets.SSHKEY }}
             port: ${{ secrets.PORT }}
-            source: "dist/browser" 
-            target: "./Inote_project/web_interface" 
-            strip_components: 1
+            source: "devServer.tar"
+            target: "./Inote_project/web_interface"
+                
+        # - uses: appleboy/scp-action@v0.1.7
+        #   with: 
+        #     host: ${{ secrets.HOST }}
+        #     username: ${{ secrets.USERNAME }}
+        #     key: ${{ secrets.SSHKEY }}
+        #     port: ${{ secrets.PORT }}
+        #     source: "dist/browser" 
+        #     target: "./Inote_project/web_interface" 
+        #     strip_components: 1
 
  
