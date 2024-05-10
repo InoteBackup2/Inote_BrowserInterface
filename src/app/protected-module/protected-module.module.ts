@@ -9,13 +9,20 @@ import { ViewUserEditComponentComponent } from './view-user-edit-component/view-
 import { ViewUserAddComponentComponent } from './view-user-add-component/view-user-add-component.component';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from '../core-module/auth.guard';
+import { DashboardComponentComponent } from './dashboard-component/dashboard-component.component';
+import { SharedModuleModule } from '../shared-module/shared-module.module';
+
 
 
 const protectedRoutes:Routes=[
   {path:'edit/user/:id', component: ViewUserEditComponentComponent, canActivate:[AuthGuard]},
   {path:'user/add', component:ViewUserAddComponentComponent , canActivate:[AuthGuard]},
   {path:'user/:id', component: ViewUserDetailsComponentComponent, canActivate:[AuthGuard]},
-  {path:'users', component:ViewUserListComponentComponent, canActivate:[AuthGuard]}
+  {path:'users', component:ViewUserListComponentComponent, canActivate:[AuthGuard]},
+  {path:'dashboard', component:DashboardComponentComponent, canActivate:[AuthGuard]},
+  
+  
+  
 ]
 @NgModule({
     declarations: [
@@ -23,6 +30,8 @@ const protectedRoutes:Routes=[
         ViewUserDetailsComponentComponent,
         ViewUserEditComponentComponent,
         ViewUserAddComponentComponent,
+        DashboardComponentComponent,
+       
         
     ],
     imports: [

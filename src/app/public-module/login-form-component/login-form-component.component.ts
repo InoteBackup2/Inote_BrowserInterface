@@ -2,6 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { PublicUserService } from "../public-user.service";
 import { Router } from "@angular/router";
 import { catchError, throwError } from "rxjs";
+import { TokenService } from "../../core-module/token.service";
+
+interface IToken {
+  bearer:string
+}
 
 @Component({
   selector: "app-login-form-component",
@@ -12,6 +17,7 @@ import { catchError, throwError } from "rxjs";
   ],
 })
 export class LoginFormComponentComponent implements OnInit {
+  token!: IToken;
   email!: string;
   password!: string;
   statusAfterRequest!: string;
@@ -19,7 +25,8 @@ export class LoginFormComponentComponent implements OnInit {
 
   constructor( 
     private publicUserservice : PublicUserService,
-    private router:Router
+    private tokenService : TokenService,
+    private router:Router 
   ){}
 
   OnSubmit() {
@@ -34,16 +41,15 @@ export class LoginFormComponentComponent implements OnInit {
 
       catchError(error => {
         this.statusAfterRequest = error.status;
-        this.msgAfterRequest = error.error.msg;
+        this.msgAfterRequest = error.error.detail;
         return throwError(error);
       })
     )
-    .subscribe(response => {
-      console.log(response.body.bearer);
-      this.statusAfterRequest = response.status;
-      // const object : Object = response.body.msg;
-      if(this.statusAfterRequest=="200"){
-      
+    .subscribe((response) => {
+     this.statusAfterRequest = response.status;
+     if(response.status=="200"){
+        this.tokenService.saveToken(response.body.bearer);
+        this.router.navigate(['dashboard']);
       }
     })
 

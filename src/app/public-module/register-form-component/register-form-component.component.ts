@@ -4,6 +4,8 @@ import { PublicUserService } from '../public-user.service';
 import { catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
+
+
 @Component({
   selector: 'app-register-form-component',
   templateUrl: './register-form-component.component.html',
@@ -36,19 +38,33 @@ export class RegisterFormComponentComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  // registerUser(user: PublicUserDto) {
+  //   this.publicUserService.addUser(user).pipe(
+  //     catchError(error => {
+  //       this.statusAfterRegisterRequest = error.status;
+  //       this.msgAfterRegisterRequest = error.error.msg;
+  //       return throwError(error);
+  //     })
+  //   )
+  //     .subscribe(response => {
+  //       this.statusAfterRegisterRequest = response.status;
+  //       this.msgAfterRegisterRequest = response.body.msg;
+  //       this.registering_success=true;
+  //     })
+  // }
+
   registerUser(user: PublicUserDto) {
-    this.publicUserService.addUser(user).pipe(
-      catchError(error => {
-        this.statusAfterRegisterRequest = error.status;
-        this.msgAfterRegisterRequest = error.error.msg;
-        return throwError(error);
-      })
-    )
-      .subscribe(response => {
+    this.publicUserService.addUser(user).subscribe(
+      response => {
         this.statusAfterRegisterRequest = response.status;
         this.msgAfterRegisterRequest = response.body.msg;
         this.registering_success=true;
-      })
+      },
+    error => {
+      this.statusAfterRegisterRequest = error.status;
+        this.msgAfterRegisterRequest = error.error.msg;
+        return throwError(error);
+    })
   }
 
   activateUser(activationCode:string){
