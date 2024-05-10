@@ -5,6 +5,8 @@ import { PublicNavBarComponentComponent } from './public-nav-bar-component/publi
 import { DtoModuleModule } from './dto-module/dto-module.module';
 import { PublicUserService } from '../public-user.service';
 import {BackEndPoints} from './back-end-points.constants';
+import { RouterModule } from '@angular/router';
+import { SharedModuleModule } from '../../shared-module/shared-module.module';
 
 
 
@@ -15,6 +17,7 @@ import {BackEndPoints} from './back-end-points.constants';
     PublicNavBarComponentComponent,
     ],
   imports: [
+    RouterModule,
     CommonModule,
     DtoModuleModule
   ],

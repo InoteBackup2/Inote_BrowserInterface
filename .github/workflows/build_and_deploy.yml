@@ -35,6 +35,5 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           port: ${{ secrets.PORT }}
           source: "./dist/inote-web-interface/"
-          target: "/var/www/html"
+          target: "./Inote_project/web_interface"
           strip_components: 1
-         
