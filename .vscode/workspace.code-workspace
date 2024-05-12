@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "./..",
+			"name": "Inote Frontend"
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "firefox",
+				"name": "Firefox debugger",
+				"request": "launch",
+				"reAttach": true,
+				"url": "http://localhost:4200/",
+				"webRoot": "${workspaceFolder}"
+			}
+		]
+	},
+	"extensions": {
+		"recommendations": [
+			"angular.ng-template",
+			"redhat.vscode-xml",
+			"firefox-devtools.vscode-firefox-debug"
+		]
+	}
+}
