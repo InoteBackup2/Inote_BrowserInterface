@@ -1,2 +1,20 @@
-node_modules
-dist
+# Ignore Angular/NodeJS temporary files.
+
+## Angular ##
+node_modules/
+dist/
+tmp/
+app/**/*.js
+app/**/*.js.map
+typings/
+.angular/cache/
+e2e/*.js
+e2e/*.map
+
+## File systems ##
+.DS_Store/
+
+## NodeJS ##
+logs
+*.log
+npm-debug.log*
