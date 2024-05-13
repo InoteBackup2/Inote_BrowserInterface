@@ -1,8 +1,8 @@
 import {
   DomSanitizer
-} from "./chunk-ECRQDBOP.js";
-import "./chunk-2PVJEK6W.js";
-import "./chunk-XC2K4NUU.js";
+} from "./chunk-5ND6GWAE.js";
+import "./chunk-PZ3PDJQY.js";
+import "./chunk-LDCJVNPO.js";
 import {
   Component,
   Directive,
@@ -30,11 +30,11 @@ import {
   ɵɵprojection,
   ɵɵprojectionDef,
   ɵɵsanitizeHtml
-} from "./chunk-M5MGQLXV.js";
-import "./chunk-A7767RW4.js";
+} from "./chunk-ADC7WMBP.js";
+import "./chunk-WSA2QMXP.js";
 import "./chunk-WKYGNSYM.js";
 
-// ../../../node_modules/@fortawesome/fontawesome-svg-core/index.mjs
+// node_modules/@fortawesome/fontawesome-svg-core/index.mjs
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
@@ -2590,7 +2590,7 @@ var layer = api.layer;
 var text = api.text;
 var counter = api.counter;
 
-// ../../../node_modules/@fortawesome/angular-fontawesome/fesm2022/angular-fontawesome.mjs
+// node_modules/@fortawesome/angular-fontawesome/fesm2022/angular-fontawesome.mjs
 var _c0 = ["*"];
 var faWarnIfIconDefinitionMissing = (iconSpec) => {
   throw new Error(`Could not find icon with iconName=${iconSpec.iconName} and prefix=${iconSpec.prefix} in the icon library.`);

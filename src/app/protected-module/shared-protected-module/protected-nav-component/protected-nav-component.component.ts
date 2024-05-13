@@ -1,10 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { faCoffee, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-protected-nav-component',
   templateUrl: './protected-nav-component.component.html',
-  styles: ``
+  styles: `
+  
+  `
 })
-export class ProtectedNavComponentComponent {
+export class ProtectedNavComponentComponent implements OnInit{
 
+  requestedSearch!:boolean;
+  faMagnifyingGlass = faMagnifyingGlass;
+
+  ngOnInit(): void {
+      this.requestedSearch = false;
+  }
+  onSearchRequested() {
+    this.requestedSearch= !this.requestedSearch;
+  }
 }
