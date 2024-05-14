@@ -5,12 +5,25 @@
 			"name": "Inote Frontend"
 		}
 	],
+	// Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"launch": {
 		"version": "0.2.0",
 		"configurations": [
 			{
+				"type": "chrome",
+				"name": "Launch Brave",
+				"request": "launch",
+				"webRoot": "${workspaceFolder}",
+				"runtimeExecutable": "stable",
+				"runtimeArgs": [
+					"--remote-debugging-port=9222"
+				]
+			},
+			{
 				"type": "firefox",
-				"name": "Firefox debugger",
+				"name": "Launch Firefox",
 				"request": "launch",
 				"reAttach": true,
 				"url": "http://localhost:4200/",
@@ -20,9 +33,18 @@
 	},
 	"extensions": {
 		"recommendations": [
-			"angular.ng-template",
+			// Redhat
 			"redhat.vscode-xml",
-			"firefox-devtools.vscode-firefox-debug"
+			// Angular
+			"angular.ng-template",
+			// Browser debug
+			"firefox-devtools.vscode-firefox-debug",
+			// Style
+			"pucelle.vscode-css-navigation",
+			// Git
+			"mhutchie.git-graph",
+			// Test coverage
+			"ryanluker.vscode-coverage-gutters"
 		]
 	}
 }
