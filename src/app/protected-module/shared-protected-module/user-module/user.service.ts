@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of, tap } from 'rxjs';
 import { User } from './user';
+import { PublicUserDto } from './public-user-dto.dto';
+import { BackEndPoints } from '../../../public-module/shared-public-module/back-end-points.constants';
 
 @Injectable()
 export class UserService {
@@ -9,6 +11,18 @@ export class UserService {
   constructor(
     private http:HttpClient
   ) { }
+
+  getCurrentUser(bearer:string):Observable<any>{
+    const authorisation: string = `Bearer ${bearer}`;
+    const headers = { 'Authorization': authorisation }
+    return this.http.get<any>(BackEndPoints.GET_CURRENT_USER,{headers}) // Envoi de la requete HTTP et réception d'un observable
+      .pipe(  //Applique des transformations sur les données directement dans le template
+        tap(  //Effectue des actions sur les valeurs émises par l'observable, sans les modifier
+          response => this.log(response)),
+        // Si erreur, on logue l'erreur et on retourne un tableau vide pour éviter de faire planter l'application 
+        catchError(error => this.handleError(error, []))
+      );
+  }
 
   getUserList(): Observable<User[]> {
     return this.http.get<User[]>('api/users') // Envoi de la requete HTTP et réception d'un observable
