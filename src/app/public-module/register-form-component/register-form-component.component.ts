@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component/*, OnInit*/ } from '@angular/core';
 import { PublicUserDto } from '../shared-public-module/dto-module/public-user-dto.dto';
 import { PublicUserService } from '../public-user.service';
 import { catchError, throwError } from 'rxjs';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './register-form-component.component.html',
   styleUrls: ['./register-form-component.component.css', '../../shared-module/general-styles.css']
 })
-export class RegisterFormComponentComponent implements OnInit {
+export class RegisterFormComponentComponent/* implements OnInit*/ {
 
 
   // Forms Fields
@@ -36,7 +36,7 @@ export class RegisterFormComponentComponent implements OnInit {
       private publicUserService: PublicUserService,
       private router:Router) { }
 
-  ngOnInit(): void { }
+  //ngOnInit(): void { }
 
   // registerUser(user: PublicUserDto) {
   //   this.publicUserService.addUser(user).pipe(

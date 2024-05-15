@@ -7,15 +7,13 @@ import { BackEndPoints } from "./shared-public-module/back-end-points.constants"
 
 
 @Injectable()
-export class PublicUserService {
-
-  
+export class PublicUserService {  
   
   constructor(private http: HttpClient) {}
 
   addUser(user: PublicUserDto): Observable<any> {
     const headers = { "content-type": "application/json" }; // because we send JSON
-    const body: string = user.serializedData();
+    //const body: string = user.serializedData();
     return this.http.post<any>(BackEndPoints.REGISTER, user.serializedData(), {
       headers: headers,
       reportProgress: true,

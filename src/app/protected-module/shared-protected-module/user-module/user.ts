@@ -12,7 +12,7 @@ export class User {
     biography!: string;
     subscriptionDate: Date = new Date;
     teamInCommon!: boolean;
-    picture!: Object;
+    picture!: unknown; // Type inconnu ?
 
     constructor(
         pseudo: string = '',
