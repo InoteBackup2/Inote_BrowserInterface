@@ -18,3 +18,7 @@ e2e/*.map
 logs
 *.log
 npm-debug.log*
+
+## ESLint
+.nx/cache
+.nx/workspace-data
