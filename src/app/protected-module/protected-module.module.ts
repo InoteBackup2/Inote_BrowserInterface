@@ -10,7 +10,7 @@ import { ViewUserAddComponentComponent } from './view-user-add-component/view-us
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from '../core-module/auth.guard';
 import { DashboardComponentComponent } from './dashboard-component/dashboard-component.component';
-import { SharedModuleModule } from '../shared-module/shared-module.module';
+//import { SharedModuleModule } from '../shared-module/shared-module.module';
 
 
 

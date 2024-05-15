@@ -7,10 +7,10 @@ import { PublicModuleModule } from './public-module/public-module.module';
 import { SharedModuleModule } from './shared-module/shared-module.module';
 import { ProtectedModuleModule } from './protected-module/protected-module.module';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './core-module/in-memory-data.service';
+//import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+//import { InMemoryDataService } from './core-module/in-memory-data.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+//import { FormsModule } from '@angular/forms';
 
 
 @NgModule({

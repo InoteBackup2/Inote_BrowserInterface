@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component/*, OnInit*/ } from "@angular/core";
 import { PublicUserService } from "../public-user.service";
 import { Router } from "@angular/router";
 import { catchError, throwError } from "rxjs";
@@ -16,7 +16,7 @@ interface IToken {
     "../../shared-module/general-styles.css",
   ],
 })
-export class LoginFormComponentComponent implements OnInit {
+export class LoginFormComponentComponent/* implements OnInit*/ {
   token!: IToken;
   email!: string;
   password!: string;
@@ -34,7 +34,7 @@ export class LoginFormComponentComponent implements OnInit {
    this.login(this.email, this.password);
   }
 
-  ngOnInit(): void {}
+  //ngOnInit(): void {}
 
   private login(email:string, password:string){
     this.publicUserservice.loginUser(email,password).pipe(

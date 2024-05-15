@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
   }
   `
 })
-export class UserFormComponentComponent {
+export class UserFormComponentComponent implements OnInit {
   @Input() user!: User;
   isAddForm!: boolean;
 

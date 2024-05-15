@@ -11,7 +11,7 @@ export class UserFilterPipePipe implements PipeTransform {
       return null;
     }
 
-    let filteredResults: User[] = users.filter(user => {
+    const filteredResults: User[] = users.filter(user => {
       return (
         user.pseudo.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
