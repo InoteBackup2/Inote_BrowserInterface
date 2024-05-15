@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import * as AOS from 'aos';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-root',

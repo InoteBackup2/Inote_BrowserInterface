@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faCoffee, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { User } from '../user';
@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
   templateUrl: './search-user-component.component.html',
   styles: ``
 })
-export class SearchUserComponentComponent {
+export class SearchUserComponentComponent implements OnInit {
   faCoffee = faCoffee;
   faMagnifyingGlass = faMagnifyingGlass;
 
@@ -46,7 +46,7 @@ export class SearchUserComponentComponent {
       // plus récente que l'utilisateur a demandé, grâce à switchMap().
       // A l'instar de map() qui renverrai un flux (Observable) d'utilisateur, il va 
       // déjà renvoyer directement les utilisateurs.
-      switchMap((term) => this.userService.getUserList())
+      switchMap(() => this.userService.getUserList())
       //{....userList(ab)....userList(abc)...}
     );
   }
