@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UserModuleModule } from './user-module/user-module.module';
 import { ProtectedNavComponentComponent } from './protected-nav-component/protected-nav-component.component';
 import { RouterModule } from '@angular/router';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [ 
@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
+    FontAwesomeModule,
     UserModuleModule,
     RouterModule
   ],

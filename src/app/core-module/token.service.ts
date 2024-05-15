@@ -16,4 +16,8 @@ export class TokenService {
     const token = localStorage.getItem(this.BEARER);
     return !!token; // !! transforme la variable en boolean
   }
+
+  getToken() : string | null {
+    return localStorage.getItem(this.BEARER);
+  }
 }
