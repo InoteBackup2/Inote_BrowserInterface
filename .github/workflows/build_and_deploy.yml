@@ -2,7 +2,7 @@
 # atsuhikoMochizuki
 # 08/05/2024
 ---
-name: CI/CD pipeline for Inote API
+name: Inote Frontend CI/CD
 'on':
   push:
     branches: ["main"]
