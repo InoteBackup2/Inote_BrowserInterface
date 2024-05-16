@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { PublicUserDto } from "./shared-public-module/dto-module/public-user-dto.dto";
-import { BackEndPoints } from "./shared-public-module/back-end-points.constants";
+import { BackEndPoints } from "./shared-public-module/back-end-points.enum";
 
 
 

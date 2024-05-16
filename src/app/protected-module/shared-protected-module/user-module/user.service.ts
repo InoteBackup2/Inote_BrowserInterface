@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, of, tap } from 'rxjs';
 import { User } from './user';
 import { PublicUserDto } from './public-user-dto.dto';
-import { BackEndPoints } from '../../../public-module/shared-public-module/back-end-points.constants';
+import { BackEndPoints } from '../../../public-module/shared-public-module/back-end-points.enum';
 
 @Injectable()
 export class UserService {
