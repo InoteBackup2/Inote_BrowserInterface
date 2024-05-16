@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { faCoffee, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { /*faCoffee, */faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { PublicUserDto } from '../user-module/public-user-dto.dto';
-import { Observable } from 'rxjs';
+//import { Observable } from 'rxjs';
 import { UserService } from '../user-module/user.service';
 import { TokenService } from '../../../core-module/token.service';
 
