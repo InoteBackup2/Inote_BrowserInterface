@@ -1,5 +1,5 @@
 import { Component/*, OnInit*/ } from '@angular/core';
-import { PublicUserService } from '../../public-module/public-user.service';
+//import { PublicUserService } from '../../public-module/public-user.service';
 
 @Component({
   selector: 'app-dashboard-component',
