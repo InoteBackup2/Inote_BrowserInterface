@@ -4,7 +4,7 @@ import { HighlightDemoModeComponentComponent } from './highlight-demo-mode-compo
 import { PublicNavBarComponentComponent } from './public-nav-bar-component/public-nav-bar-component.component';
 import { DtoModuleModule } from './dto-module/dto-module.module';
 import { PublicUserService } from '../public-user.service';
-import {BackEndPoints} from './back-end-points.constants';
+import { BackEndPoints } from './back-end-points.enum';
 import { RouterModule } from '@angular/router';
 //import { SharedModuleModule } from '../../shared-module/shared-module.module';
 
