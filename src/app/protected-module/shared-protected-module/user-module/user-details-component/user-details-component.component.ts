@@ -9,6 +9,9 @@ import { UserService } from '../user.service';
   styles: ``
 })
 export class UserDetailsComponentComponent implements OnInit {
+onKeyUp() {
+throw new Error('Method not implemented.');
+}
   user!: User | undefined;
 
   constructor(

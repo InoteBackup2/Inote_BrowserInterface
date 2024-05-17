@@ -1,8 +1,8 @@
 <div class="d-flex flex-column overflow-auto" style="margin-top:5rem; margin-bottom:8rem">
     <app-search-user-component class="mb-4"></app-search-user-component>
     <div class="d-flex flex-row flex-wrap justify-content-start align-items-center">
-        <a class="btn btn-success ms-auto me-auto" (click)="goToUserAdd()">+</a>
-        <div *ngFor="let user of this.listUsers" (click)="goToUser(user)" appBorderMouse="#009688"
+        <a (keydown)="onKeyDown()" tabindex="1" class="btn btn-success ms-auto me-auto" (click)="goToUserAdd()">+</a>
+        <div *ngFor="let user of this.listUsers" (click)="goToUser(user)" (keydown)="onKeyDown()" tabindex="1" appBorderMouse="#009688"
             class="d-flex flex-column justify-content-center align-items-center p-1 m-1"
             style="width:14rem; height:20rem">
             <img [src]="user.picture" alt="user profile img" class="img-fluid rounded-circle"

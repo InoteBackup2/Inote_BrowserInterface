@@ -2,14 +2,14 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex align-items-center">
-                <input #searchBox (keyup)="search(searchBox.value)" type="text" class="form-control" autofocus
+                <input #searchBox (keyup)="search(searchBox.value)" type="text" class="form-control"
                     placeholder="recherche utilisateur">
                 <fa-icon [icon]="faMagnifyingGlass" class="fa-bounce ms-3"
                     style="--fa-animation-duration: 2s; --fa-beat-scale: 2.0;"></fa-icon>
             </div>
-            <ul class="list-group " style="position:fixed">
-                <li *ngFor="let user of users$|async|userFilterPipe:searchBox.value" class="list-group-item">
-                    <a (click)="goToDetailUser(user)">
+            <ul  class="list-group " style="position:fixed">
+                <li  *ngFor="let user of users$|async|userFilterPipe:searchBox.value" class="list-group-item">
+                    <a  (click)="goToDetailUser(user)" (keyup)="onKeyUp()" tabindex=1>
                         <div class="d-flex flex-row align-items-center p-2" appBorderMouseNoInitialColorDirective="#009688">
                             <p class="text-start fs-6 flex-fill"><span class="fw-bold">{{user.pseudo}}</span><br>
                                 {{user.firstName}} {{user.lastName}}

@@ -43,7 +43,7 @@
       id="email"
       aria-describedby="inputGroup-sizing-sm"
       required
-      autofocus
+     
       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
       [(ngModel)]="this.email"
       name="email"
@@ -78,7 +78,7 @@
       Se connecter
     </button>
   </div>
-  <div *ngIf="this.statusAfterRequest !== '200'" class="mt-4 text-danger" >
+  <div *ngIf="this.statusAfterRequest !== 200" class="mt-4 text-danger" >
     {{ this.msgAfterRequest }}
   </div>
 </form>

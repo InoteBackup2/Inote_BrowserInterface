@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
   ]
 })
 export class LandingPageComponentComponent {
+onKeyDown() {
+throw new Error('Method not implemented.');
+}
 
 
   constructor(private router: Router) { }

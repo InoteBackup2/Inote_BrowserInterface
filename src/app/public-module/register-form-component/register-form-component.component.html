@@ -25,7 +25,6 @@
       id="pseudo"
       aria-describedby="inputGroup-sizing-sm"
       required
-      autofocus
       pattern="^[a-zA-Z0-9!@#$%^&*()_+=-{}[\]:;<>?,./~|]{0,25}$"
       [(ngModel)]="this.pseudonyme"
       name="pseudo"
@@ -46,7 +45,6 @@
       id="email"
       aria-describedby="inputGroup-sizing-sm"
       required
-      autofocus
       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
       [(ngModel)]="this.email"
       name="email"
@@ -68,7 +66,6 @@
       id="pwd"
       aria-describedby="inputGroup-sizing-sm"
       required
-      autofocus
       pattern="[a-zA-Z0-9!@#$%^&*_=+-]{8,12}"
       [(ngModel)]="this.password"
       name="password"
@@ -102,7 +99,6 @@
             id="activation"
             aria-describedby="inputGroup-sizing-sm"
             required
-            autofocus
             pattern="[0-9]{6}$"
             [(ngModel)]="this.activationcode"
             name="activation"

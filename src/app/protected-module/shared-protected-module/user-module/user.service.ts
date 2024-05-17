@@ -4,6 +4,7 @@ import { Observable, catchError, of, tap } from 'rxjs';
 import { User } from './user';
 //import { PublicUserDto } from './public-user-dto.dto';
 import { BackEndPoints } from '../../../public-module/shared-public-module/back-end-points.constants';
+import { PublicUserDto } from './public-user-dto.dto';
 
 @Injectable()
 export class UserService {
@@ -12,10 +13,10 @@ export class UserService {
     private http:HttpClient
   ) { }
 
-  getCurrentUser(bearer:string):Observable<any>{
+  getCurrentUser(bearer:string):Observable<PublicUserDto>{
     const authorisation: string = `Bearer ${bearer}`;
     const headers = { 'Authorization': authorisation }
-    return this.http.get<any>(BackEndPoints.GET_CURRENT_USER,{headers}) // Envoi de la requete HTTP et réception d'un observable
+    return this.http.get<PublicUserDto>(BackEndPoints.GET_CURRENT_USER,{headers}) // Envoi de la requete HTTP et réception d'un observable
       .pipe(  //Applique des transformations sur les données directement dans le template
         tap(  //Effectue des actions sur les valeurs émises par l'observable, sans les modifier
           response => this.log(response)),
@@ -60,7 +61,7 @@ export class UserService {
 
     return this.http.post<User>('api/users', user, httpOptions)
       .pipe(
-        tap(response => this.log(response)),
+        
         catchError(error => this.handleError(error, null))
       );
   }

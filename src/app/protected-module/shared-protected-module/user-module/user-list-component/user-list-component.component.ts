@@ -9,6 +9,9 @@ import { UserService } from '../user.service';
   styles: ``
 })
 export class UserListComponentComponent implements OnInit {
+onKeyDown() {
+throw new Error('Method not implemented.');
+}
   listUsers!: User[];
 
   constructor(

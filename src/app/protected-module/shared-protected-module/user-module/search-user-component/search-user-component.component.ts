@@ -5,12 +5,19 @@ import { User } from '../user';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 
+
 @Component({
   selector: 'app-search-user-component',
   templateUrl: './search-user-component.component.html',
   styles: ``
 })
 export class SearchUserComponentComponent implements OnInit {
+onKeyUp() {
+throw new Error('Method not implemented.');
+}
+onKeyup() {
+throw new Error('Method not implemented.');
+}
   faCoffee = faCoffee;
   faMagnifyingGlass = faMagnifyingGlass;
 

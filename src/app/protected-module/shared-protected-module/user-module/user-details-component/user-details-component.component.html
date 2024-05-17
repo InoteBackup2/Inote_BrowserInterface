@@ -15,11 +15,11 @@
             {{user.biography}}</div>
         <hr />
         <div class="d-flex flex-row justify-content-evenly">
-            <a (click)="goToUserList()" class="text-success" style="text-decoration:none;"
+            <a (click)="goToUserList()" (keyup)="onKeyUp()" tabindex="1" class="text-success" style="text-decoration:none;"
                 appBorderMouseNoInitialColorDirective>RETOUR</a>
-            <a (click)="gotToEditUser(user)" class="text-warning" style="text-decoration:none;"
+            <a (click)="gotToEditUser(user)" (keyup)="onKeyUp()" tabindex="1" class="text-warning" style="text-decoration:none;"
                 appBorderMouseNoInitialColorDirective="#ffc107">EDITER</a>
-            <a (click)="deleteUser(user)" class="text-danger" style="text-decoration:none;"
+            <a (click)="deleteUser(user)" (keyup)="onKeyUp()" tabindex="1" class="text-danger" style="text-decoration:none;"
                 appBorderMouseNoInitialColorDirective="#dc3545">SUPPRIMER</a>
         </div>
     </div>

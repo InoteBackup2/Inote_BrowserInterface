@@ -20,7 +20,7 @@ export class ProtectedNavComponentComponent implements OnInit{
   publicUserDto! : PublicUserDto;
   token! : string|null;
 
-  jsonData: any;
+  
 
   constructor(
     private userService:UserService,
@@ -31,8 +31,8 @@ export class ProtectedNavComponentComponent implements OnInit{
       if(this.token !== null){
         this.userService.getCurrentUser(this.token).subscribe(
           response => {
-             this.jsonData = response;
-             this.publicUserDto = this.jsonData.data;
+             this.publicUserDto = response;
+             
              
 
             
