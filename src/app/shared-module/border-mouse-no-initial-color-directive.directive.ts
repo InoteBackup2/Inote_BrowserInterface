@@ -28,7 +28,7 @@ export class BorderMouseNoInitialColorDirectiveDirective {
   }
 
   private setBorder(color: string) {
-    let border = 'solid 4px' + color;
-    this.el.nativeElement.style.border = border;
+    const BORDER = 'solid 4px' + color;
+    this.el.nativeElement.style.border = BORDER;
   }
 }
