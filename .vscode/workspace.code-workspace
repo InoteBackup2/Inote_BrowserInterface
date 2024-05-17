@@ -16,7 +16,7 @@
 				"name": "Launch Brave",
 				"request": "launch",
 				"webRoot": "${workspaceFolder}",
-				"runtimeExecutable": "stable",
+				"runtimeExecutable": "/usr/bin/brave-browser",
 				"runtimeArgs": [
 					"--remote-debugging-port=9222"
 				]
