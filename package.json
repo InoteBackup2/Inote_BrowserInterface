@@ -7,7 +7,8 @@
     "build": "ng build",
     "gh-build": "ng build --configuration github --base-href /Inote_BrowserInterface/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "CHROMIUM_BIN=/usr/bin/brave-browser ng test",
+    "test-graphic": "CHROMIUM_BIN=/usr/bin/brave-browser ng test --browsers Firefox,Chromium",
     "lint": "ng lint"
   },
   "private": true,
@@ -56,6 +57,7 @@
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
+    "karma-firefox-launcher": "^2.1.3",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.3.2",

@@ -44,7 +44,9 @@
 			// Git
 			"mhutchie.git-graph",
 			// Test coverage
-			"ryanluker.vscode-coverage-gutters"
+			"ryanluker.vscode-coverage-gutters",
+			// Karma
+			"lucono.karma-test-explorer"
 		]
 	},
 	"settings": {
