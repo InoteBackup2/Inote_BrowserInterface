@@ -16,7 +16,7 @@
 				"name": "Launch Brave",
 				"request": "launch",
 				"webRoot": "${workspaceFolder}",
-				"runtimeExecutable": "stable",
+				"runtimeExecutable": "/usr/bin/brave-browser",
 				"runtimeArgs": [
 					"--remote-debugging-port=9222"
 				]
@@ -44,7 +44,9 @@
 			// Git
 			"mhutchie.git-graph",
 			// Test coverage
-			"ryanluker.vscode-coverage-gutters"
+			"ryanluker.vscode-coverage-gutters",
+			// Karma
+			"lucono.karma-test-explorer"
 		]
 	},
 	"settings": {
