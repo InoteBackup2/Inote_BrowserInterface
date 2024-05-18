@@ -7,8 +7,8 @@ module.exports = function (config) {
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
-      //require('karma-chrome-launcher'),
-      require('karma-firefox-launcher'),
+      require('karma-chrome-launcher'), // For Brave
+      require('karma-firefox-launcher'), // For Firefox
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma')
@@ -34,7 +34,8 @@ module.exports = function (config) {
       ]
     },
     reporters: ['progress', 'kjhtml'],
-    browsers: ['FirefoxHeadless'],
-    restartOnFileChange: true
+    browsers: ['FirefoxHeadless', 'ChromiumHeadless'],
+    restartOnFileChange: true,
+    retryLimit: 0
   });
 };
