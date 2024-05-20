@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PublicModuleModule } from './public-module/public-module.module';
-import { SharedModuleModule } from './shared-module/shared-module.module';
-import { ProtectedModuleModule } from './protected-module/protected-module.module';
+import { PublicModule } from './public/public.module';
+import { SharedModule } from './shared/shared.module';
+import { ProtectedModule } from './protected/protected.module';
 import { HttpClientModule } from '@angular/common/http';
 //import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 //import { InMemoryDataService } from './core-module/in-memory-data.service';
@@ -21,9 +21,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserModule,
     HttpClientModule,
     // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService,  { dataEncapsulation: false }),
-    ProtectedModuleModule,
-    PublicModuleModule,
-    SharedModuleModule,
+    ProtectedModule,
+    PublicModule,
+    SharedModule,
     AppRoutingModule,
     FontAwesomeModule,
   ],
