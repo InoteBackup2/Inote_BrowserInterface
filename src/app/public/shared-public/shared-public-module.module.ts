@@ -6,10 +6,6 @@ import { DtoModule } from './dto/dto.module';
 import { PublicUserService } from '../public-user.service';
 import { BackEndPoints } from './back-end-points.enum';
 import { RouterModule } from '@angular/router';
-//import { SharedModule } from '../../shared-module/shared-module.module';
-
-
-
 
 @NgModule({
   declarations: [
