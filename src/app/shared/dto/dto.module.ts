@@ -13,8 +13,6 @@ import { HttpRespMsgDto} from './ResponseMsg.dto';
     { provide: 'UserDto', useValue: UserDto },
     { provide: 'HttpRespMsgDto', useValue: HttpRespMsgDto }
   ],
-  exports: [
-    
-  ]
+  exports: []
 })
 export class DtoModule { }

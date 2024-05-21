@@ -9,3 +9,9 @@ export class PublicUserDto {
         return JSON.stringify(this);
     }
 }
+
+export type NewPublicUserRequestDto = {
+    readonly NAME: string;
+    readonly USER_NAME: string;
+    readonly PASSWORD: string;
+}

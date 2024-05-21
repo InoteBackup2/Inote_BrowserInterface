@@ -9,10 +9,10 @@ import { BackEndPoints } from '../../../public/shared-public/back-end-points.enu
 export class UserService {
   
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
-  getCurrentUser(bearer:string):Observable<any>{
+  getCurrentUser(bearer:string): Observable<any>{
     const authorisation: string = `Bearer ${bearer}`;
     const headers = { 'Authorization': authorisation }
     return this.http.get<any>(BackEndPoints.GET_CURRENT_USER,{headers}) // Envoi de la requete HTTP et réception d'un observable

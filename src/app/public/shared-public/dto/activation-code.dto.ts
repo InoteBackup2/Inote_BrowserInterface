@@ -7,3 +7,7 @@ export class ActivationCodeDto {
         return JSON.stringify(this);
     }
 }
+
+export type NewActivationCodeDto = {
+    readonly CODE: string;
+}

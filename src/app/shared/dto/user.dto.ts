@@ -5,4 +5,8 @@ export class UserDto {
         public password: string
     ) { }
 
+}export type NewUserRequestDto = {
+    readonly NAME: string;
+    readonly USER_NAME: string;
+    readonly PASSWORD: string;
 }
