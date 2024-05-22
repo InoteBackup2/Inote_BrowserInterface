@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of, tap } from 'rxjs';
 import { User } from './user';
-//import { PublicUserDto } from './public-user-dto.dto';
+import type { NewPublicUserResponseDto } from '../user/public-user.dto';
 import { BackEndPoints } from '../../../public/shared-public/back-end-points.enum';
 
 @Injectable()
@@ -12,13 +12,17 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  getCurrentUser(bearer:string): Observable<any>{
-    const authorisation: string = `Bearer ${bearer}`;
-    const headers = { 'Authorization': authorisation }
-    return this.http.get<any>(BackEndPoints.GET_CURRENT_USER,{headers}) // Envoi de la requete HTTP et réception d'un observable
+  getCurrentUser(bearer: string): Observable<HttpResponse<NewPublicUserResponseDto>>{
+    const AUTHORISATION: string = `Bearer ${bearer}`;
+    const headers = {
+      'Authorization': AUTHORISATION,
+      'content-type': 'application/json'
+    };
+    return this.http.get<NewPublicUserResponseDto>(BackEndPoints.GET_CURRENT_USER,{headers}) // Envoi de la requete HTTP et réception d'un observable
       .pipe(  //Applique des transformations sur les données directement dans le template
         tap(  //Effectue des actions sur les valeurs émises par l'observable, sans les modifier
-          response => this.log(response)),
+          response => this.log(response)
+        ),
         // Si erreur, on logue l'erreur et on retourne un tableau vide pour éviter de faire planter l'application 
         catchError(error => this.handleError(error, []))
       );

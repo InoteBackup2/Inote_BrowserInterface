@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-success">
   <div class="container-fluid d-flex align-items-center">
     <div class="d-flex align-items-center">
-      <img src="../../../assets/logo-alone.png" alt="Inote logo" class=" border-danger" style="max-width: 50px;" />
+      <img src="../../../assets/logo-alone.png" alt="Inote logo" class=" border-danger" id="inote-logo" />
       <a class="navbar-brand text-white" href="#">Inote</a>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -10,15 +10,15 @@
     </button>
     <div class="ms-4 nav-item dropdown order-lg-2">
       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="../assets/admin.png" alt="user profile img" class="img-fluid rounded-circle  border border border-secondary-subtle" style="object-fit: cover; object-position: center ;width: 3rem; height: 3rem;">
+        <img src="../assets/admin.png" alt="user profile img" class="img-fluid rounded-circle  border border border-secondary-subtle" id="user-profile">
       </a>
       <ul class="dropdown-menu dropdown-menu-end">
-        <div  class="ms-1 me-1 fw-bold " style="text-align: end;">{{this.publicUserDto.pseudo}}</div>
-        <div  class="ms-1 me-1 text-success fw-bold  fs-6 fst-italic " style="text-align: end;">{{this.publicUserDto.username}}</div>
+        <div  class="ms-1 me-1 fw-bold " >{{this.publicUserDto.PSEUDO}}</div>
+        <div  class="ms-1 me-1 text-success fw-bold  fs-6 fst-italic " >{{this.publicUserDto.USER_NAME}}</div>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#" style="text-align: end;">Gestion profil</a></li>
+        <li><a class="dropdown-item" href="#" >Gestion profil</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#" style="text-align: end;">Déconnexion</a></li>
+        <li><a class="dropdown-item" href="#" >Déconnexion</a></li>
       </ul>
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">

@@ -8,7 +8,7 @@ import { UserService } from '../user.service';
 @Component({
   selector: 'app-search-user-component',
   templateUrl: './search-user.component.html',
-  styles: ``
+  styleUrl: './search-user.component.css'
 })
 export class SearchUserComponent implements OnInit {
   faCoffee = faCoffee;

@@ -1,51 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { /*faCoffee, */faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { PublicUserDto } from '../user/public-user.dto';
-//import { Observable } from 'rxjs';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import type { NewPublicUserResponseDto } from '../user/public-user.dto';
 import { UserService } from '../user/user.service';
 import { TokenService } from '../../../core/token.service';
 
 @Component({
   selector: 'app-protected-nav-component',
   templateUrl: './protected-nav.component.html',
-  styles: `
-  
-  `
+  styleUrls: ['./protected-nav.component.css']
 })
-export class ProtectedNavComponent implements OnInit{
+export class ProtectedNavComponent implements OnInit {
 
   requestedSearch!:boolean;
   faMagnifyingGlass = faMagnifyingGlass;
 
-  publicUserDto! : PublicUserDto;
+  publicUserDto! : NewPublicUserResponseDto;
   token! : string|null;
 
-  jsonData: any;
-
   constructor(
-    private userService:UserService,
+    private userService: UserService,
     private tokenService: TokenService){}
 
   ngOnInit(): void {
       this.token = this.tokenService.getToken();
-      if(this.token !== null){
+      if(this.token){
         this.userService.getCurrentUser(this.token).subscribe(
           response => {
-             this.jsonData = response;
-             this.publicUserDto = this.jsonData.data;
-             
-
-            
+            if (response.body) {
+              this.publicUserDto = response.body;
+            }
+            else {
+              throw new Error('HTTP body hasn\'t to be null');
+            }
           })
       }
       else{ 
-        throw Error("Authentication token could not be recovered");
+        throw new Error("Authentication token could not be recovered");
       }
       
       this.requestedSearch = false;
-
-     
   }
+
   onSearchRequested() {
     this.requestedSearch= !this.requestedSearch;
   }

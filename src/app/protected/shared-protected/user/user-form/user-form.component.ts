@@ -6,19 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-form-component',
   templateUrl: './user-form.component.html',
-  styles: `
-  .ng-valid[required]{
-    border-left:5px solid green;
-  }
-
-  .ng-valid{
-      border-left:5px solid green;
-  }
-
-  .ng-invalid:not(form){
-      border-left:5px solid red;
-  }
-  `
+  styleUrl: 'user-form.component.css'
 })
 export class UserFormComponent implements OnInit {
   @Input() user!: User;

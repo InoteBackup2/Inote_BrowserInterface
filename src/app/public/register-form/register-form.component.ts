@@ -1,5 +1,8 @@
 import { Component/*, OnInit*/ } from '@angular/core';
 import { PublicUserDto } from '../shared-public/dto/public-user.dto';
+import type {
+  NewPublicUserRequestDto
+} from '../shared-public/dto/public-user.dto';
 import { PublicUserService } from '../public-user.service';
 import { catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -9,10 +12,12 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register-form-component',
   templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.css', '../../shared/general-styles.css']
+  styleUrls: [
+    './register-form.component.css',
+    '../../shared/general-styles.css'
+  ]
 })
 export class RegisterFormComponent/* implements OnInit*/ {
-
 
   // Forms Fields
   email!: string;
@@ -23,7 +28,7 @@ export class RegisterFormComponent/* implements OnInit*/ {
   registering_success: boolean = false;
   activation_success: boolean = false;
 
-  userToRegister!: PublicUserDto;
+  userToRegister!: NewPublicUserRequestDto;
 
   // Http response variables 
   msgAfterRegisterRequest!: string;
@@ -53,12 +58,17 @@ export class RegisterFormComponent/* implements OnInit*/ {
   //     })
   // }
 
-  registerUser(user: PublicUserDto) {
+  registerUser(user: NewPublicUserRequestDto) {
     this.publicUserService.addUser(user).subscribe(
       response => {
-        this.statusAfterRegisterRequest = response.status;
-        this.msgAfterRegisterRequest = response.body.msg;
-        this.registering_success=true;
+        if (response.body !== null) {
+          this.statusAfterRegisterRequest = response.status;
+          this.msgAfterRegisterRequest = response.body.msg;
+          this.registering_success=true;
+        }
+        else {
+          throw new Error('Public user HTTP body needed');
+        }
       },
     error => {
       this.statusAfterRegisterRequest = error.status;
@@ -67,7 +77,7 @@ export class RegisterFormComponent/* implements OnInit*/ {
     })
   }
 
-  activateUser(activationCode:string){
+  activateUser(activationCode: string){
     this.publicUserService.activateUser(activationCode).pipe(
       catchError(error => {
         this.statusAfterActivationRequest = error.status;
@@ -76,16 +86,21 @@ export class RegisterFormComponent/* implements OnInit*/ {
       })
     )
     .subscribe(response => {
-      this.statusAfterActivationRequest = response.status;
-      this.msgAfterActivationRequest = response.body.msg;
-      this.activation_success=true;
+      if (response.body !== null) {
+        this.statusAfterActivationRequest = response.status;
+        this.msgAfterActivationRequest = response.body.msg;
+        this.activation_success=true;
+      }
     })
   }
 
   OnSubmit() {
-    this.registerUser(
-      new PublicUserDto(this.pseudonyme, this.email, this.password)
-    );
+    const newPublicUserRequestDto: NewPublicUserRequestDto = {
+      NAME: this.pseudonyme,
+      USER_NAME: this.email,
+      PASSWORD: this.password
+    };
+    this.registerUser(newPublicUserRequestDto);
   }
 
   OnSubmitActivation() {

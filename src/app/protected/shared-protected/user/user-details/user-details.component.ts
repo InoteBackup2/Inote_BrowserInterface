@@ -6,7 +6,7 @@ import { UserService } from '../user.service';
 @Component({
   selector: 'app-user-details-component',
   templateUrl: './user-details.component.html',
-  styles: ``
+  styleUrl: './user-details.component.css'
 })
 export class UserDetailsComponent implements OnInit {
   user!: User | undefined;

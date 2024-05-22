@@ -1,21 +1,26 @@
-<div class="d-flex flex-column overflow-auto" style="margin-top:5rem; margin-bottom:8rem">
+<div class="d-flex flex-column overflow-auto" id="list-bloc">
     <app-search-user-component class="mb-4"></app-search-user-component>
     <div class="d-flex flex-row flex-wrap justify-content-start align-items-center">
         <a class="btn btn-success ms-auto me-auto" (click)="goToUserAdd()">+</a>
-        <div *ngFor="let user of this.listUsers" (click)="goToUser(user)" appBorderMouse="#009688"
-            class="d-flex flex-column justify-content-center align-items-center p-1 m-1"
-            style="width:14rem; height:20rem">
-            <img [src]="user.picture" alt="user profile img" class="img-fluid rounded-circle"
-                style="object-fit: cover; object-position:center; width:5rem; height:5rem;">
+        <div *ngFor="let user of this.listUsers"
+                (click)="goToUser(user)"
+                appBorderMouse="#009688"
+                class="d-flex flex-column justify-content-center align-items-center p-1 m-1"
+                id="user-list">
+            <img [src]="user.picture"
+                alt="user profile img"
+                class="img-fluid rounded-circle"
+                id="user-picture">
             <h5 class="text-center">
                 <strong>{{user?.pseudo}}</strong>
             </h5>
             <p class="m-0 text-center">{{user?.firstName}}</p>
             <p class="m-0 text-center">{{user?.lastName}}</p>
             <p class="m-0 text-center"><i>membre depuis le {{user?.subscriptionDate|date:"dd/MM/yyyy"}}</i></p>
-            <div class="d-flex flex-row">
-                <img src="../assets/delete.png" alt="" class="m-1 img-fluid"
-                    style="object-fit: cover; object-position: center ;width: 2rem; height: 2rem;">
+            <div id="delete-role" class="d-flex flex-row">
+                <img src="../assets/delete.png"
+                        alt=""
+                        class="m-1 img-fluid">
                 <img src="../assets/role.png" alt="" class="m-1 img-fluid "
                     style="object-fit: cover; object-position: center ;width: 2rem; height: 2rem;">
             </div>

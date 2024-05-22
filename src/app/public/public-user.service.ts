@@ -1,7 +1,9 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { PublicUserDto } from "./shared-public/dto/public-user.dto";
+import type {
+  NewPublicUserRequestDto
+} from './shared-public/dto/public-user.dto';
 import { BackEndPoints } from "./shared-public/back-end-points.enum";
 
 
@@ -11,20 +13,23 @@ export class PublicUserService {
   
   constructor(private http: HttpClient) {}
 
-  addUser(user: PublicUserDto): Observable<any> {
+  addUser(user: NewPublicUserRequestDto): Observable<HttpResponse<{msg: string}>> {
     const headers = { "content-type": "application/json" }; // because we send JSON
-    //const body: string = user.serializedData();
-    return this.http.post<any>(BackEndPoints.REGISTER, user.serializedData(), {
-      headers: headers,
-      reportProgress: true,
-      observe: "response",
-    });
+    return this.http.post<{msg: string}>(
+      BackEndPoints.REGISTER,
+      JSON.stringify(user),
+      {
+        headers: headers,
+        reportProgress: true,
+        observe: "response",
+      }
+    );
   }
 
-  activateUser(activationCode: string): Observable<any> {
+  activateUser(activationCode: string): Observable<HttpResponse<{msg: string}>> {
     const headers = { "content-type": "application/json" }; // because we send JSON
 
-    return this.http.post<any>(
+    return this.http.post<{msg: string}>(
       BackEndPoints.ACTIVATE,
       JSON.stringify({ code: activationCode }),
       { headers: headers, reportProgress: true, observe: "response" }
