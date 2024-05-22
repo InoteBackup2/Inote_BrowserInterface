@@ -12,8 +12,8 @@
   (ngSubmit)="OnSubmit()" 
   #registerForm="ngForm" 
   [hidden] = "this.activation_success">
-  <div [hidden]="!pseudo.pristine" style="visibility: hidden">RAS</div>
-  <div [hidden]="!pseudo.valid" style="visibility: hidden">RAS</div>
+  <div [hidden]="!pseudo.pristine" class="is-hidden">RAS</div>
+  <div [hidden]="!pseudo.valid" class="is-hidden">RAS</div>
   <div [hidden]="pseudo.valid || pseudo.pristine" class="text-danger">
     Longueur pseudonyme ou présence d'un caractère invalide
   </div>
@@ -33,8 +33,8 @@
     />
   </div>
 
-  <div [hidden]="!emailA.pristine" style="visibility: hidden">RAS</div>
-  <div [hidden]="!emailA.valid" style="visibility: hidden">RAS</div>
+  <div [hidden]="!emailA.pristine" class="is-hidden">RAS</div>
+  <div [hidden]="!emailA.valid" class="is-hidden">RAS</div>
   <div [hidden]="emailA.valid || emailA.pristine" class="text-danger">
     Email requis ou invalide
   </div>
@@ -55,8 +55,8 @@
   </div>
 
   <!-- Security rules : at least one uppercase letter, one lowercase letter, one number, and one special character, and has a length of between 8 and 12 characters -->
-  <div [hidden]="!pwdA.pristine" style="visibility: hidden">RAS</div>
-  <div [hidden]="!pwdA.valid" style="visibility: hidden">RAS</div>
+  <div [hidden]="!pwdA.pristine" class="is-hidden">RAS</div>
+  <div [hidden]="!pwdA.valid" class="is-hidden">RAS</div>
   <div [hidden]="pwdA.valid || pwdA.pristine" class="text-danger">
     Mot de passe requis ou invalide
   </div>
@@ -89,8 +89,8 @@
     <div *ngSwitchCase="201" class="text-white">
       Entrez SVP le code d'activation envoyé à l'adresse email fournie
       <form (ngSubmit)="OnSubmitActivation()" #registerFormActivation="ngForm">
-        <div [hidden]="!code_activation.pristine" style="visibility: hidden">RAS</div>
-        <div [hidden]="!code_activation.valid" style="visibility: hidden">RAS</div>
+        <div [hidden]="!code_activation.pristine" class="is-hidden">RAS</div>
+        <div [hidden]="!code_activation.valid" class="is-hidden">RAS</div>
         <div [hidden]="code_activation.valid || code_activation.pristine" class="text-danger">
           Le code est doit être une suite de 6 digits
         </div>

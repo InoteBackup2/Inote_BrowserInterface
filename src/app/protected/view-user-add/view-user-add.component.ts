@@ -3,12 +3,7 @@ import { User } from '../shared-protected/user/user';
 
 @Component({
   selector: 'app-view-user-add-component',
-  template: `
-   <app-protected-nav-component></app-protected-nav-component>
-   <h2 class='text-center'> Ajouter un utilisateur</h2>
-   <app-user-form-component [user]="user"></app-user-form-component>
-  `,
-  styles: ``
+  templateUrl: 'view-user-add.component.html'
 })
 export class ViewUserAddComponent implements OnInit {
   user!: User;

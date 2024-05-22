@@ -30,8 +30,8 @@
 </div> -->
 
 <form (ngSubmit)="OnSubmit()" #loginForm="ngForm">
-  <div [hidden]="!ref_email.pristine" style="visibility: hidden">RAS</div>
-  <div [hidden]="!ref_email.valid" style="visibility: hidden">RAS</div>
+  <div [hidden]="!ref_email.pristine" id="email-pristine">RAS</div>
+  <div [hidden]="!ref_email.valid" id="email-valide">RAS</div>
   <div [hidden]="ref_email.valid || ref_email.pristine" class="text-danger">
     Email requis ou invalide
   </div>
@@ -51,8 +51,8 @@
     />
   </div>
 
-  <div [hidden]="!ref_pwd.pristine" style="visibility: hidden">RAS</div>
-  <div [hidden]="!ref_pwd.valid" style="visibility: hidden">RAS</div>
+  <div [hidden]="!ref_pwd.pristine" id="pwd-pristine">RAS</div>
+  <div [hidden]="!ref_pwd.valid" id="pwd-valide">RAS</div>
   <div [hidden]="ref_pwd.valid || ref_pwd.pristine" class="text-danger">
     Mot de passe requis
   </div>

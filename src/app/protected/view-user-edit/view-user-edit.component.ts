@@ -5,11 +5,7 @@ import { UserService } from '../shared-protected/user/user.service';
 
 @Component({
   selector: 'app-view-user-edit-component',
-  template: `
-  <app-protected-nav-component></app-protected-nav-component>
-  <h2 class = "text-center mb-2" *ngIf="this.user">Editer l'utilisateur {{user.pseudo}}</h2>
-  <app-user-form-component *ngIf="this.user" [user]="this.user" ></app-user-form-component>
-  `,
+  templateUrl: 'view-user-edit.component.html'
 })
 export class ViewUserEditComponent implements OnInit {
   user!: User | undefined;

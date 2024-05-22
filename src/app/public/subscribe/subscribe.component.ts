@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-subscribe-component',
   templateUrl: './subscribe.component.html',
   styleUrls: [
-    './subscribe.component.css',
-    '../../shared/shared/shared.component.css']
+    '../../shared/shared/shared.component.css'
+  ]
 })
 export class SubscribeComponent {}

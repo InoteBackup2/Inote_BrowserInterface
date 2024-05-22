@@ -1,0 +1,16 @@
+#email-pristine {
+    visibility: hidden;
+}
+
+#email-valide {
+    visibility: hidden;
+}
+
+#pwd-pristine {
+    visibility: hidden;
+}
+
+#pwd-valide {
+    visibility: hidden;
+}
+

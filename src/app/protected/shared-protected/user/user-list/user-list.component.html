@@ -16,16 +16,17 @@
             </h5>
             <p class="m-0 text-center">{{user?.firstName}}</p>
             <p class="m-0 text-center">{{user?.lastName}}</p>
-            <p class="m-0 text-center"><i>membre depuis le {{user?.subscriptionDate|date:"dd/MM/yyyy"}}</i></p>
+            <p class="m-0 text-center"><em>membre depuis le {{user?.subscriptionDate|date:"dd/MM/yyyy"}}</em></p>
             <div id="delete-role" class="d-flex flex-row">
                 <img src="../assets/delete.png"
                         alt=""
                         class="m-1 img-fluid">
-                <img src="../assets/role.png" alt="" class="m-1 img-fluid "
-                    style="object-fit: cover; object-position: center ;width: 2rem; height: 2rem;">
+                <img src="../assets/role.png"
+                        alt=""
+                        class="m-1 img-fluid ">
             </div>
             <p *ngIf="user.teamInCommon" class="fs-6 text-danger mt-2"><i>Equipe(s) en commun</i></p>
-            <p *ngIf="!user.teamInCommon" style="visibility:hidden">E</p>
+            <p *ngIf="!user.teamInCommon" id="common-team">E</p>
         </div>
     </div>
 </div>

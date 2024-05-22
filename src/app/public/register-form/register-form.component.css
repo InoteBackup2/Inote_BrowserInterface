@@ -17,3 +17,7 @@
 .nok{
     color: red
 }
+
+.is-hidden {
+    visibility: hidden;
+}
