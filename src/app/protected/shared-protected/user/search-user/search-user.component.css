@@ -1,0 +1,15 @@
+#fa-icon {
+    --fa-animation-duration: 2s;
+    --fa-beat-scale: 2.0;
+}
+
+#list-group {
+    position:fixed;
+}
+
+#user-avatar {
+    object-fit: cover;
+    object-position: center;
+    width: 2rem;
+    height: 2rem;
+}

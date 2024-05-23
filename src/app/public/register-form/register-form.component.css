@@ -1,0 +1,23 @@
+/* Use of Angular classes */
+
+/* Field of form is valid */
+.ng-valid [required]{
+    border-left: 5px solid green;
+}
+
+/* All element who aren't form not valid (input, select...) */
+.ng-invalid:not(form){
+    border-left: 5px solid red;
+}
+
+.ok{
+    color: greenyellow;
+}
+
+.nok{
+    color: red
+}
+
+.is-hidden {
+    visibility: hidden;
+}

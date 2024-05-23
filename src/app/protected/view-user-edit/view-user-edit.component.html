@@ -1,0 +1,3 @@
+<app-protected-nav-component></app-protected-nav-component>
+<h2 class = "text-center mb-2" *ngIf="this.user">Editer l'utilisateur {{user.pseudo}}</h2>
+<app-user-form-component *ngIf="this.user" [user]="this.user" ></app-user-form-component>
