@@ -15,6 +15,7 @@
 				"type": "chrome",
 				"name": "Launch Brave",
 				"request": "launch",
+				"url": "http://localhost:4200/",
 				"webRoot": "${workspaceFolder}",
 				"runtimeExecutable": "/usr/bin/brave-browser",
 				"runtimeArgs": [
