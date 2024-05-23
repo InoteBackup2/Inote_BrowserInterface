@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { LoadChildrenCallback, RouterModule, Routes } from '@angular/router';
+import { type LoadChildrenCallback, RouterModule, type Routes } from '@angular/router';
 
 const loadChildrenCallback: LoadChildrenCallback = () => import('./public/public.module').then(m => m.PublicModule);
 
