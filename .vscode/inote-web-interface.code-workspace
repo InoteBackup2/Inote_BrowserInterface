@@ -1,0 +1,137 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    }
+  ],
+  "launch": {
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "ng serve",
+        "type": "chrome",
+        "request": "launch",
+        "preLaunchTask": "npm: start",
+        "url": "http://localhost:4200/",
+        "runtimeExecutable": "/usr/bin/brave-browser",
+          "runtimeArgs": [
+            "--remote-debugging-port=9222"
+          ]
+      },
+      {
+        "name": "ng test",
+        "type": "chrome",
+        "request": "launch",
+        "preLaunchTask": "npm: test",
+        "url": "http://localhost:9876/debug.html",
+        "runtimeExecutable": "/usr/bin/brave-browser",
+          "runtimeArgs": [
+            "--remote-debugging-port=9222"
+          ]
+      }
+    ]
+  },
+
+  "extensions": {
+    "recommendations": [
+      /* !IMPORTANT!
+      Some of the extensions listed below may not appear in the Vscode side bar.
+      This is a known and documented bug.
+      When initially setting up the environment, please perform the following action:
+      ==> Open the command palette (ctrl+shift+p) and enter the command: ‘Extensions: show recommended extensions’
+          or insert "@recommended" in Extensions search bar
+      */
+
+      // LANGUAGE SUPPORT && FACILITIES
+      // ============================================
+      //  > Xml
+      "redhat.vscode-xml",
+
+      //  >  JavaScript/TypeScript/SCSS/HTML/GraphQL/Markdown/YAML
+      "esbenp.prettier-vscode",
+
+      // > Css navigation
+      "hossaini.bootstrap-intellisense",
+      "pucelle.vscode-css-navigation",
+
+      // > Yaml
+      "pascalreitermann93.vscode-yaml-sort",
+
+      // FRAMEWORKS SUPPORT && FACILITIES
+      // ============================================
+      //  > Angular
+      "angular.ng-template",
+
+      //  > Angular
+      "davidepostiglione.angular-generate-vscode",
+
+      // HTTP
+      // ============================================
+      //  > REST Client
+      "humao.rest-client",
+
+      // DATABASE && SQL
+      // ============================================
+
+      //  > MariaDb/MySQL
+      "mtxr.sqltools-driver-mysql",
+
+      // VERSIONNING
+      // ============================================
+      //  > Git graph
+      "mhutchie.git-graph",
+
+      //  > GitHub Actions
+      "github.vscode-github-actions",
+
+      // LINTING
+      // ============================================
+      //  > ESLint
+      "dbaeumer.vscode-eslint",
+
+      // TEST
+      // ============================================
+      //  > Launch tests in Vscode Sidebar
+      "lucono.karma-test-explorer",
+      "hbenl.vscode-jasmine-test-adapter",
+      "hbenl.vscode-mocha-test-adapter",
+      "ms-vscode.test-adapter-converter",
+
+      //  > Test coverage
+      "ryanluker.vscode-coverage-gutters",
+
+      // CODE EDITION
+      // ============================================
+      //  > Auto import
+      "steoates.autoimport",
+
+      //  > EditorConfig
+      "editorconfig.editorconfig",
+
+      //  > Documentation
+     "oouo-diogo-perdigao.docthis",
+
+     // SECURITY
+     // ============================================
+     // > Red Hat Dependency Analytics
+     "redhat.fabric8-analytics",
+
+     // APPEAREANCE
+     // ============================================
+     // > IntelliJ Theme
+     "arzg.intellij-theme",
+
+     // > Icons
+     "vscode-icons-team.vscode-icons",
+    ]
+  },
+  "settings": {
+    "angular.log": "normal",
+    "karmaTestExplorer.autoWatchEnabled": false,
+    "karmaTestExplorer.enableExtension": true,
+    "karmaTestExplorer.projectType": "angular",
+    "karmaTestExplorer.testFramework": "jasmine",
+    "karmaTestExplorer.browser": "ChromiumHeadless",
+  }
+}

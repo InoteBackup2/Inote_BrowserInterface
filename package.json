@@ -7,8 +7,8 @@
     "build": "ng build",
     "gh-build": "ng build --configuration github --base-href /Inote_BrowserInterface/",
     "watch": "ng build --watch --configuration development",
-    "test": "CHROMIUM_BIN=/usr/bin/brave-browser ng test",
-    "test-graphic": "CHROMIUM_BIN=/usr/bin/brave-browser ng test --browsers Firefox,Chromium",
+    "test": "CHROME_BIN=/usr/bin/brave-browser ng test",
+    "test-graphic": "CHROME_BIN=/usr/bin/brave-browser ng test --browsers Firefox,Chromium",
     "lint": "ng lint"
   },
   "private": true,

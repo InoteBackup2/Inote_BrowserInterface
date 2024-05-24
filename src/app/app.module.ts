@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PublicModule } from './public/public.module';
-import { SharedModule } from './shared/shared.module';
-import { ProtectedModule } from './protected/protected.module';
+import { PublicModule } from './publicModule/public.module';
+import { SharedModule } from './sharedModule/shared.module';
+import { ProtectedModule } from './protectedModule/protected.module';
 import { HttpClientModule } from '@angular/common/http';
 //import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 //import { InMemoryDataService } from './core-module/in-memory-data.service';
