@@ -7,10 +7,11 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SharedPublicModule } from './shared-public-module/shared-public-module.module';
-import { SubscribeComponent } from './subscribe/subscribe.component';
+import { SubscribeComponent } from './register2/subscribe.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { UserService } from '../protected-module/shared-protected-module/userModule/user.service';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LoginFormComponent } from './login-form/login-form.component';
     PageNotFoundComponent,
     SubscribeComponent,
     RegisterFormComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

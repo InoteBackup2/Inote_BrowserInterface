@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { SubscribeComponent } from './subscribe/subscribe.component';
+import { SubscribeComponent } from './register2/subscribe.component';
 
 const publicRoutes: Routes = [
     {path:'home', component:LandingPageComponent},
