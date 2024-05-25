@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import type { NewPublicUserResponseDto } from '../userModule/public-user.dto';
-import { UserService } from '../userModule/user.service';
+import type { NewPublicUserResponseDto } from '../user-module/public-user.dto';
+import { UserService } from '../user-module/user.service';
 import { TokenService } from '../../../core-module/token.service';
 
 @Component({

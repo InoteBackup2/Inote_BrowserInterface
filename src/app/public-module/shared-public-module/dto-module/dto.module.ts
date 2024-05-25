@@ -10,6 +10,8 @@ import { PublicUserDto } from './public-user.dto';
     CommonModule
   ],
   providers: [
+    // 'NewPublicUserRequestDto' only refers to a type, but is being used as a value here
+    // { provide: 'PublicUserDto', useValue: NewPublicUserRequestDto },
     { provide: 'PublicUserDto', useValue: PublicUserDto },
   ],
 })

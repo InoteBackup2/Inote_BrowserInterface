@@ -18,6 +18,6 @@ export class LandingPageComponent {
   }
 
   goToSubscribePage() {
-   this.router.navigate(['subscribe']);
+   this.router.navigate(['register']);
   }
 }
