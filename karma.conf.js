@@ -3,6 +3,7 @@
 
 module.exports = function (config) {
   config.set({
+    autoWatch: false,
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
@@ -34,8 +35,9 @@ module.exports = function (config) {
       ]
     },
     reporters: ['progress', 'kjhtml'],
-    browsers: ['FirefoxHeadless', 'ChromiumHeadless'],
-    restartOnFileChange: true,
+    browsers: ['Chrome'],
+    chromeBin: '/usr/bin/brave-browser',
+    restartOnFileChange: false,
     retryLimit: 0
   });
 };
