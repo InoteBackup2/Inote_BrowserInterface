@@ -16,10 +16,11 @@ export class PublicUserService {
 
   addUser(user: PublicUserDtoRequest): Observable<HttpResponse<string>> {
     const headers = { "content-type": "application/json" }; // because we send JSON
-    return this.http.post<string>(
+    return this.http.post(
       BackEndPoints.REGISTER,
       JSON.stringify(user),
       {
+        responseType: 'text',
         headers: headers,
         reportProgress: true,
         observe: "response",
@@ -28,17 +29,20 @@ export class PublicUserService {
   }
 
   activateUser(activationCode: ActivationCodeDtoRequest): Observable<HttpResponse<string>> {
-    const headers = { "content-type": "application/json" }; // because we send JSON
+    
 
-    return this.http.post<string>(
+    const headers = { "content-type": "application/json" };
+    return this.http.post(
       BackEndPoints.ACTIVATE,
       JSON.stringify(activationCode),
-      { headers: headers, reportProgress: true, observe: "response"}
-      
+      {
+        responseType: 'text',
+        headers: headers,
+        reportProgress: true,
+        observe: "response",
+      }
     );
   }
-
-
 
   loginUser(
     emailToSend: string,
