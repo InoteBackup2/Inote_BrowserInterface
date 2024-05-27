@@ -1,11 +1,13 @@
-import { Component/*, OnInit*/ } from "@angular/core";
+import { SignInResponseDto } from './../shared-public-module/dto/sign-in-response.dto';
+import { SignInRequestDto } from './../shared-public-module/dto/sign-in-request.dto';
+import { Component /*, OnInit*/ } from "@angular/core";
 import { PublicUserService } from "../public-user.service";
 import { Router } from "@angular/router";
 import { catchError, throwError } from "rxjs";
 import { TokenService } from "../../core-module/token.service";
 
 interface IToken {
-  bearer:string
+  bearer: string;
 }
 
 @Component({
@@ -16,42 +18,42 @@ interface IToken {
     "../../shared-module/general-styles.css",
   ],
 })
-export class LoginFormComponent/* implements OnInit*/ {
+export class LoginFormComponent {
   token!: IToken;
   email!: string;
   password!: string;
-  statusAfterRequest!: string;
+  statusAfterRequest!: number;
   msgAfterRequest!: string;
+  signInResponseDto!: SignInResponseDto;
 
   constructor(
-    private publicUserservice : PublicUserService,
-    private tokenService : TokenService,
-    private router:Router
-  ){}
+    private publicUserservice: PublicUserService,
+    private tokenService: TokenService,
+    private router: Router
+  ) {}
 
   OnSubmit() {
-    console.log(`${this.email}:${this.password}`);
-   this.login(this.email, this.password);
-  }
+    const signInRequestDto: SignInRequestDto = {
+      "username": this.email,
+      "password": this.password
+    };
 
-  //ngOnInit(): void {}
-
-  private login(email:string, password:string){
-    this.publicUserservice.loginUser(email,password).pipe(
-
-      catchError(error => {
-        this.statusAfterRequest = error.status;
-        this.msgAfterRequest = error.error.detail;
-        return throwError(error);
-      })
-    )
-    .subscribe((response) => {
-     this.statusAfterRequest = response.status;
-     if(response.status=="200"){
-        this.tokenService.saveToken(response.body.bearer);
-        this.router.navigate(['dashboard']);
-      }
-    })
-
+    this.publicUserservice
+      .loginUser(signInRequestDto)
+      .pipe(
+        catchError((error) => {
+          this.statusAfterRequest = error.status;
+          this.msgAfterRequest = error.error.detail;
+          return throwError(error);
+        })
+      )
+      .subscribe((response) => {
+        this.statusAfterRequest = response.status;
+        if (response.status === 200 && response.body !== null) {
+          this.signInResponseDto = response.body;
+          this.tokenService.saveToken(this.signInResponseDto.bearer);
+          this.router.navigate(["dashboard"]);
+        }
+      });
   }
 }

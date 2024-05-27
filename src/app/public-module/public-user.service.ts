@@ -1,42 +1,74 @@
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import type {
-  PublicUserDtoRequest
-} from './shared-public-module/dto/public-user.dto';
+import type { RegisterRequestDto } from "./shared-public-module/dto/register-request.dto";
 import { BackEndPoints } from "./shared-public-module/back-end-points.enum";
-import { ActivationCodeDtoRequest } from "./shared-public-module/dto/activation-code.dto";
-
-
+import { ActivationRequestDto } from "./shared-public-module/dto/activation-request.dto";
+import { SignInRequestDto } from "./shared-public-module/dto/sign-in-request.dto";
+import { SignInResponseDto } from "./shared-public-module/dto/sign-in-response.dto";
 
 @Injectable()
 export class PublicUserService {
+  // HTTP
+  // ==============================================
+  /* Headers variables */
+  private bearer!: string;
 
+  // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
+  // ==============================================
   constructor(private http: HttpClient) {}
 
-  addUser(user: PublicUserDtoRequest): Observable<HttpResponse<string>> {
-    const headers = { "content-type": "application/json" }; // because we send JSON
+  // SERVICE METHODS
+  // ==============================================
+
+  /**
+   * Sends the request to create a new user account
+   *
+   * @param {RegisterRequestDto} Needed user account informations
+   * @returns {Observable<HttpResponse<string>>}  Response message
+   * @author atsuhikoMochizuki
+   * @since 2024-05-27
+   */
+  addUser(user: RegisterRequestDto): Observable<HttpResponse<string>> {
+    // Headers definitions
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.bearer}`,
+    });
+
     return this.http.post(
+      // Url
       BackEndPoints.REGISTER,
+
+      // Body Request
       JSON.stringify(user),
+
+      // Options
       {
-        responseType: 'text',
+        // Uncomment if body response is plain/text
+        responseType: "text",
+
+        // headers injection
         headers: headers,
+
+        // Uncomment if request progression is needed
         reportProgress: true,
+
+        // Get full Http response
         observe: "response",
       }
     );
   }
 
-  activateUser(activationCode: ActivationCodeDtoRequest): Observable<HttpResponse<string>> {
-    
-
+  activateUser(
+    activationCode: ActivationRequestDto
+  ): Observable<HttpResponse<string>> {
     const headers = { "content-type": "application/json" };
     return this.http.post(
       BackEndPoints.ACTIVATE,
       JSON.stringify(activationCode),
       {
-        responseType: 'text',
+        responseType: "text",
         headers: headers,
         reportProgress: true,
         observe: "response",
@@ -45,19 +77,20 @@ export class PublicUserService {
   }
 
   loginUser(
-    emailToSend: string,
-    passwordToSend: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): Observable<any> {
-    const headers = { "content-type": "application/json" };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return this.http.post<any>(
+    signInRequestDto: SignInRequestDto
+  ): Observable<HttpResponse<SignInResponseDto>> {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    });
+
+    return this.http.post<SignInResponseDto>(
       BackEndPoints.SIGN_IN,
-      JSON.stringify({
-        username: emailToSend,
-        password: passwordToSend,
-      }),
-      { headers: headers, reportProgress: true, observe: "response" }
+      JSON.stringify(signInRequestDto),
+      {
+        headers: headers,
+        reportProgress: true,
+        observe: "response",
+      }
     );
   }
 }
