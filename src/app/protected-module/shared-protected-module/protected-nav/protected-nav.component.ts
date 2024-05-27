@@ -99,6 +99,7 @@ export class ProtectedNavComponent implements OnInit {
           ) {
             throw new Error("Anomaly in SignOut Http response");
           }
+          this.tokenService.removeToken();
           this.router.navigate(["home"]);
         },
 

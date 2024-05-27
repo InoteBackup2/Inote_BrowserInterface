@@ -49,4 +49,14 @@ export class TokenService {
   getToken() : string | null {
     return localStorage.getItem(this.BEARER);
   }
+
+  /**
+   * Remove the token from local storage
+   * 
+   * @author atsuhikoMochizuki
+   * @since 2024-05-27
+   */
+  removeToken():void {
+    localStorage.removeItem(this.BEARER);
+  }
 }
