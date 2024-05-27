@@ -142,6 +142,6 @@ export class RegisterFormComponent {
    * @since 2024-05-27
    */
   onGoToHome() {
-    this.router.navigate([""]);
+    this.router.navigate(["home"]);
   }
 }

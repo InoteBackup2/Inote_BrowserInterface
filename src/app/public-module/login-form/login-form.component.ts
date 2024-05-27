@@ -6,10 +6,6 @@ import { Router } from "@angular/router";
 import { catchError, throwError } from "rxjs";
 import { TokenService } from "../../core-module/token.service";
 
-interface IToken {
-  bearer: string;
-}
-
 @Component({
   selector: "app-login-form-component",
   templateUrl: "./login-form.component.html",
@@ -19,7 +15,6 @@ interface IToken {
   ],
 })
 export class LoginFormComponent {
-  token!: IToken;
   email!: string;
   password!: string;
   statusAfterRequest!: number;

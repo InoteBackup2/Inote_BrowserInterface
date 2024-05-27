@@ -10,15 +10,20 @@
     </button>
     <div class="ms-4 nav-item dropdown order-lg-2">
       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="../assets/admin.png" alt="user profile img" class="img-fluid rounded-circle  border border border-secondary-subtle" id="user-profile">
+        <img src="../assets/admin.png" alt="user profile img"
+          class="img-fluid rounded-circle  border border border-secondary-subtle" id="user-profile">
       </a>
       <ul class="dropdown-menu dropdown-menu-end">
-        <div  class="ms-1 me-1 fw-bold " >{{this.publicUserDto.PSEUDO}}</div>
-        <div  class="ms-1 me-1 text-success fw-bold  fs-6 fst-italic " >{{this.publicUserDto.USER_NAME}}</div>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#" >Gestion profil</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#" >Déconnexion</a></li>
+        <div class="ms-1 me-1 fw-bold ">{{this.currentConnectUser?.pseudo}}</div>
+        <div class="ms-1 me-1 text-success fw-bold  fs-6 fst-italic ">{{this.currentConnectUser?.username}}</div>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="#">Gestion profil</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" (click)="onSignOut()">Déconnexion</a></li>
       </ul>
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -37,7 +42,7 @@
       </form>
     </div>
   </div>
- 
+
 </nav>
 
 <!-- <nav class="navbar navbar-expand-lg bg-success">
