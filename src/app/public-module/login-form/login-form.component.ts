@@ -16,6 +16,9 @@ import { ChangePasswordRequestDto } from "../shared-public-module/dto/change-pas
   ],
 })
 export class LoginFormComponent {
+OnSubmitChangePwdRequest() {
+throw new Error('Method not implemented.');
+}
   @ViewChild("scanModalContent") modalContent: ElementRef | undefined;
   activationcode!: number;
   activation_success!: boolean;
@@ -63,6 +66,7 @@ export class LoginFormComponent {
   // TEMPLATE CALLBACKS METHODS
   // ==============================================
   OnSubmit() {
+    console.log("1111")
     const signInRequestDto: SignInRequestDto = {
       username: this.email,
       password: this.password,
@@ -116,5 +120,10 @@ export class LoginFormComponent {
 
   onAskingReceiveCode() {
     this.receivedActivationCode = true;
+  }
+
+  OnSubmit2() {
+    console.log("aaaaaa");
+    this.activation_success=true;
   }
 }
