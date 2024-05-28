@@ -6,5 +6,6 @@ export const BackEndPoints = {
     ACTIVATE : `${ROOT_PATH}/auth/activation`,
     SIGN_IN : `${ROOT_PATH}/auth/sign_in`,
     GET_CURRENT_USER : `${ROOT_PATH}/auth/current-user`,
-    SIGN_OUT : `${ROOT_PATH}/auth/sign_out`
+    SIGN_OUT : `${ROOT_PATH}/auth/sign_out`,
+    CHANGE_PASSWORD_REQUEST : `${ROOT_PATH}/auth/change_password`
 } as const;

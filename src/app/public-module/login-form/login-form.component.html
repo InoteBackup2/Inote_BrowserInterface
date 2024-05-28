@@ -6,18 +6,8 @@
   </div>
   <div class="input-group input-group-sm mb-3 mx-auto">
     <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
-    <input
-      type="text"
-      class="form-control"
-      id="email"
-      aria-describedby="inputGroup-sizing-sm"
-      required
-      autofocus
-      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-      [(ngModel)]="this.email"
-      name="email"
-      #ref_email="ngModel"
-    />
+    <input type="text" class="form-control" id="email" aria-describedby="inputGroup-sizing-sm" required autofocus
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="this.email" name="email" #ref_email="ngModel" />
   </div>
 
   <div [hidden]="!ref_pwd.pristine" id="pwd-pristine">RAS</div>
@@ -25,29 +15,123 @@
   <div [hidden]="ref_pwd.valid || ref_pwd.pristine" class="text-danger">
     Mot de passe requis
   </div>
-  <div class="input-group input-group-sm mb-3 mx-auto">
+  <div class="input-group input-group-sm  mx-auto">
     <span class="input-group-text" id="inputGroup-sizing-sm">Mot de passe</span>
-    <input
-      type="password"
-      class="form-control"
-      id="pwd"
-      aria-describedby="inputGroup-sizing-sm"
-      required
-      [(ngModel)]="this.password"
-      name="pwd"
-      #ref_pwd="ngModel"
-    />
+    <input type="password" class="form-control" id="pwd" aria-describedby="inputGroup-sizing-sm" required
+      [(ngModel)]="this.password" name="pwd" #ref_pwd="ngModel" />
   </div>
+
+  <div>
+    <div data-bs-toggle="modal" data-bs-target="#myModal" class="d-flex justify-content-end fst-italic mt-1">
+      <a class="" [ngStyle]="ref_email.valid ? {'text-decoration':'none'}:{'color': 'transparent'}">Mot de passe perdu
+        ?</a>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
   <div class="d-flex flex-grow-0 justify-content-center">
-    <button
-      type="submit"
-      class="mt-2 btn btn-secondary ms-lg-auto border border-white"
-      [disabled]="!loginForm.form.valid"
-    >
+    <button type="submit" class="mt-2 btn btn-secondary ms-lg-auto border border-white"
+      [disabled]="!loginForm.form.valid">
       Se connecter
     </button>
   </div>
-  <div *ngIf="this.statusAfterRequest !== 200" class="mt-4 text-danger" >
+
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body bg-success rounded">
+
+
+          <form (ngSubmit)="OnSubmit()" #loginForm2="ngForm">
+            <div class="d-flex flex-column align-items-center">
+              <div class="d-flex flex-column">
+                <button (click)="onAskingReceiveCode()" type="button" class="mt-2 btn btn-secondary border border-white"
+                  [hidden]="this.receivedActivationCode">
+                  Recevoir mon code de changement de mot de passe sur l'adresse <span
+                    class="text-primary">{{this.email}}</span>
+                </button>
+              </div>
+              <div class="d-flex flex-column align-items-center">
+                <p [hidden]="!this.receivedActivationCode">Entrez le code d'activation reçu (validité 15 mn)</p>
+                <div [hidden]="!this.receivedActivationCode" class="input-group input-group-sm mb-3 mt-2">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Code</span>
+                  <div>
+                    <input type="text" class="form-control" [disabled]="!this.receivedActivationCode" id="activation"
+                      aria-describedby="inputGroup-sizing-sm" required pattern="[0-9]{6}$"
+                      [(ngModel)]="this.activationcode" name="activation" #code_activation="ngModel" />
+                  </div>
+
+                </div>
+                <div class="d-flex flex-grow-0 justify-content-center">
+                  <button type="submit" class="mt-2 btn btn-secondary ms-lg-auto border border-white"
+                    [disabled]="!loginForm2.form.valid" [hidden]="this.activation_success">
+                    Envoyer le code
+                  </button>
+                </div>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div [ngSwitch]="this.changePasswordResponseStatus" class="mt-4">
+    <div *ngSwitchCase="200" class="text-white">
+      Entrez SVP le code d'activation envoyé à l'adresse email fournie
+      <form (ngSubmit)="onSubmitActivation()" #registerFormActivation="ngForm">
+        <div [hidden]="!code_activation.pristine" class="is-hidden">RAS</div>
+        <div [hidden]="!code_activation.valid" class="is-hidden">RAS</div>
+        <div [hidden]="code_activation.valid || code_activation.pristine" class="text-danger">
+          Le code est doit être une suite de 6 digits
+        </div>
+        <div class="input-group input-group-sm mb-3 mx-auto">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Code d'activation</span>
+          <input
+            type="text"
+            class="form-control"
+            id="activation"
+            aria-describedby="inputGroup-sizing-sm"
+            required
+            pattern="[0-9]{6}$"
+            [(ngModel)]="this.activationcode"
+            name="activation"
+            #code_activation="ngModel"
+          />
+        </div>
+        <div class="d-flex flex-grow-0 justify-content-center">
+          <button
+            type="submit"
+            class="mt-2 btn btn-secondary ms-lg-auto border border-white"
+            [disabled]="!registerFormActivation.form.valid"
+            [hidden]="this.activation_success"
+          >
+            Envoyer le code
+          </button>
+        </div>
+        <div [ngSwitch]="this.activationResponseStatus" class="mt-4">
+          <div *ngSwitchCase="200" class="text-white"> activation OK</div>
+          <div *ngSwitchDefault class="text-danger">
+            <strong>{{ this.activationResponseMsgToDisplay }}</strong>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+    <div *ngSwitchDefault class="text-danger">
+      <strong>{{ this.registerResponseMsgToDisplay }}</strong>
+    </div>
+  </div> -->
+  <div *ngIf="this.statusAfterRequest !== 200" class="mt-4 text-danger">
     {{ this.msgAfterRequest }}
   </div>
 </form>

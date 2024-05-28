@@ -6,9 +6,11 @@ import { BackEndPoints } from "./shared-public-module/back-end-points.enum";
 import { ActivationRequestDto } from "./shared-public-module/dto/activation-request.dto";
 import { SignInRequestDto } from "./shared-public-module/dto/sign-in-request.dto";
 import { SignInResponseDto } from "./shared-public-module/dto/sign-in-response.dto";
+import { ChangePasswordRequestDto } from "./shared-public-module/dto/change-password-request.dto";
 
 @Injectable()
 export class PublicUserService {
+
   // HTTP
   // ==============================================
   /* Headers variables */
@@ -87,6 +89,20 @@ export class PublicUserService {
       BackEndPoints.SIGN_IN,
       JSON.stringify(signInRequestDto),
       {
+        headers: headers,
+        reportProgress: true,
+        observe: "response",
+      }
+    );
+  }
+
+  askChangePassword(changePasswordRequestDto: ChangePasswordRequestDto) : Observable<HttpResponse<string>> {
+    const headers = { "content-type": "application/json" };
+    return this.http.post(
+      BackEndPoints.CHANGE_PASSWORD_REQUEST,
+      JSON.stringify(changePasswordRequestDto),
+      {
+        responseType: "text",
         headers: headers,
         reportProgress: true,
         observe: "response",
