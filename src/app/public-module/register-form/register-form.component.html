@@ -46,7 +46,7 @@
       aria-describedby="inputGroup-sizing-sm"
       required
       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-      [(ngModel)]="this.email"
+      [(ngModel)]="this.username"
       name="email"
       #emailA="ngModel"
     />
@@ -61,7 +61,7 @@
   <div class="input-group input-group-sm mb-3 mx-auto">
     <span class="input-group-text" id="inputGroup-sizing-sm">Mot de Passe</span>
     <input
-      type="text"
+      type="password"
       class="form-control"
       id="pwd"
       aria-describedby="inputGroup-sizing-sm"
@@ -82,10 +82,10 @@
       Continuer
     </button>
   </div>
-  <div [ngSwitch]="this.statusAfterRegisterRequest" class="mt-4">
+  <div [ngSwitch]="this.registerResponseStatus" class="mt-4">
     <div *ngSwitchCase="201" class="text-white">
       Entrez SVP le code d'activation envoyé à l'adresse email fournie
-      <form (ngSubmit)="OnSubmitActivation()" #registerFormActivation="ngForm">
+      <form (ngSubmit)="onSubmitActivation()" #registerFormActivation="ngForm">
         <div [hidden]="!code_activation.pristine" class="is-hidden">RAS</div>
         <div [hidden]="!code_activation.valid" class="is-hidden">RAS</div>
         <div [hidden]="code_activation.valid || code_activation.pristine" class="text-danger">
@@ -115,24 +115,24 @@
             Envoyer le code
           </button>
         </div>
-        <div [ngSwitch]="this.statusAfterActivationRequest" class="mt-4">
+        <div [ngSwitch]="this.activationResponseStatus" class="mt-4">
           <div *ngSwitchCase="200" class="text-white"> activation OK</div>
           <div *ngSwitchDefault class="text-danger">
-            <strong>{{ this.msgAfterActivationRequest }}</strong>
+            <strong>{{ this.activationResponseMsgToDisplay }}</strong>
           </div>
         </div>
       </form>
       
     </div>
     <div *ngSwitchDefault class="text-danger">
-      <strong>{{ this.msgAfterRegisterRequest }}</strong>
+      <strong>{{ this.registerResponseMsgToDisplay }}</strong>
     </div>
   </div>
 </form>
 <p [hidden]="!this.activation_success">Votre compte inote est à présent activé et vous pouvez dès lors vous y connecter</p>
 <button
     type="button"
-    (click)="goToHome()"
+    (click)="onGoToHome()"
     class="mt-2 btn btn-secondary ms-lg-auto border border-white"
     [hidden]="!this.activation_success"
   >

@@ -9,7 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { SharedPublicModule } from './shared-public-module/shared-public-module.module';
 
 import { RegisterFormComponent } from './register-form/register-form.component';
-import { UserService } from '../protected-module/shared-protected-module/user-module/user.service';
+import { ProtectedUserService } from '../protected-module/shared-protected-module/user-module/protected-user.service';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterComponent } from './register/register.component';
 
@@ -30,7 +30,7 @@ import { RegisterComponent } from './register/register.component';
     SharedPublicModule
   ],
   providers:[
-    UserService,
+    ProtectedUserService,
   ]
 })
 export class PublicModule { }

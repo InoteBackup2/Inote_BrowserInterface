@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserService } from './user.service';
+import { ProtectedUserService } from './protected-user.service';
 import { SharedModule } from '../../../shared-module/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserFilterPipe } from './user-filter-pipe.pipe';
@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   providers:[
-    UserService
+    ProtectedUserService
   ]
 })
 export class UserModule { }

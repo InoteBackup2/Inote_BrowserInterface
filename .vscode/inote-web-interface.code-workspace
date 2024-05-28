@@ -110,7 +110,9 @@
       "editorconfig.editorconfig",
 
       //  > Documentation
-     "oouo-diogo-perdigao.docthis",
+      "crystal-spider.jsdoc-generator",
+      "hookyqr.jsdoctagcomplete",
+
 
      // SECURITY
      // ============================================
