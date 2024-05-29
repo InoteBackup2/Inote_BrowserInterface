@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
+import { PublicUserService } from './public-user.service';
 
-import { PublicUserService } from './public-user-service.service';
-
-describe('PublicUserServiceService', () => {
+describe('PublicUserService', () => {
   let service: PublicUserService;
 
   beforeEach(() => {
