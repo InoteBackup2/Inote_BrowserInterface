@@ -7,6 +7,7 @@ import { ActivationRequestDto } from "./shared-public-module/dto/activation-requ
 import { SignInRequestDto } from "./shared-public-module/dto/sign-in-request.dto";
 import { SignInResponseDto } from "./shared-public-module/dto/sign-in-response.dto";
 import { ChangePasswordRequestDto } from "./shared-public-module/dto/change-password-request.dto";
+import { NewPasswordRequestDto } from "./shared-public-module/dto/new-password-request.dto";
 
 @Injectable()
 export class PublicUserService {
@@ -109,4 +110,20 @@ export class PublicUserService {
       }
     );
   }
+
+  sendNewPassword(newPasswordRequestDto: NewPasswordRequestDto) : Observable<HttpResponse<string>> {
+    const headers = { "content-type": "application/json" };
+    return this.http.post(
+      BackEndPoints.NEW_PASSWORD,
+      JSON.stringify(newPasswordRequestDto),
+      {
+        responseType: "text",
+        headers: headers,
+        reportProgress: true,
+        observe: "response",
+      }
+    );
+  }
+
+  
 }

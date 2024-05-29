@@ -1,12 +1,13 @@
-import { EngineStepService } from './../engine-step.service';
+import { NewPasswordRequestDto } from "./../dto/new-password-request.dto";
+import { EngineStepService } from "./../engine-step.service";
 import { Component, Input, OnInit } from "@angular/core";
 import { ChangePasswordRequestDto } from "../dto/change-password-request.dto";
 import { PublicUserService } from "../../public-user.service";
 import { TokenService } from "../../../core-module/token.service";
 import { Router } from "@angular/router";
 import { SignInResponseDto } from "../dto/sign-in-response.dto";
-import { Steps } from '../steps.enum';
-
+import { Steps } from "../steps.enum";
+import { catchError, throwError } from "rxjs";
 
 @Component({
   selector: "app-send-auth-code-and-act",
@@ -14,19 +15,19 @@ import { Steps } from '../steps.enum';
   styles: ``,
 })
 export class SendAuthCodeAndActComponent implements OnInit {
-  
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-  @Input() emailWhereCodeSended!:string;
+  @Input() emailWhereCodeSended!: string;
   confirmedPassword!: string;
   newPassword!: string;
-  activationcode!: number;
+  activationcode!: string;
   email!: string;
-  
+
   // HTTP
   // ==============================================
   /* Request */
   changePasswordRequestBody!: ChangePasswordRequestDto;
+  newPasswordRequestDto!: NewPasswordRequestDto;
 
   /* Response */
   signInResponseDto!: SignInResponseDto;
@@ -35,6 +36,15 @@ export class SendAuthCodeAndActComponent implements OnInit {
   changePasswordResponseStatus!: number;
   changePasswordResponseMsgToDisplay!: string | null;
   changePassword_success: boolean = false;
+
+  newPasswordResponseBody!: string | null;
+  newPasswordResponseStatus!: number;
+  newPasswordResponseMsgToDisplay!: string | null;
+  newPassword_success: boolean = false;
+
+  
+
+  askedChangePassword: boolean = false;
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
@@ -54,67 +64,67 @@ export class SendAuthCodeAndActComponent implements OnInit {
 
   // TEMPLATE CALLBACKS METHODS
   // ==============================================
-  // OnSubmit() {
-  //   const signInRequestDto: SignInRequestDto = {
-  //     username: this.email,
-  //     password: this.password,
-  //   };
-
-  //   this.publicUserservice
-  //     .loginUser(signInRequestDto)
-  //     .pipe(
-  //       catchError((error) => {
-  //         this.changePasswordResponseStatus = error.status;
-  //         this.changePasswordResponseBody = error.error.detail;
-  //         return throwError(error);
-  //       })
-  //     )
-  //     .subscribe((response) => {
-  //       this.changePasswordResponseStatus = response.status;
-  //       if (response.status === 200 && response.body !== null) {
-  //         this.signInResponseDto = response.body;
-  //         this.tokenService.saveToken(this.signInResponseDto.bearer);
-  //         this.router.navigate(["dashboard"]);
-  //       }
-  //     });
-  // }
-
-  // onChangePasswordAsked() {
-  //   this.changePasswordRequestBody = {
-  //     email: this.email,
-  //   };
-
-  //   this.publicUserservice
-  //     .askChangePassword(this.changePasswordRequestBody)
-  //     .pipe(
-  //       catchError((error) => {
-  //         this.changePasswordResponseStatus = error.status;
-  //         this.changePasswordResponseBody = error.error.detail;
-  //         return throwError(error);
-  //       })
-  //     )
-  //     .subscribe((response) => {
-  //       this.askedChangePassword = true;
-  //       this.changePasswordResponseStatus = response.status;
-  //       if (response.status === 200 && response.body !== null) {
-  //         this.changePassword_success = true;
-  //       } else {
-  //         throw new Error(
-  //           "HTTP Response anomaly : body is empty or status code not attempted"
-  //         );
-  //       }
-  //     });
-  // }
-
   onAskingReceiveCode() {
-    this.engineStepService.setCurrentStep(Steps.SEND_AUTH_CODE);
-  }
+    this.changePasswordRequestBody = {
+      email: this.emailWhereCodeSended,
+    };
 
-  onSendActivationCode() {
-      this.engineStepService.setCurrentStep(Steps.SEND_NEW_PASSWORD);
+    this.publicUserservice
+      .askChangePassword(this.changePasswordRequestBody)
+      .pipe(
+        catchError((error) => {
+          this.changePasswordResponseStatus = error.status;
+          this.changePasswordResponseBody = error.error.detail;
+          return throwError(error);
+        })
+      )
+      .subscribe((response) => {
+        this.askedChangePassword = true;
+        this.changePasswordResponseStatus = response.status;
+        if (response.status === 200 && response.body !== null) {
+          this.changePassword_success = true;
+        } else {
+          throw new Error(
+            "The HTTP request for an authentication code to change the password has failed."
+          );
+        }
+      });
+
+    this.engineStepService.setCurrentStep(Steps.SEND_NEW_PASSWORD);
   }
 
   onSendNewPassword() {
-    this.engineStepService.setCurrentStep(Steps.OPERATION_RESULT_STATUS);
+    this.newPasswordRequestDto = {
+      "code": this.activationcode,
+      "email": this.emailWhereCodeSended,
+      "password": this.confirmedPassword
+    };
+
+    this.publicUserservice
+      .sendNewPassword(this.newPasswordRequestDto)
+      .pipe(
+        catchError((error) => {
+          this.newPasswordResponseStatus = error.status;
+          this.newPasswordResponseBody = error.error.detail;
+          this.newPassword_success = false;
+          this.newPasswordResponseMsgToDisplay = "La requête de changement de mot de passe a échoué";
+          return throwError(error);
+        })
+      )
+      .subscribe((response) => {
+        this.newPasswordResponseStatus = response.status;
+        if (response.status === 200 && response.body !== null) {
+          this.newPassword_success = true;
+          this.newPasswordResponseMsgToDisplay = "Changement du mot de passe effectué."
+          this.engineStepService.setCurrentStep(Steps.OPERATION_RESULT_STATUS);
+          } else {
+            this.newPassword_success = false;
+          this.newPasswordResponseMsgToDisplay = "La requête de changement de mot de passe a échoué";
+          throw new Error(
+            "Request to change password failed"
+          );
+        }
+      });
+   
   }
 }
