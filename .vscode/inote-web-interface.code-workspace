@@ -135,6 +135,9 @@
     "karmaTestExplorer.enableExtension": true,
     "karmaTestExplorer.projectType": "angular",
     "karmaTestExplorer.testFramework": "jasmine",
-    "karmaTestExplorer.browser": "ChromiumHeadless",
+    "karmaTestExplorer.browser": "ChromeHeadless",
+    "karmaTestExplorer.env": {
+      "CHROME_BIN": "/usr/bin/brave-browser"
+    }
   }
 }

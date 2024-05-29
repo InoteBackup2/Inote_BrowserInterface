@@ -7,9 +7,9 @@ import AOS from 'aos';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit{
-  title = 'inote-web-interface';
+  title = 'Inote Web Interface';
 
-  constructor(private http:HttpClient){}
+  constructor(private http: HttpClient){}
 
   ngOnInit(): void {
     
