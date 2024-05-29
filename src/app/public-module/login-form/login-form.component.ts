@@ -1,4 +1,4 @@
-import { EngineStepService } from '../shared-public-module/engine-step.service';
+import { EngineStepService } from "../shared-public-module/engine-step.service";
 import { SignInResponseDto } from "./../shared-public-module/dto/sign-in-response.dto";
 import { SignInRequestDto } from "./../shared-public-module/dto/sign-in-request.dto";
 import { Component } from "@angular/core";
@@ -7,8 +7,7 @@ import { Router } from "@angular/router";
 import { catchError, throwError } from "rxjs";
 import { TokenService } from "../../core-module/token.service";
 import { ChangePasswordRequestDto } from "../shared-public-module/dto/change-password-request.dto";
-import { Steps } from '../shared-public-module/steps.enum';
-
+import { Steps } from "../shared-public-module/steps.enum";
 
 @Component({
   selector: "app-login-form-component",
@@ -19,63 +18,13 @@ import { Steps } from '../shared-public-module/steps.enum';
   ],
 })
 export class LoginFormComponent {
-onCloseNewPasswordModal() {
-  this.engineStepService.setCurrentStep(Steps.INIT);
-}
-
-
-
-onForgottenPassword() {
- this.engineStepService.setCurrentStep(Steps.REQUEST_AUTH_CODE);
- 
-}
   
-  
-    isModalShow = false;
-  
-    openModal() {
-      this.isModalShow = true;
-    }
-  
-    closeModal() {
-      this.isModalShow = false;
-    }
-  
-
-
-  
-  
-  confirmedPassword!: string;
-  newPassword!: string;
-  onSendNewPassword() {
-    
-  }
-
-  OnSubmitChangePwdRequest() {
-    throw new Error("Method not implemented.");
-  }
-  
-  activationcode!: number;
-  activation_success!: boolean;
-  activationResponseStatus!: number;
-  activationResponseMsgToDisplay!: string;
-  registerResponseMsgToDisplay!: string;
-  receivedActivationCode!: boolean;
-  onSubmitActivation() {
-    throw new Error("Method not implemented.");
-  }
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-
   email!: string;
   password!: string;
-  statusAfterRequest!: number;
-  msgAfterRequest!: string;
-  askedChangePassword: boolean = false;
-  isModalOpen = false;
-  receveidCode: boolean = false;
-  authenticatedCode: boolean = false;
-
+  askedChangePassword!: boolean;
+  
   // HTTP
   // ==============================================
   /* Request */
@@ -88,18 +37,16 @@ onForgottenPassword() {
   changePasswordResponseStatus!: number;
   changePasswordResponseMsgToDisplay!: string | null;
   changePassword_success: boolean = false;
+  
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
   constructor(
-    private engineStepService:EngineStepService,
+    private engineStepService: EngineStepService,
     private publicUserservice: PublicUserService,
     private tokenService: TokenService,
     private router: Router
   ) {}
-
-
-  
 
   // INITIALIZATION (by ngOnInit)
   // ==============================================
@@ -107,7 +54,6 @@ onForgottenPassword() {
   // TEMPLATE CALLBACKS METHODS
   // ==============================================
   OnSubmit() {
-    console.log("1111");
     const signInRequestDto: SignInRequestDto = {
       username: this.email,
       password: this.password,
@@ -159,16 +105,11 @@ onForgottenPassword() {
       });
   }
 
-  onAskingReceiveCode() {
-   
+  onCloseNewPasswordModal() {
+    this.engineStepService.setCurrentStep(Steps.INIT);
   }
 
-  OnSubmit2() {
-    console.log("aaaaaa");
-    this.activation_success = true;
-  }
-
-  onSendActivationCode() {
-   
+  onForgottenPassword() {
+    this.engineStepService.setCurrentStep(Steps.REQUEST_AUTH_CODE);
   }
 }

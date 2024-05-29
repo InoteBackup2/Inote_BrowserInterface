@@ -1,4 +1,3 @@
-
 export enum Steps {
     INIT=0,
     REQUEST_AUTH_CODE= 1,
