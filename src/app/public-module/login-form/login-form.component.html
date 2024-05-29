@@ -16,9 +16,9 @@
       [(ngModel)]="this.password" name="pwd" #ref_pwd="ngModel" />
   </div>
   <!-- Forgotten password link -->
-  <a class="d-flex justify-content-end fst-italic mt-1"data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-  (click)="onForgottenPassword()"
-  [ngStyle]="ref_email.valid ? {'text-decoration':'none','color':'white'}:{'color': 'transparent','pointer-events':'none'}">
+  <a class="d-flex justify-content-end fst-italic mt-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+    (click)="onForgottenPassword()"
+    [ngStyle]="ref_email.valid ? {'text-decoration':'none','color':'white'}:{'color': 'transparent','pointer-events':'none'}">
     Mot de passe perdu ?
   </a>
 
@@ -32,15 +32,19 @@
 </form>
 
 <!-- PASSWORD CHANGE MODAL -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="d-flex flex-column align-items-center modal-content bg-success">
-      <button (click)="onCloseNewPasswordModal()" type="button" class="btn-close align-self-end" data-bs-dismiss="modal" aria-label="Close"></button>
-      <app-send-auth-code-and-act class="p-3" 
-        [step]="0"
-        [emailWhereCodeSended]="this.email"
-        ></app-send-auth-code-and-act>
-     
+
+      <!-- Start of modal content -->
+
+      <button (click)="onCloseNewPasswordModal()" type="button" class="btn-close align-self-end" data-bs-dismiss="modal"
+        aria-label="Close"></button>
+      <app-send-auth-code-and-act class="p-3" [emailWhereCodeSended]="this.email"></app-send-auth-code-and-act>
+
+      <!-- End of modal content -->
+
     </div>
   </div>
 </div>
