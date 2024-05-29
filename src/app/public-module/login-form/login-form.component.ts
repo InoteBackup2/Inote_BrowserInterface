@@ -1,11 +1,12 @@
 import { SignInResponseDto } from "./../shared-public-module/dto/sign-in-response.dto";
 import { SignInRequestDto } from "./../shared-public-module/dto/sign-in-request.dto";
-import { Component, ElementRef, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { PublicUserService } from "../public-user.service";
 import { Router } from "@angular/router";
 import { catchError, throwError } from "rxjs";
 import { TokenService } from "../../core-module/token.service";
 import { ChangePasswordRequestDto } from "../shared-public-module/dto/change-password-request.dto";
+import { ForgottenPasswordSteps } from "./forgotten-password-steps.enum";
 
 @Component({
   selector: "app-login-form-component",
@@ -15,17 +16,20 @@ import { ChangePasswordRequestDto } from "../shared-public-module/dto/change-pas
     "../../shared-module/general-styles.css",
   ],
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit{
+  
 
-confirmedPassword!: string;
-newPassword!: string;
-onSendNewPassword() {
-throw new Error('Method not implemented.');
-}
+  resetPasswordStep!:ForgottenPasswordSteps;
+  
+  confirmedPassword!: string;
+  newPassword!: string;
+  onSendNewPassword() {
+    this.resetPasswordStep = ForgottenPasswordSteps.OPERATION_RESULT_STATUS;
+  }
 
-OnSubmitChangePwdRequest() {
-throw new Error('Method not implemented.');
-}
+  OnSubmitChangePwdRequest() {
+    throw new Error("Method not implemented.");
+  }
   @ViewChild("scanModalContent") modalContent: ElementRef | undefined;
   activationcode!: number;
   activation_success!: boolean;
@@ -68,13 +72,18 @@ throw new Error('Method not implemented.');
     private router: Router
   ) {}
 
+
+  ngOnInit(): void {
+    this.resetPasswordStep = ForgottenPasswordSteps.REQUEST_AUTH_CODE;
+  }
+
   // INITIALIZATION (by ngOnInit)
   // ==============================================
 
   // TEMPLATE CALLBACKS METHODS
   // ==============================================
   OnSubmit() {
-    console.log("1111")
+    console.log("1111");
     const signInRequestDto: SignInRequestDto = {
       username: this.email,
       password: this.password,
@@ -127,16 +136,15 @@ throw new Error('Method not implemented.');
   }
 
   onAskingReceiveCode() {
-    this.receivedActivationCode = true;
+    this.resetPasswordStep =  ForgottenPasswordSteps.SEND_AUTH_CODE;
   }
 
   OnSubmit2() {
     console.log("aaaaaa");
-    this.activation_success=true;
-  }
-  
-  onSendActivationCode() {
-    this.authenticatedCode = true;
+    this.activation_success = true;
   }
 
+  onSendActivationCode() {
+    this.resetPasswordStep= ForgottenPasswordSteps.SEND_NEW_PASSWORD;
+  }
 }
