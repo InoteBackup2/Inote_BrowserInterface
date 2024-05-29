@@ -4,52 +4,73 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 @Component({
-  template: '<input id="test-input" appAutofocus>'
-}) class MockComponent{}
+  template: '<input appAutofocus>'
+}) class PositiveMockComponent {}
 
-let fixture: ComponentFixture<MockComponent>;
-let inputElement: HTMLInputElement;
+@Component({
+  template: '<input>'
+}) class NegativeMockComponent {}
+
+let positiveFixture: ComponentFixture<PositiveMockComponent>;
+let negativeFixture: ComponentFixture<NegativeMockComponent>;
+let inputElements: HTMLInputElement[];
 
 describe('AutofocusDirective', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         AutofocusDirective,
-        MockComponent
+        PositiveMockComponent,
+        NegativeMockComponent
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MockComponent);
-    fixture.detectChanges();
+    positiveFixture = TestBed.createComponent(PositiveMockComponent);
+    positiveFixture.detectChanges();
+    negativeFixture = TestBed.createComponent(NegativeMockComponent);
+    negativeFixture.detectChanges();
 
-    const newElement: HTMLInputElement | null =
-        fixture.debugElement.query(By.css('input')).nativeElement;
-    
-    if (newElement) {
-      inputElement = newElement;
-    } else {
-      throw new Error('Can\'t test without input element !');
-    }
+    inputElements = [
+      positiveFixture.debugElement.query(By.css('input')).nativeElement,
+      negativeFixture.debugElement.query(By.css('input')).nativeElement
+    ]
+
   });
 
   it('should create an instance', () => {
-    const inputRef = new ElementRef(inputElement);
+    const inputRef = new ElementRef(inputElements[0]);
     const directive = new AutofocusDirective(inputRef);
+
     expect(directive).toBeTruthy();
   });
 
-  it('creates a focused input when autofocus is true', () => {
-    inputElement.setAttribute('appAutofocus', 'true');
-    fixture.detectChanges();
-
-    expect(inputElement.autofocus).toBe(true);
+  it('creates a focused input when autofocus is present', () => {
+    const focusedElement = positiveFixture
+        .debugElement
+        .query(By.css(':focus'));
+    
+    
+    expect(inputElements[0].attributes.getNamedItem('appAutofocus'))
+        .not
+        .toBeNull();
+    expect(focusedElement)
+        .not
+        .toBeNull();
+    if (focusedElement !== null) {
+      expect(focusedElement.nativeElement)
+          .toBeInstanceOf(HTMLInputElement);
+    }
   });
 
-  it('creates a unfocused input when autofocus is false', () => {
-    inputElement.setAttribute('appAutofocus', 'false');
-    fixture.detectChanges();
-
-    //expect(fixture.nativeElement.hasFocus()).toBe(false);
-    expect(inputElement.autofocus).toBe(false);
+  it('does\'t create a focused input when autofocus isn\'t present', () => {
+    const focusedElement = negativeFixture
+        .debugElement
+        .query(By.css('input:focus'));
+    
+    
+    expect(inputElements[1].attributes.getNamedItem('appAutofocus'))
+        .toBeNull();
+    expect(focusedElement).toBeNull();
   });
+
 });
