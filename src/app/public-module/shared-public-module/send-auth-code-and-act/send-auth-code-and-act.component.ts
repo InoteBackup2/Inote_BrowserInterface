@@ -1,60 +1,38 @@
-import { EngineStepService } from '../shared-public-module/engine-step.service';
-import { SignInResponseDto } from "./../shared-public-module/dto/sign-in-response.dto";
-import { SignInRequestDto } from "./../shared-public-module/dto/sign-in-request.dto";
-import { Component } from "@angular/core";
-import { PublicUserService } from "../public-user.service";
+import { EngineStepService } from './../engine-step.service';
+import { Component, Input, OnInit } from "@angular/core";
+import { ChangePasswordRequestDto } from "../dto/change-password-request.dto";
+import { PublicUserService } from "../../public-user.service";
+import { TokenService } from "../../../core-module/token.service";
 import { Router } from "@angular/router";
+import { SignInRequestDto } from "../dto/sign-in-request.dto";
 import { catchError, throwError } from "rxjs";
-import { TokenService } from "../../core-module/token.service";
-import { ChangePasswordRequestDto } from "../shared-public-module/dto/change-password-request.dto";
-import { Steps } from '../shared-public-module/steps.enum';
+import { SignInResponseDto } from "../dto/sign-in-response.dto";
+import { Steps } from '../steps.enum';
 
 
 @Component({
-  selector: "app-login-form-component",
-  templateUrl: "./login-form.component.html",
-  styleUrls: [
-    "./login-form.component.css",
-    "../../shared-module/general-styles.css",
-  ],
+  selector: "app-send-auth-code-and-act",
+  templateUrl: "./send-auth-code-and-act.component.html",
+  styles: ``,
 })
-export class LoginFormComponent {
-onCloseNewPasswordModal() {
-  this.engineStepService.setCurrentStep(Steps.INIT);
-}
+export class SendAuthCodeAndActComponent implements OnInit {
+  @Input() step!:number;
+   @Input() emailWhereCodeSended!:string;
+   
+   
+   @Input() modalIsHidden!:boolean;
 
-
-
-onForgottenPassword() {
- this.engineStepService.setCurrentStep(Steps.REQUEST_AUTH_CODE);
- 
-}
-  
-  
-    isModalShow = false;
-  
-    openModal() {
-      this.isModalShow = true;
-    }
-  
-    closeModal() {
-      this.isModalShow = false;
-    }
-  
-
-
-  
-  
   confirmedPassword!: string;
   newPassword!: string;
+  
   onSendNewPassword() {
-    
+    this.engineStepService.setCurrentStep(Steps.OPERATION_RESULT_STATUS);
   }
 
   OnSubmitChangePwdRequest() {
     throw new Error("Method not implemented.");
   }
-  
+
   activationcode!: number;
   activation_success!: boolean;
   activationResponseStatus!: number;
@@ -66,7 +44,6 @@ onForgottenPassword() {
   }
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-
   email!: string;
   password!: string;
   statusAfterRequest!: number;
@@ -92,14 +69,16 @@ onForgottenPassword() {
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
   constructor(
-    private engineStepService:EngineStepService,
+    public engineStepService: EngineStepService,
     private publicUserservice: PublicUserService,
     private tokenService: TokenService,
     private router: Router
   ) {}
 
-
-  
+  ngOnInit(): void {
+    
+    this.email = this.emailWhereCodeSended;
+  }
 
   // INITIALIZATION (by ngOnInit)
   // ==============================================
@@ -160,7 +139,7 @@ onForgottenPassword() {
   }
 
   onAskingReceiveCode() {
-   
+    this.engineStepService.setCurrentStep(Steps.SEND_AUTH_CODE);
   }
 
   OnSubmit2() {
@@ -169,6 +148,11 @@ onForgottenPassword() {
   }
 
   onSendActivationCode() {
+      this.engineStepService.setCurrentStep(Steps.SEND_NEW_PASSWORD);
+  }
+
+  onFinish() {
    
+
   }
 }
