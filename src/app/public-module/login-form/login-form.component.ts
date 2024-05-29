@@ -16,6 +16,13 @@ import { ChangePasswordRequestDto } from "../shared-public-module/dto/change-pas
   ],
 })
 export class LoginFormComponent {
+
+confirmedPassword!: string;
+newPassword!: string;
+onSendNewPassword() {
+throw new Error('Method not implemented.');
+}
+
 OnSubmitChangePwdRequest() {
 throw new Error('Method not implemented.');
 }
@@ -25,7 +32,7 @@ throw new Error('Method not implemented.');
   activationResponseStatus!: number;
   activationResponseMsgToDisplay!: string;
   registerResponseMsgToDisplay!: string;
-  receivedActivationCode: any;
+  receivedActivationCode!: boolean;
   onSubmitActivation() {
     throw new Error("Method not implemented.");
   }
@@ -38,6 +45,7 @@ throw new Error('Method not implemented.');
   askedChangePassword: boolean = false;
   isModalOpen = false;
   receveidCode: boolean = false;
+  authenticatedCode: boolean = false;
 
   // HTTP
   // ==============================================
@@ -126,4 +134,9 @@ throw new Error('Method not implemented.');
     console.log("aaaaaa");
     this.activation_success=true;
   }
+  
+  onSendActivationCode() {
+    this.authenticatedCode = true;
+  }
+
 }
