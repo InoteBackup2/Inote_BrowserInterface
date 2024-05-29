@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BorderMouseNoInitialColorDirective } from './border-mouse-no-initial-color.directive';
 import { SpinLoaderComponent } from './spin-loader/spin-loader.component';
 import { SharedComponent } from './shared/shared.component';
+import { AutofocusDirective } from './autofocus.directive';
 @NgModule({
   declarations: [
     BorderMouseDirective,
@@ -12,6 +13,7 @@ import { SharedComponent } from './shared/shared.component';
     BorderMouseNoInitialColorDirective,
     SpinLoaderComponent,
     SharedComponent,
+    AutofocusDirective,
     
   ],
   imports: [
@@ -22,6 +24,7 @@ import { SharedComponent } from './shared/shared.component';
     BorderMouseNoInitialColorDirective,
     SpinLoaderComponent,
     SharedComponent,
+    AutofocusDirective,
   ],
 
 })
