@@ -7,3 +7,11 @@
     height: 90vh;
     width: 100%;
   }
+
+.inote-link-normal{
+    cursor:pointer;
+}
+
+.inote-small-comment{
+    font-size: smaller;
+}

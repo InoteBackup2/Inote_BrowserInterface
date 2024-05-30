@@ -1,4 +1,4 @@
-import { EngineStepService } from "../shared-public-module/engine-step.service";
+import { EngineStepService } from "../shared-public-module/authentication-by-mail.service.spec.";
 import { SignInResponseDto } from "./../shared-public-module/dto/sign-in-response.dto";
 import { SignInRequestDto } from "./../shared-public-module/dto/sign-in-request.dto";
 import { Component } from "@angular/core";
@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 import { catchError, throwError } from "rxjs";
 import { TokenService } from "../../core-module/token.service";
 import { ChangePasswordRequestDto } from "../shared-public-module/dto/change-password-request.dto";
-import { Steps } from "../shared-public-module/steps.enum";
+import { AuthenticationByMailSteps } from "../shared-public-module/authentication-by-mail.enum";
 
 @Component({
   selector: "app-login-form-component",
@@ -106,10 +106,10 @@ export class LoginFormComponent {
   }
 
   onCloseNewPasswordModal() {
-    this.engineStepService.setCurrentStep(Steps.INIT);
+    this.engineStepService.setCurrentStep(AuthenticationByMailSteps.INIT);
   }
 
   onForgottenPassword() {
-    this.engineStepService.setCurrentStep(Steps.REQUEST_AUTH_CODE);
+    this.engineStepService.setCurrentStep(AuthenticationByMailSteps.REQUEST_AUTH_CODE);
   }
 }
