@@ -21,6 +21,7 @@ import { RegisterComponent } from './register/register.component';
     PageNotFoundComponent,
     RegisterFormComponent,
     RegisterComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -31,6 +32,7 @@ import { RegisterComponent } from './register/register.component';
   ],
   providers:[
     ProtectedUserService,
+    
   ]
 })
 export class PublicModule { }

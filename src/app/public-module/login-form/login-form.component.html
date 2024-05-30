@@ -1,53 +1,50 @@
+<!-- LOGIN FORM -->
 <form (ngSubmit)="OnSubmit()" #loginForm="ngForm">
-  <div [hidden]="!ref_email.pristine" id="email-pristine">RAS</div>
-  <div [hidden]="!ref_email.valid" id="email-valide">RAS</div>
-  <div [hidden]="ref_email.valid || ref_email.pristine" class="text-danger">
-    Email requis ou invalide
-  </div>
+
+  <!-- EMAIL FIELD -->
+  <!-- status informations of input -->
   <div class="input-group input-group-sm mb-3 mx-auto">
     <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
-    <input
-      type="text"
-      class="form-control"
-      id="email"
-      aria-describedby="inputGroup-sizing-sm"
-      required
-      autofocus
-      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-      [(ngModel)]="this.email"
-      name="email"
-      #ref_email="ngModel"
-    />
+    <input type="text" class="form-control" id="email" aria-describedby="inputGroup-sizing-sm" required autofocus
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="this.email" name="email" #ref_email="ngModel" />
   </div>
 
-  <div [hidden]="!ref_pwd.pristine" id="pwd-pristine">RAS</div>
-  <div [hidden]="!ref_pwd.valid" id="pwd-valide">RAS</div>
-  <div [hidden]="ref_pwd.valid || ref_pwd.pristine" class="text-danger">
-    Mot de passe requis
-  </div>
-  <div class="input-group input-group-sm mb-3 mx-auto">
+  <!-- PASSWORD FIELD -->
+  <div class="input-group input-group-sm  mx-auto">
     <span class="input-group-text" id="inputGroup-sizing-sm">Mot de passe</span>
-    <input
-      type="password"
-      class="form-control"
-      id="pwd"
-      aria-describedby="inputGroup-sizing-sm"
-      required
-      [(ngModel)]="this.password"
-      name="pwd"
-      #ref_pwd="ngModel"
-    />
+    <input type="password" class="form-control" id="pwd" aria-describedby="inputGroup-sizing-sm" required
+      [(ngModel)]="this.password" name="pwd" #ref_pwd="ngModel" />
   </div>
+  <!-- Forgotten password link -->
+  <a class="d-flex justify-content-end fst-italic mt-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+    (click)="onForgottenPassword()"
+    [ngStyle]="ref_email.valid ? {'text-decoration':'none','color':'white'}:{'color': 'transparent','pointer-events':'none'}">
+    Mot de passe perdu ?
+  </a>
+
+  <!-- Login button -->
   <div class="d-flex flex-grow-0 justify-content-center">
-    <button
-      type="submit"
-      class="mt-2 btn btn-secondary ms-lg-auto border border-white"
-      [disabled]="!loginForm.form.valid"
-    >
+    <button type="submit" class="mt-2 btn btn-secondary ms-lg-auto border border-white"
+      [disabled]="!loginForm.form.valid">
       Se connecter
     </button>
   </div>
-  <div *ngIf="this.statusAfterRequest !== 200" class="mt-4 text-danger" >
-    {{ this.msgAfterRequest }}
-  </div>
 </form>
+
+<!-- PASSWORD CHANGE MODAL -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="d-flex flex-column align-items-center modal-content bg-success">
+
+      <!-- Start of modal content -->
+
+      <button (click)="onCloseNewPasswordModal()" type="button" class="btn-close align-self-end" data-bs-dismiss="modal"
+        aria-label="Close"></button>
+      <app-send-auth-code-and-act class="p-3" [emailWhereCodeSended]="this.email"></app-send-auth-code-and-act>
+
+      <!-- End of modal content -->
+
+    </div>
+  </div>
+</div>
