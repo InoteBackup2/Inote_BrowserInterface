@@ -1,5 +1,4 @@
 import { NewPasswordRequestDto } from "./../dto/new-password-request.dto";
-import { EngineStepService } from "../authentication-by-mail.service.spec.";
 import { Component, Input, OnInit } from "@angular/core";
 import { ChangePasswordRequestDto } from "../dto/change-password-request.dto";
 import { PublicUserService } from "../../public-user.service";
@@ -8,6 +7,7 @@ import { Router } from "@angular/router";
 import { SignInResponseDto } from "../dto/sign-in-response.dto";
 import { AuthenticationByMailSteps } from "../authentication-by-mail.enum";
 import { catchError, throwError } from "rxjs";
+import { AuthenticationByMailService } from "../authentication-by-mail.service";
 
 @Component({
   selector: "app-send-auth-code-and-act",
@@ -49,7 +49,7 @@ export class SendAuthCodeAndActComponent implements OnInit {
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
   constructor(
-    public engineStepService: EngineStepService,
+    public engineStepService: AuthenticationByMailService,
     private publicUserservice: PublicUserService,
     private tokenService: TokenService,
     private router: Router
