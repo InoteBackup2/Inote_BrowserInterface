@@ -1,4 +1,3 @@
-import { EngineStepService } from "../shared-public-module/authentication-by-mail.service.spec.";
 import { SignInResponseDto } from "./../shared-public-module/dto/sign-in-response.dto";
 import { SignInRequestDto } from "./../shared-public-module/dto/sign-in-request.dto";
 import { Component } from "@angular/core";
@@ -8,6 +7,7 @@ import { catchError, throwError } from "rxjs";
 import { TokenService } from "../../core-module/token.service";
 import { ChangePasswordRequestDto } from "../shared-public-module/dto/change-password-request.dto";
 import { AuthenticationByMailSteps } from "../shared-public-module/authentication-by-mail.enum";
+import { AuthenticationByMailService } from "../shared-public-module/authentication-by-mail.service";
 
 @Component({
   selector: "app-login-form-component",
@@ -42,7 +42,7 @@ export class LoginFormComponent {
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
   constructor(
-    private engineStepService: EngineStepService,
+    private engineStepService: AuthenticationByMailService,
     private publicUserservice: PublicUserService,
     private tokenService: TokenService,
     private router: Router
