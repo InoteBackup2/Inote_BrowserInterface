@@ -1,12 +1,12 @@
 import { NewPasswordRequestDto } from "./../dto/new-password-request.dto";
-import { EngineStepService } from "./../engine-step.service";
+import { EngineStepService } from "../authentication-by-mail.service.spec.";
 import { Component, Input, OnInit } from "@angular/core";
 import { ChangePasswordRequestDto } from "../dto/change-password-request.dto";
 import { PublicUserService } from "../../public-user.service";
 import { TokenService } from "../../../core-module/token.service";
 import { Router } from "@angular/router";
 import { SignInResponseDto } from "../dto/sign-in-response.dto";
-import { Steps } from "../steps.enum";
+import { AuthenticationByMailSteps } from "../authentication-by-mail.enum";
 import { catchError, throwError } from "rxjs";
 
 @Component({
@@ -90,7 +90,7 @@ export class SendAuthCodeAndActComponent implements OnInit {
         }
       });
 
-    this.engineStepService.setCurrentStep(Steps.SEND_NEW_PASSWORD);
+    this.engineStepService.setCurrentStep(AuthenticationByMailSteps.SEND_NEW_PASSWORD);
   }
 
   onSendNewPassword() {
@@ -116,7 +116,7 @@ export class SendAuthCodeAndActComponent implements OnInit {
         if (response.status === 200 && response.body !== null) {
           this.newPassword_success = true;
           this.newPasswordResponseMsgToDisplay = "Changement du mot de passe effectué."
-          this.engineStepService.setCurrentStep(Steps.OPERATION_RESULT_STATUS);
+          this.engineStepService.setCurrentStep(AuthenticationByMailSteps.OPERATION_RESULT_STATUS);
           } else {
             this.newPassword_success = false;
           this.newPasswordResponseMsgToDisplay = "La requête de changement de mot de passe a échoué";
