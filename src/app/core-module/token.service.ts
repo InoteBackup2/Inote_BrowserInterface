@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class TokenService {
 
   // SERVICE properties
   // ==============================================
-  BEARER: string = "bearer";
+  private readonly BEARER: string = 'bearer';
 
   // SERVICE METHODS
   // ==============================================

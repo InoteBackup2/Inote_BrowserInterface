@@ -6,7 +6,7 @@ import { PublicRoutingModule } from './public-routing.module';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { SharedPublicModule } from './shared-public-module/shared-public-module.module';
+import { SharedPublicModule } from './shared-public-module/shared-public.module';
 
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { ProtectedUserService } from '../protected-module/shared-protected-module/user-module/protected-user.service';
