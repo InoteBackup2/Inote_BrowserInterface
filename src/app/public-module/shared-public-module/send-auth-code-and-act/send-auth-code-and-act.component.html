@@ -39,7 +39,8 @@
             <span class="input-group-text" id="inputGroup-sizing-sm">Mot de passe</span>
             <input type="password" class="form-control" id="newPwdId" aria-describedby="inputGroup-sizing-sm" required
               pattern="[a-zA-Z0-9!@#$%^&*_=+-]{8,12}" [(ngModel)]="this.newPassword" name="newPwdField"
-              #new_pwd_model="ngModel" placeholder="Entrez votre nouveau mot de passe" />
+              #new_pwd_model="ngModel" placeholder="Entrez votre nouveau mot de passe" 
+              [disabled]="!code_activation.valid" />
           </div>
 
           <div class="align-items-center input-group input-group-sm mb-3 mx-auto">
