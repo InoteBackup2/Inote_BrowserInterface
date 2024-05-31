@@ -12,7 +12,9 @@ import { AuthenticationByMailService } from "../authentication-by-mail.service";
 @Component({
   selector: "app-send-auth-code-and-act",
   templateUrl: "./send-auth-code-and-act.component.html",
-  styles: ``,
+  styleUrls: [
+    "./../../../shared-module/general-styles.css",
+  ]
 })
 export class SendAuthCodeAndActComponent implements OnInit {
   // RELATING TEMPLATE VARIABLES
