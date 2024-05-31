@@ -2,7 +2,7 @@
   <!-- Input fielss agencement -->
   <div class="d-flex flex-column align-items-center">
     
-    <div [ngSwitch]="this.engineStepService.getCurrentStep()">
+    <div [ngSwitch]="this.authenticationByMailService.getCurrentStep()">
 
       <!-- Nota bene : It seems not possible to use enum literals on template -->
       
@@ -67,7 +67,7 @@
       </div>
 
       <!-- Default case -->
-      <div *ngSwitchDefault>Step anomaly : {{this.engineStepService.getCurrentStep()}}</div>
+      <div *ngSwitchDefault>Step anomaly : {{this.authenticationByMailService.getCurrentStep()}}</div>
     
     </div>
   </div>

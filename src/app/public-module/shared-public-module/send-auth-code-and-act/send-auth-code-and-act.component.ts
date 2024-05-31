@@ -44,14 +44,12 @@ export class SendAuthCodeAndActComponent implements OnInit {
   newPasswordResponseMsgToDisplay!: string | null;
   newPassword_success: boolean = false;
 
-  
-
   askedChangePassword: boolean = false;
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
   constructor(
-    public engineStepService: AuthenticationByMailService,
+    public authenticationByMailService: AuthenticationByMailService,
     private publicUserservice: PublicUserService,
     private tokenService: TokenService,
     private router: Router
@@ -92,7 +90,7 @@ export class SendAuthCodeAndActComponent implements OnInit {
         }
       });
 
-    this.engineStepService.setCurrentStep(AuthenticationByMailSteps.SEND_NEW_PASSWORD);
+    this.authenticationByMailService.setCurrentStep(AuthenticationByMailSteps.SEND_NEW_PASSWORD);
   }
 
   onSendNewPassword() {
@@ -118,7 +116,7 @@ export class SendAuthCodeAndActComponent implements OnInit {
         if (response.status === 200 && response.body !== null) {
           this.newPassword_success = true;
           this.newPasswordResponseMsgToDisplay = "Changement du mot de passe effectué."
-          this.engineStepService.setCurrentStep(AuthenticationByMailSteps.OPERATION_RESULT_STATUS);
+          this.authenticationByMailService.setCurrentStep(AuthenticationByMailSteps.OPERATION_RESULT_STATUS);
           } else {
             this.newPassword_success = false;
           this.newPasswordResponseMsgToDisplay = "La requête de changement de mot de passe a échoué";
