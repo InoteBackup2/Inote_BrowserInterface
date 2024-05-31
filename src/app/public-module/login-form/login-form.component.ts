@@ -42,7 +42,7 @@ export class LoginFormComponent {
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
   constructor(
-    private engineStepService: AuthenticationByMailService,
+    private authenticationByMailService: AuthenticationByMailService,
     private publicUserservice: PublicUserService,
     private tokenService: TokenService,
     private router: Router
@@ -106,10 +106,10 @@ export class LoginFormComponent {
   }
 
   onCloseNewPasswordModal() {
-    this.engineStepService.setCurrentStep(AuthenticationByMailSteps.INIT);
+    this.authenticationByMailService.setCurrentStep(AuthenticationByMailSteps.INIT);
   }
 
   onForgottenPassword() {
-    this.engineStepService.setCurrentStep(AuthenticationByMailSteps.REQUEST_AUTH_CODE);
+    this.authenticationByMailService.setCurrentStep(AuthenticationByMailSteps.REQUEST_AUTH_CODE);
   }
 }
