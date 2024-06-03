@@ -12,6 +12,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import { ProtectedUserService } from '../protected-module/shared-protected-module/user-module/protected-user.service';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterComponent } from './register/register.component';
+import { RegisterWithPopupComponent } from './register-with-popup/register-with-popup.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RegisterComponent } from './register/register.component';
     PageNotFoundComponent,
     RegisterFormComponent,
     RegisterComponent,
+    RegisterWithPopupComponent,
     
   ],
   imports: [

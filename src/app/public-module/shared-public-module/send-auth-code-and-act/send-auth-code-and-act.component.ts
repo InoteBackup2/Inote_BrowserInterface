@@ -1,3 +1,4 @@
+import { ActivationRequestDto } from "./../dto/activation-request.dto";
 import { NewPasswordRequestDto } from "./../dto/new-password-request.dto";
 import { Component, Input, OnInit } from "@angular/core";
 import { ChangePasswordRequestDto } from "../dto/change-password-request.dto";
@@ -12,9 +13,7 @@ import { AuthenticationByMailService } from "../authentication-by-mail.service";
 @Component({
   selector: "app-send-auth-code-and-act",
   templateUrl: "./send-auth-code-and-act.component.html",
-  styleUrls: [
-    "./../../../shared-module/general-styles.css",
-  ]
+  styleUrls: ["./../../../shared-module/general-styles.css"],
 })
 export class SendAuthCodeAndActComponent implements OnInit {
   // RELATING TEMPLATE VARIABLES
@@ -28,6 +27,7 @@ export class SendAuthCodeAndActComponent implements OnInit {
   // HTTP
   // ==============================================
   /* Request */
+  activationRequestDto!: ActivationRequestDto;
   changePasswordRequestBody!: ChangePasswordRequestDto;
   newPasswordRequestDto!: NewPasswordRequestDto;
 
@@ -44,7 +44,13 @@ export class SendAuthCodeAndActComponent implements OnInit {
   newPasswordResponseMsgToDisplay!: string | null;
   newPassword_success: boolean = false;
 
+  activateUserResponseBody!: string;
+  activateUserResponseStatus!: number;
+  activateUserResponseMsgToDisplay!: string;
+  activateUser_success!: boolean;
+
   askedChangePassword: boolean = false;
+ 
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
@@ -90,14 +96,51 @@ export class SendAuthCodeAndActComponent implements OnInit {
         }
       });
 
-    this.authenticationByMailService.setCurrentStep(AuthenticationByMailSteps.SEND_NEW_PASSWORD);
+    this.authenticationByMailService.setCurrentStep(
+      AuthenticationByMailSteps.SEND_AUTH_CODE
+    );
+  }
+
+  onSendAuthCode() {
+    this.activationRequestDto = {
+      code: this.activationcode,
+    };
+
+    this.publicUserservice
+      .activateUser(this.activationRequestDto)
+      .pipe(
+        catchError((error) => {
+          this.activateUserResponseStatus = error.status;
+          this.activateUserResponseBody = error.error.detail;
+          this.activateUser_success = false;
+          this.activateUserResponseMsgToDisplay =
+            "La requête d'activation de l'utilisateur a échoué";
+          return throwError(error);
+        })
+      )
+      .subscribe((response) => {
+        this.activateUserResponseStatus = response.status;
+        if (response.status === 200 && response.body !== null) {
+          this.activateUser_success = true;
+          this.activateUserResponseMsgToDisplay =
+            "Authentification réussie";
+          this.authenticationByMailService.setCurrentStep(
+            AuthenticationByMailSteps.OPERATION_RESULT_STATUS
+          );
+        } else {
+          this.activateUser_success = false;
+          this.activateUserResponseMsgToDisplay =
+            "La requête d'activation de l'utilisateur a échoué";
+          throw new Error("Request to change password failed");
+        }
+      });
   }
 
   onSendNewPassword() {
     this.newPasswordRequestDto = {
-      "code": this.activationcode,
-      "email": this.emailWhereCodeSended,
-      "password": this.confirmedPassword
+      code: this.activationcode,
+      email: this.emailWhereCodeSended,
+      password: this.confirmedPassword,
     };
 
     this.publicUserservice
@@ -107,7 +150,8 @@ export class SendAuthCodeAndActComponent implements OnInit {
           this.newPasswordResponseStatus = error.status;
           this.newPasswordResponseBody = error.error.detail;
           this.newPassword_success = false;
-          this.newPasswordResponseMsgToDisplay = "La requête de changement de mot de passe a échoué";
+          this.newPasswordResponseMsgToDisplay =
+            "La requête de changement de mot de passe a échoué";
           return throwError(error);
         })
       )
@@ -115,16 +159,17 @@ export class SendAuthCodeAndActComponent implements OnInit {
         this.newPasswordResponseStatus = response.status;
         if (response.status === 200 && response.body !== null) {
           this.newPassword_success = true;
-          this.newPasswordResponseMsgToDisplay = "Changement du mot de passe effectué."
-          this.authenticationByMailService.setCurrentStep(AuthenticationByMailSteps.OPERATION_RESULT_STATUS);
-          } else {
-            this.newPassword_success = false;
-          this.newPasswordResponseMsgToDisplay = "La requête de changement de mot de passe a échoué";
-          throw new Error(
-            "Request to change password failed"
+          this.newPasswordResponseMsgToDisplay =
+            "Changement du mot de passe effectué.";
+          this.authenticationByMailService.setCurrentStep(
+            AuthenticationByMailSteps.OPERATION_RESULT_STATUS
           );
+        } else {
+          this.newPassword_success = false;
+          this.newPasswordResponseMsgToDisplay =
+            "La requête de changement de mot de passe a échoué";
+          throw new Error("Request to change password failed");
         }
       });
-   
   }
 }

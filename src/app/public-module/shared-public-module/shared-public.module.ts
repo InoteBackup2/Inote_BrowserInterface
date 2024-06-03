@@ -6,12 +6,14 @@ import { PublicUserService } from '../public-user.service';
 import { BackEndPoints } from './back-end-points.enum';
 import { RouterModule } from '@angular/router';
 import { SendAuthCodeAndActComponent } from './send-auth-code-and-act/send-auth-code-and-act.component';
+import { ActivateUserFormComponent } from './modals/activate-user/activate-user-form/activate-user-form.component';
 
 
 @NgModule({
   declarations: [
     PublicNavBarComponent,
     SendAuthCodeAndActComponent,
+    ActivateUserFormComponent
     ],
   imports: [
     RouterModule,
@@ -24,7 +26,8 @@ import { SendAuthCodeAndActComponent } from './send-auth-code-and-act/send-auth-
   ],
   exports : [
    PublicNavBarComponent,
-   SendAuthCodeAndActComponent
+   SendAuthCodeAndActComponent,
+   ActivateUserFormComponent
   ]
 })
 export class SharedPublicModule { }
