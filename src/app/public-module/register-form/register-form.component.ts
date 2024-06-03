@@ -1,9 +1,12 @@
+import { ErrorResponseDto } from "./../../shared-module/dto/error-response.dto";
 import { ActivationRequestDto } from "./../shared-public-module/dto/activation-request.dto";
-import { Component /*, OnInit*/ } from "@angular/core";
+import { Component, OnInit} from "@angular/core";
 import type { RegisterRequestDto } from "../shared-public-module/dto/register-request.dto";
 import { PublicUserService } from "../public-user.service";
 import { Router } from "@angular/router";
 import { throwError } from "rxjs";
+import { ActivateUserManagerService } from "../shared-public-module/modals/activate-user/activate-user-manager.service";
+import { ActivateUserStepsEnum } from "../shared-public-module/modals/activate-user/activate-user-steps.enum";
 
 @Component({
   selector: "app-register-form-component",
@@ -13,7 +16,8 @@ import { throwError } from "rxjs";
     "../../shared-module/general-styles.css",
   ],
 })
-export class RegisterFormComponent {
+export class RegisterFormComponent implements OnInit{
+
   // RELATING TEMPLATE VARIABLES
   // ==============================================
   username!: string;
@@ -24,6 +28,13 @@ export class RegisterFormComponent {
   activation_success: boolean = false;
   registerResponseMsgToDisplay!: string | null;
   activationResponseMsgToDisplay!: string | null;
+  errorMsgToSend!: string;
+  globalSuccessState!: boolean;
+  inProgress!:boolean;
+  modalIsReady!:boolean;
+
+
+  
 
   // HTTP
   // ==============================================
@@ -37,16 +48,22 @@ export class RegisterFormComponent {
   activationResponseBody!: string | null;
   activationResponseStatus!: number;
 
+  errorResponseDto!: ErrorResponseDto;
+  activateUserStep!: ActivateUserStepsEnum;
+
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
   constructor(
     private publicUserService: PublicUserService,
-    private router: Router
+    private router: Router,
+    private activateUserManagerService: ActivateUserManagerService
   ) {}
 
   // INITIALIZATION (by ngOnInit)
   // ==============================================
-
+  ngOnInit(): void {
+      this.activateUserStep=ActivateUserStepsEnum.INIT;
+  }
   // TEMPLATE CALLBACKS METHODS
   // ==============================================
 
@@ -57,7 +74,6 @@ export class RegisterFormComponent {
    * @since 2024-05-27
    */
   onSubmitRegister() {
-    // Dto creation if needed
     this.registerRequestBody = {
       pseudo: this.pseudonyme,
       username: this.username,
@@ -78,16 +94,20 @@ export class RegisterFormComponent {
           this.registerResponseBody !== null
         ) {
           this.registerResponseMsgToDisplay = response.body;
-          this.registering_success = true;
+          this.activateUserStep = ActivateUserStepsEnum.SEND_AUTH_CODE;
+          
+          
         } else {
-          throw new Error("HTTP Response body is empty");
+         
+         throw new Error("Anomaly during register operation");
         }
       },
 
       // Error case
       (error) => {
-        this.registerResponseStatus = error.status;
-        this.registerResponseMsgToDisplay = error.error.msg;
+      this.errorResponseDto = JSON.parse(error.error);
+        this.errorMsgToSend = this.errorResponseDto.detail;
+        
         return throwError(error);
       }
     );
@@ -100,6 +120,7 @@ export class RegisterFormComponent {
    * @since 2024-05-27
    */
   onSubmitActivation() {
+    this.inProgress=true;
     // Dto creation if needed
     this.activationRequestBody = {
       code: this.activationcode,
@@ -120,7 +141,9 @@ export class RegisterFormComponent {
         ) {
           this.activationResponseMsgToDisplay = this.activationResponseBody;
           this.activation_success = true;
+          this.inProgress=false;
         } else {
+          this.inProgress=false;
           throw new Error("HTTP Response body is empty");
         }
       },
@@ -129,19 +152,31 @@ export class RegisterFormComponent {
       (error) => {
         this.activationResponseStatus = error.status;
         this.activationResponseMsgToDisplay = error.error.msg;
+        this.inProgress=false;
         return throwError(error);
       }
     );
   }
 
-  
+  onCloseModal() {
+    this.activateUserManagerService.setCurrentStep(ActivateUserStepsEnum.INIT);
+    this.registering_success
+      ? (this.globalSuccessState = true)
+      : (this.globalSuccessState = false);
+    this.registering_success = false;
+  }
+
   /**
-   * Navigate to landign page
-   * 
+   * Navigate to landing page
+   *
    * @author atsuhikoMochizuki
    * @since 2024-05-27
    */
   onGoToHome() {
     this.router.navigate(["home"]);
   }
+
+  onLogin() {
+    this.router.navigate(["login"]);
+    }
 }

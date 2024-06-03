@@ -8,20 +8,40 @@
       
       <!-- Case REQUEST_AUTH_CODE -->
       <div *ngSwitchCase=1>
-        <!-- Send authentication code -->
         <h3 class="mb-3">Demande d'authentification</h3>
         <p sclass="inote-small-comment">Nous devons nous assurez que vous êtes celui que vous prétendez.<br>
-        En cliquant sur le bouton ci-dessous, vous allez recevoir sur votre adresse mail un code qui vous permettra de réinitialiser votre mot de passe
+        En cliquant sur le bouton ci-dessous, vous allez recevoir sur votre adresse mail un code qui vous permettra l'opération que vous venez d'initier.
         </p>
         <button (click)="onAskingReceiveCode()" type="button" class="mt-2 btn btn-secondary border border-white">
-          Recevoir mon code de changement de mot de passe sur l'adresse <span
+          Recevoir mon code d'authentification sur l'adresse <span
             class="text-primary">{{this.emailWhereCodeSended}}</span>
         </button>
       </div>
 
+      <!-- Case SEND_AUTH_CODE -->
+      <div *ngSwitchCase=2>
+        <div class="d-flex flex-column">
+          <h3 class="mb-3">Saisie du code d'authentification</h3>
+          <p class="inote-small-comment">Nb : le code d'authentification vient d'être envoyé à l'adresse
+            <strong>{{this.emailWhereCodeSended}}</strong>
+          </p>
+          <div class="align-items-center input-group input-group-sm mb-3 mx-auto">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Code d'authentification</span>
+            <input type="text" class="form-control" id="activation" aria-describedby="inputGroup-sizing-sm" required
+              pattern="[0-9]{6}$" [(ngModel)]="this.activationcode" name="activation" #code_activation="ngModel"
+              placeholder="Entrez le code (validité 15mn)" />
+          </div>
+          
+          <button (click)="onSendAuthCode()" type="button" class="mt-2 btn btn-secondary border border-white"
+            [disabled]="!code_activation.valid">
+            Envoyer
+          </button>
+        </div>
+      </div>
+
       
 
-       <!-- Case SEND_NEW_PASSWORD -->
+      <!-- Case SEND_NEW_PASSWORD -->
       <div *ngSwitchCase=3>
         <!-- 3 - Input new password -->
         <div class="d-flex flex-column">
@@ -51,7 +71,7 @@
               [disabled]="!new_pwd_model.valid" />
           </div>
           <p [ngClass]="!this.newPasswordResponseStatus ? 'text-danger':'text-white'" >{{this.newPasswordResponseMsgToDisplay}}</p>
-          <button (click)="onSendNewPassword()" type="button" class="mt-2 btn btn-secondary border border-white"
+          <button (click)="onSendAuthCode()" type="button" class="mt-2 btn btn-secondary border border-white"
             [disabled]="this.newPassword !== this.confirmedPassword || !this.newPassword">
             Enregistrer
           </button>
