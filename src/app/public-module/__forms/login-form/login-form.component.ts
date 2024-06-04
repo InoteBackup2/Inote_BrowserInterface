@@ -1,20 +1,20 @@
-import { SignInResponseDto } from "./../shared-public-module/dto/sign-in-response.dto";
-import { SignInRequestDto } from "./../shared-public-module/dto/sign-in-request.dto";
+import { SignInResponseDto } from "../../shared-public-module/__dto/sign-in-response.dto";
+import { SignInRequestDto } from "../../shared-public-module/__dto/sign-in-request.dto";
 import { Component } from "@angular/core";
-import { PublicUserService } from "../public-user.service";
+import { PublicUserService } from "../../__services/public-user.service";
 import { Router } from "@angular/router";
 import { catchError, throwError } from "rxjs";
-import { TokenService } from "../../core-module/token.service";
-import { ChangePasswordRequestDto } from "../shared-public-module/dto/change-password-request.dto";
-import { AuthenticationByMailSteps } from "../shared-public-module/authentication-by-mail.enum";
-import { AuthenticationByMailService } from "../shared-public-module/authentication-by-mail.service";
+import { TokenService } from "../../../core-module/token.service";
+import { ChangePasswordRequestDto } from "../../shared-public-module/__dto/change-password-request.dto";
+import { AuthenticationByMailSteps } from "../../shared-public-module/__enums/authentication-by-mail.enum";
+import { AuthenticationByMailService } from "../../shared-public-module/__services/authentication-by-mail.service";
 
 @Component({
   selector: "app-login-form-component",
   templateUrl: "./login-form.component.html",
   styleUrls: [
     "./login-form.component.css",
-    "../../shared-module/general-styles.css",
+    "../../../shared-module/general-styles.css",
   ],
 })
 export class LoginFormComponent {

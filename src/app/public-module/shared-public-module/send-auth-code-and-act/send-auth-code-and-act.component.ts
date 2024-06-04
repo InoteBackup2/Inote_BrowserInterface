@@ -1,14 +1,14 @@
-import { ActivationRequestDto } from "./../dto/activation-request.dto";
-import { NewPasswordRequestDto } from "./../dto/new-password-request.dto";
+import { ActivationRequestDto } from "../__dto/activation-request.dto";
+import { NewPasswordRequestDto } from "../__dto/new-password-request.dto";
 import { Component, Input, OnInit } from "@angular/core";
-import { ChangePasswordRequestDto } from "../dto/change-password-request.dto";
-import { PublicUserService } from "../../public-user.service";
+import { ChangePasswordRequestDto } from "../__dto/change-password-request.dto";
+import { PublicUserService } from "../../__services/public-user.service";
 import { TokenService } from "../../../core-module/token.service";
 import { Router } from "@angular/router";
-import { SignInResponseDto } from "../dto/sign-in-response.dto";
-import { AuthenticationByMailSteps } from "../authentication-by-mail.enum";
+import { SignInResponseDto } from "../__dto/sign-in-response.dto";
+import { AuthenticationByMailSteps } from "../__enums/authentication-by-mail.enum";
 import { catchError, throwError } from "rxjs";
-import { AuthenticationByMailService } from "../authentication-by-mail.service";
+import { AuthenticationByMailService } from "../__services/authentication-by-mail.service";
 
 @Component({
   selector: "app-send-auth-code-and-act",

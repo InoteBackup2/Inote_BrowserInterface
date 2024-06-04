@@ -1,18 +1,18 @@
-import { ErrorResponseDto } from "./../../shared-module/dto/error-response.dto";
+import { ErrorResponseDto } from "../../../shared-module/dto/error-response.dto";
 import { Component, ViewChild } from "@angular/core";
-import type { RegisterRequestDto } from "../shared-public-module/dto/register-request.dto";
-import { PublicUserService } from "../public-user.service";
+import type { RegisterRequestDto } from "../../shared-public-module/__dto/register-request.dto";
+import { PublicUserService } from "../../__services/public-user.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { HttpStatusCode } from "@angular/common/http";
-import { ModalActivateUserComponent } from "../shared-public-module/modals/modal-activate-user/modal-activate-user.component";
+import { ModalActivateUserComponent } from "../../shared-public-module/__modals/modal-activate-user/modal-activate-user.component";
 
 @Component({
   selector: "app-register-form-component",
   templateUrl: "./register-form.component.html",
   styleUrls: [
     "./register-form.component.css",
-    "../../shared-module/general-styles.css",
+    "../../../shared-module/general-styles.css",
   ],
 })
 export class RegisterFormComponent {
@@ -21,7 +21,7 @@ export class RegisterFormComponent {
 
   // @ViewChild retrieves a reference to one of the component's child elements, and provides access to its methods
   @ViewChild(ModalActivateUserComponent) modal!: ModalActivateUserComponent;
-  // operationSuccess!: boolean;
+  
   username!: string;
   password!: string;
   pseudonyme!: string;
@@ -31,14 +31,8 @@ export class RegisterFormComponent {
   // ==============================================
   /* Request */
   registerRequestBody!: RegisterRequestDto;
-  // activationRequestBody!: ActivationRequestDto;
-
+  
   /* Response */
-  // registerResponseBody!: string | null;
-  // registerResponseStatus!: number;
-  // activationResponseBody!: string | null;
-  // activationResponseStatus!: number;
-
   errorResponseDto!: ErrorResponseDto;
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
