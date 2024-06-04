@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 })
 export class PublicNavBarComponent {
 goToLoginPage() {
-throw new Error('Method not implemented.');
+  throw new Error('Method not implemented.');
 }
 
 }

@@ -55,7 +55,7 @@ export class ProtectedUserService {
     // Headers definitions
     const headers = new HttpHeaders({
       "Content-Type": "plain/text",
-      Authorization: `Bearer ${bearer}`,
+      Authorization: `bearer ${bearer}`,
     });
 
     return this.http.get<PublicUserResponseDto>(
