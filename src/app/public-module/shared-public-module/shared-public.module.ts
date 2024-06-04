@@ -7,13 +7,15 @@ import { BackEndPoints } from './back-end-points.enum';
 import { RouterModule } from '@angular/router';
 import { SendAuthCodeAndActComponent } from './send-auth-code-and-act/send-auth-code-and-act.component';
 import { ActivateUserFormComponent } from './modals/activate-user/activate-user-form/activate-user-form.component';
+import { ModalComponentComponent } from './modals/modal-component/modal-component.component';
 
 
 @NgModule({
   declarations: [
     PublicNavBarComponent,
     SendAuthCodeAndActComponent,
-    ActivateUserFormComponent
+    ActivateUserFormComponent,
+    ModalComponentComponent
     ],
   imports: [
     RouterModule,
@@ -27,7 +29,8 @@ import { ActivateUserFormComponent } from './modals/activate-user/activate-user-
   exports : [
    PublicNavBarComponent,
    SendAuthCodeAndActComponent,
-   ActivateUserFormComponent
+   ActivateUserFormComponent,
+   ModalComponentComponent
   ]
 })
 export class SharedPublicModule { }
