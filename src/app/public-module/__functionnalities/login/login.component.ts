@@ -4,7 +4,7 @@ import { Component} from '@angular/core';
   selector: 'app-login-component',
   templateUrl: './login.component.html',
     styleUrls: [
-    '../../shared-module/shared/shared.component.css'
+    '../../../shared-module/shared/shared.component.css'
   ]
 })
 export class LoginComponent{

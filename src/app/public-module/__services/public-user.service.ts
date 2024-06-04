@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import type { RegisterRequestDto } from "./shared-public-module/dto/register-request.dto";
-import { BackEndPoints } from "./shared-public-module/back-end-points.enum";
-import { ActivationRequestDto } from "./shared-public-module/dto/activation-request.dto";
-import { SignInRequestDto } from "./shared-public-module/dto/sign-in-request.dto";
-import { SignInResponseDto } from "./shared-public-module/dto/sign-in-response.dto";
-import { ChangePasswordRequestDto } from "./shared-public-module/dto/change-password-request.dto";
-import { NewPasswordRequestDto } from "./shared-public-module/dto/new-password-request.dto";
+import type { RegisterRequestDto } from "../shared-public-module/__dto/register-request.dto";
+import { BackEndPoints } from "../shared-public-module/__enums/back-end-points.enum";
+import { ActivationRequestDto } from "../shared-public-module/__dto/activation-request.dto";
+import { SignInRequestDto } from "../shared-public-module/__dto/sign-in-request.dto";
+import { SignInResponseDto } from "../shared-public-module/__dto/sign-in-response.dto";
+import { ChangePasswordRequestDto } from "../shared-public-module/__dto/change-password-request.dto";
+import { NewPasswordRequestDto } from "../shared-public-module/__dto/new-password-request.dto";
 
 @Injectable()
 export class PublicUserService {

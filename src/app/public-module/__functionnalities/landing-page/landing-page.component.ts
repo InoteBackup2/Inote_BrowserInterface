@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './landing-page.component.html',
   styleUrls: [
     './landing-page.component.css',
-    '../../shared-module/shared/shared.component.css'
+    '../../../shared-module/shared/shared.component.css'
   ]
 })
 export class LandingPageComponent {

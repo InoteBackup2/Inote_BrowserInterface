@@ -1,4 +1,4 @@
-import { environment as env } from "../../../environments/environment";
+import { environment as env } from "../../../../environments/environment";
 const ROOT_PATH = `http://${env.FRONTEND_HOST}:${env.FRONTEND_PORT}/api`;
 // OK, ce n’est pas vraiment une énumération selon TypeScript mais presque.
 export const BackEndPoints = {

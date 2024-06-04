@@ -1,7 +1,7 @@
-import { ErrorResponseDto } from "./../../../../shared-module/dto/error-response.dto";
+import { ErrorResponseDto } from "../../../../shared-module/dto/error-response.dto";
 import { HttpStatusCode } from "@angular/common/http";
-import { PublicUserService } from "./../../../public-user.service";
-import { ActivationRequestDto } from "./../../dto/activation-request.dto";
+import { PublicUserService } from "../../../__services/public-user.service";
+import { ActivationRequestDto } from "../../__dto/activation-request.dto";
 import {
   Component,
   ElementRef,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationByMailSteps } from './authentication-by-mail.enum';
+import { AuthenticationByMailSteps } from '../__enums/authentication-by-mail.enum';
 
 @Injectable({
   providedIn: 'root'
