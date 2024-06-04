@@ -1,12 +1,16 @@
 import { ErrorResponseDto } from "./../../shared-module/dto/error-response.dto";
 import { ActivationRequestDto } from "./../shared-public-module/dto/activation-request.dto";
-import { Component, OnInit} from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import type { RegisterRequestDto } from "../shared-public-module/dto/register-request.dto";
 import { PublicUserService } from "../public-user.service";
 import { Router } from "@angular/router";
-import { throwError } from "rxjs";
 import { ActivateUserManagerService } from "../shared-public-module/modals/activate-user/activate-user-manager.service";
 import { ActivateUserStepsEnum } from "../shared-public-module/modals/activate-user/activate-user-steps.enum";
+import { ToastrService } from 'ngx-toastr';
+import { ModalComponentComponent } from "../shared-public-module/modals/modal-component/modal-component.component";
+import { HttpStatusCode } from "@angular/common/http";
+
+
 
 @Component({
   selector: "app-register-form-component",
@@ -16,8 +20,21 @@ import { ActivateUserStepsEnum } from "../shared-public-module/modals/activate-u
     "../../shared-module/general-styles.css",
   ],
 })
-export class RegisterFormComponent implements OnInit{
+export class RegisterFormComponent implements OnInit {
+  // @ViewChild retrieves a reference to one of the component's child elements, and provides access to its methods
+  @ViewChild(ModalComponentComponent) modal!: ModalComponentComponent;
 
+  operationSuccess!: boolean;
+  
+  openModal(){
+    this.modal.openModal("Activation du compte",
+    `Veuillez saisir ci-dessous le code d'activation qui vous a été envoyé sur votre adresse ${this.username}`);
+  }
+ 
+   closeModal(){
+     this.modal.closeModal();
+   }
+  
   // RELATING TEMPLATE VARIABLES
   // ==============================================
   username!: string;
@@ -30,9 +47,10 @@ export class RegisterFormComponent implements OnInit{
   activationResponseMsgToDisplay!: string | null;
   errorMsgToSend!: string;
   globalSuccessState!: boolean;
-  inProgress!:boolean;
-  modalIsReady!:boolean;
+  inProgress!: boolean;
+  modalIsVisible: boolean=false;
 
+  errorDetected!:boolean;
 
   
 
@@ -53,20 +71,32 @@ export class RegisterFormComponent implements OnInit{
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
+  
   constructor(
     private publicUserService: PublicUserService,
     private router: Router,
-    private activateUserManagerService: ActivateUserManagerService
+    private activateUserManagerService: ActivateUserManagerService,
+    private toastr: ToastrService
   ) {}
 
   // INITIALIZATION (by ngOnInit)
   // ==============================================
   ngOnInit(): void {
-      this.activateUserStep=ActivateUserStepsEnum.INIT;
+    this.errorDetected=false;
+    this.activateUserStep = ActivateUserStepsEnum.SEND_AUTH_CODE;
+   
   }
   // TEMPLATE CALLBACKS METHODS
   // ==============================================
-
+  handleValueChange(value: string) {
+    if(value==='activation success'){
+      this.closeModal();
+      this.activation_success=true;
+    }
+    
+  }
+  
+  
   /**
    * Register a new user account
    *
@@ -74,6 +104,9 @@ export class RegisterFormComponent implements OnInit{
    * @since 2024-05-27
    */
   onSubmitRegister() {
+    this.closeModal();
+    
+    
     this.registerRequestBody = {
       pseudo: this.pseudonyme,
       username: this.username,
@@ -83,87 +116,35 @@ export class RegisterFormComponent implements OnInit{
     this.publicUserService.addUser(this.registerRequestBody).subscribe(
       // Response case
       (response) => {
-        // get response status
-        this.registerResponseStatus = response.status;
-        // get response body
-        this.registerResponseBody = response.body;
-
-        // Response treatement
-        if (
-          this.registerResponseStatus === 201 &&
-          this.registerResponseBody !== null
-        ) {
-          this.registerResponseMsgToDisplay = response.body;
-          this.activateUserStep = ActivateUserStepsEnum.SEND_AUTH_CODE;
-          
-          
-        } else {
+        if (response.status === HttpStatusCode.Created){
+          // this.activateUserStep=ActivateUserStepsEnum.SEND_AUTH_CODE;
+          this.openModal();
          
-         throw new Error("Anomaly during register operation");
         }
-      },
-
-      // Error case
-      (error) => {
-      this.errorResponseDto = JSON.parse(error.error);
-        this.errorMsgToSend = this.errorResponseDto.detail;
+          
+        else{
+          // this.modalIsVisible=false;
+          this.toastr.warning("La requête a echouée","Anomalie détectée",{"timeOut":5000});
+        }
         
-        return throwError(error);
-      }
-    );
-  }
-
-  /**
-   * Activate the newly created user account
-   *
-   * @author atsuhikoMochizuki
-   * @since 2024-05-27
-   */
-  onSubmitActivation() {
-    this.inProgress=true;
-    // Dto creation if needed
-    this.activationRequestBody = {
-      code: this.activationcode,
-    };
-
-    this.publicUserService.activateUser(this.activationRequestBody).subscribe(
-      // Response case
-      (response) => {
-        // get response status
-        this.activationResponseStatus = response.status;
-        // get response body
-        this.activationResponseBody = response.body;
-
-        // Response treatement
-        if (
-          this.activationResponseStatus === 200 &&
-          this.activationResponseBody !== null
-        ) {
-          this.activationResponseMsgToDisplay = this.activationResponseBody;
-          this.activation_success = true;
-          this.inProgress=false;
-        } else {
-          this.inProgress=false;
-          throw new Error("HTTP Response body is empty");
-        }
       },
 
       // Error case
       (error) => {
-        this.activationResponseStatus = error.status;
-        this.activationResponseMsgToDisplay = error.error.msg;
-        this.inProgress=false;
-        return throwError(error);
+       this.errorResponseDto = JSON.parse(error.error);
+        this.toastr.error(this.errorResponseDto.detail, "Anomalie détectée",{"timeOut":5000});
+        
       }
     );
   }
+
+ 
+
+  
 
   onCloseModal() {
     this.activateUserManagerService.setCurrentStep(ActivateUserStepsEnum.INIT);
-    this.registering_success
-      ? (this.globalSuccessState = true)
-      : (this.globalSuccessState = false);
-    this.registering_success = false;
+    this.modalIsVisible=false;
   }
 
   /**
@@ -178,5 +159,5 @@ export class RegisterFormComponent implements OnInit{
 
   onLogin() {
     this.router.navigate(["login"]);
-    }
+  }
 }

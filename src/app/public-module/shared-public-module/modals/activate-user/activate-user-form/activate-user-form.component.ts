@@ -1,5 +1,5 @@
 
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { Router } from "@angular/router";
 import { catchError, throwError } from "rxjs";
 import { TokenService } from "../../../../../core-module/token.service";
@@ -16,18 +16,25 @@ import { ActivateUserStepsEnum } from "../activate-user-steps.enum";
   templateUrl: "./activate-user-form.component.html",
   styleUrls: ["./../../../../../shared-module/general-styles.css"]
 })
-export class ActivateUserFormComponent implements OnInit {
+export class ActivateUserFormComponent  implements OnChanges{
 
   // RELATING TEMPLATE VARIABLES
   // ==============================================
   @Input() emailWhereCodeSended!: string;
   @Input() errorMsg!: string;
   
-  @Input()
-  isReady!:boolean;
+  // @Input()
+  // isVisible!:boolean;
 
   @Input()
   step!: ActivateUserStepsEnum;
+  interStep!: ActivateUserStepsEnum;
+
+
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ngOnChanges', changes);
+  }
   
   activationcode!: string;
   email!: string;
@@ -73,11 +80,7 @@ export class ActivateUserFormComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.email = this.emailWhereCodeSended;
-    this.activationcode="";
-    this.inProgress = false;
-  }
+ 
 
   // INITIALIZATION (by ngOnInit)
   // ==============================================

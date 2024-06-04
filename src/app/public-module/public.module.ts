@@ -34,7 +34,6 @@ import { RegisterWithPopupComponent } from './register-with-popup/register-with-
   ],
   providers:[
     ProtectedUserService,
-    
   ]
 })
 export class PublicModule { }

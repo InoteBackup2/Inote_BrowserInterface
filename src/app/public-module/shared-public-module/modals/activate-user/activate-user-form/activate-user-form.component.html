@@ -3,7 +3,7 @@
   <div class="d-flex flex-column align-items-center">
     
 
-    <div [ngSwitch]="this.activateUserManagerService.getCurrentStep()">
+    <div [ngSwitch]="this.step">
 
       <!-- Nota bene : It seems not possible to use enum literals on template -->
 
@@ -38,12 +38,7 @@
       </div>
 
 
-      <!-- Case IN_PROGRESS -->
-      <div *ngSwitchCase=3>
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </div>
+     
       
       
       <!-- Default case -->
@@ -52,13 +47,7 @@
           <span class="visually-hidden">Loading...</span>
         </div>
 
-        <!-- <div class="d-flex flex-column" *ngIf="!this.activateUserManagerService.isInProgress()">
-          <h3 class="mb-3">Erreur advenue</h3>
-          <p class="inote-small-comment">
-            Une anomalie s'est produite durant l'opération.
-          </p>
-          <p class="text-danger">{{this.errorMsg}}</p>
-        </div> -->
+        
       </div>
     </div>
   </div>

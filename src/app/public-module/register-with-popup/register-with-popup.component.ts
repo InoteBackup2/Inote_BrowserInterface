@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-
+import { Component} from '@angular/core';
 @Component({
   selector: 'app-register-with-popup',
   templateUrl: './register-with-popup.component.html',
@@ -8,5 +7,4 @@ import { Component } from '@angular/core';
   ]
 })
 export class RegisterWithPopupComponent {
-
 }
