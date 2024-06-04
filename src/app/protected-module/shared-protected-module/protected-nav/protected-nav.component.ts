@@ -1,11 +1,13 @@
+import { ErrorResponseDto } from "./../../../shared-module/dto/error-response.dto";
 import { Component, OnInit } from "@angular/core";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { ProtectedUserService } from "../user-module/protected-user.service";
 import { TokenService } from "../../../core-module/token.service";
 import { SignOutRequestDto } from "../dto/sign-out-request.dto";
 import { PublicUserResponseDto } from "../../../shared-module/dto/public-user-response.dto";
-import { throwError } from "rxjs";
 import { Router } from "@angular/router";
+import { HttpStatusCode } from "axios";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-protected-nav-component",
@@ -33,13 +35,15 @@ export class ProtectedNavComponent implements OnInit {
   signOutResponseBody!: string | null;
 
   /* Response */
-  
+  errorResponseDto!: ErrorResponseDto;
+
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
   constructor(
     private userService: ProtectedUserService,
     private tokenService: TokenService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   // INITIALIZATION (by ngOnInit)
@@ -49,25 +53,25 @@ export class ProtectedNavComponent implements OnInit {
     if (this.token) {
       this.userService.getCurrentUser(this.token).subscribe(
         (response) => {
-          // get response status
-          this.getCurrentUserResponseStatus = response.status;
-          // get response body
-          this.currentConnectUser = response.body;
-
-          // Response treatement
-          if (
-            this.getCurrentUserResponseStatus! == 200 ||
-            this.currentConnectUser === null
-          ) {
-            throw new Error("HTTP body hasn't to be null");
+          if (response.status !== HttpStatusCode.Ok || response.body === null) {
+            this.toastr.error(
+              "La récupération de l'utilisateur courant a échouée",
+              "Anomalie détectée",
+              {
+                timeOut: 5000,
+              }
+            );
+          } else {
+            this.currentConnectUser = response.body;
           }
         },
 
         // Error case
         (error) => {
-          this.getCurrentUserResponseStatus = error.status;
-          this.getCurrentUserMsgToDisplay = error.error.msg;
-          return throwError(error);
+          this.errorResponseDto = JSON.parse(error.error);
+          this.toastr.error("La récupération de l'utilisateur courant a echouée", "Anomalie détectée", {
+            timeOut: 5000,
+          });
         }
       );
     }
@@ -87,30 +91,32 @@ export class ProtectedNavComponent implements OnInit {
       this.userService.signOut(this.token).subscribe(
         // Response case
         (response) => {
-          // get response status
-          this.signOutResponseStatus = response.status;
-          // get response body
-          this.signOutResponseBody = response.body;
-
-          // Response treatement
-          if (
-            this.signOutResponseStatus !== 200 ||
-            this.signOutResponseBody === null
-          ) {
-            throw new Error("Anomaly in SignOut Http response");
+          if (response.status !== 200 || response.body === null) {
+            this.toastr.error(
+              "La récupération de l'utilisateur courant a échouée",
+              "Anomalie détectée",
+              {
+                timeOut: 5000,
+              }
+            );
+          } else {
+            this.tokenService.removeToken();
+            this.router.navigate(["home"]);
           }
-          this.tokenService.removeToken();
-          this.router.navigate(["home"]);
         },
 
         // Error case
         (error) => {
-          this.signOutResponseStatus = error.status;
-          return throwError(error);
+          this.errorResponseDto = JSON.parse(error.error);
+          this.toastr.error(this.errorResponseDto.detail, "Anomalie détectée", {
+            timeOut: 5000,
+          });
         }
       );
     } else {
-      throw new Error("token should not be null");
+      this.toastr.error("La valeur du jeton est nulle", "Anomalie détectée", {
+        timeOut: 5000,
+      });
     }
   }
 
