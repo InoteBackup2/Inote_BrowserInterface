@@ -86,8 +86,7 @@ export class ProtectedUserService {
       "Authorization": "bearer " + bearer
      };
     
-
-    return this.http.post(
+     return this.http.post(
       // Url
       BackEndPoints.SIGN_OUT,
       null,
@@ -98,7 +97,6 @@ export class ProtectedUserService {
 
         // headers injection
         headers: headers,
-
 
         // Get full Http response
         observe: "response",
