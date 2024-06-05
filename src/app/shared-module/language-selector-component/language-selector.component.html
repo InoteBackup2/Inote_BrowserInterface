@@ -1,15 +1,30 @@
-<div class="dropdown dropdown-menu-start">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
-    <img class=" w-50 dropdown-toggle" src="../../../assets/flag.svg" alt="Change language website">
-  </button>
+<button class="btn btn-secondary border border-white dropdown inote-link-normal me-3" role="button"
+  data-bs-toggle="dropdown" aria-expanded="false">
+  <div [ngSwitch]="this.languageManagerService.getCurrentLanguage()" class="d-flex">
+    <!-- FR -->
+    <div *ngSwitchCase="1">
+      <img src="../../../assets/lang/fr.svg" alt="user profile img"
+        class="img-fluid   border border border-secondary-subtle" id="user-profile">
+    </div>
+    <div *ngSwitchDefault>
+      <img src="../../../assets/lang/en.svg" alt="user profile img"
+        class="img-fluid border border border-secondary-subtle" id="user-profile">
+    </div>
+  </div>
   <ul class="dropdown-menu dropdown-menu-end">
-    <li (click)="onSelectFrench()" class="d-flex flex-row align-items-center inote-link-normal">
-      <img class=" ms-3 me-1 w-25 dropdown-toggle" src="../../../assets/lang/fr.svg" alt="French">
-      <p>Fr</p>
+    <li>
+      <a (click)="this.onSelectEnglish()"
+        class="dropdown-item  inote-link-normal d-flex align-items-center justify-content-end">
+        <img src="../../../../assets/lang/en.svg" alt="logo_en" class="me-2">
+        EN
+      </a>
     </li>
-    <li (click)="onSelectEnglish()" class="d-flex flex-row align-items-center inote-link-normal">
-      <img class=" ms-3 me-1 w-25 dropdown-toggle" src="../../../assets/lang/en.svg" alt="English">
-      <p>En</p>
+    <li>
+      <a (click)="onSelectFrench()"
+        class="dropdown-item  inote-link-normal d-flex align-items-center justify-content-end">
+        <img src="../../../../assets/lang/fr.svg" alt="logo_fr" class="me-2">
+        FR
+      </a>
     </li>
   </ul>
-</div>
+</button>

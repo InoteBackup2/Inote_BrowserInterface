@@ -29,18 +29,22 @@
         <li><a class="dropdown-item inote-link-normal" (keypress)="true" (click)="onSignOut()">{{this.lang.pickMsg(this.signoutPath)}}</a></li>
       </ul>
     </div>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center ">
+    <div class="collapse navbar-collapse border border-danger" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center border border-danger">
         <li class="nav-item">
           <a class="nav-link active text-white inote-link-normal">{{this.lang.pickMsg(this.myBoardsPath)}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white inote-link-normal">{{this.lang.pickMsg(this.myTeamsPath)}}</a>
         </li>
-
       </ul>
-      <app-language-selector class="me-3 ms-3"></app-language-selector>
-      <form class="d-flex" role="search">
+      <!-- <button class="btn btn-secondary border border-danger"> toto</button> -->
+      <app-language-selector class="  border border-primary "></app-language-selector>
+
+
+     
+
+      <form class="d-flex border border-warning" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-secondary border border-white" type="submit">{{this.lang.pickMsg(this.searchPath)}}</button>
       </form>
