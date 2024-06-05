@@ -3,10 +3,24 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ng serve",
+      "name": "Firefox Start",
+      "type": "firefox",
+      "request": "launch",
+      "preLaunchTask": "npmStart",
+      "url": "http://localhost:4200/",
+    },
+    {
+      "name": "Firefox Test",
+      "type": "firefox",
+      "request": "launch",
+      "preLaunchTask": "npmTest",
+      "url": "http://localhost:9876/debug.html",
+    },
+    {
+      "name": "Chrome Start",
       "type": "chrome",
       "request": "launch",
-      "preLaunchTask": "npm: start",
+      "preLaunchTask": "npmStart",
       "url": "http://localhost:4200/",
       "runtimeExecutable": "/usr/bin/brave-browser",
 				"runtimeArgs": [
@@ -14,10 +28,10 @@
 				]
     },
     {
-      "name": "ng test",
+      "name": "Chrome Test",
       "type": "chrome",
       "request": "launch",
-      "preLaunchTask": "npm: test",
+      "preLaunchTask": "npmTest",
       "url": "http://localhost:9876/debug.html",
       "runtimeExecutable": "/usr/bin/brave-browser",
 				"runtimeArgs": [

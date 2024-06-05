@@ -35,7 +35,10 @@ module.exports = function (config) {
       ]
     },
     reporters: ['progress', 'kjhtml'],
-    browsers: ['Chrome'],
+    browsers: [
+      'ChromeHeadless',
+      'FirefoxHeadless'
+    ],
     chromeBin: '/usr/bin/brave-browser',
     restartOnFileChange: false,
     retryLimit: 0
