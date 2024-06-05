@@ -8,10 +8,52 @@
     width: 100%;
   }
 
-.inote-link-normal{
+.inote-link-normal {
+   text-decoration: none;
     cursor:pointer;
 }
 
 .inote-small-comment{
     font-size: smaller;
 }
+
+.inoteNavLink {
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* Field of form is valid */
+  .ng-valid [required] {
+    border-left: 5px solid green;
+  }
+  
+  /* All element who aren't form not valid (input, select...) */
+  .ng-invalid:not(form) {
+    border-left: 5px solid red;
+  }
+  
+  #page {
+    height: 90vh;
+    width: 100%;
+  }
+  
+  #page_without_nav {
+    height: 100vh;
+    width: 100%;
+  }
+  
+  @keyframes inote_logo_vertical_translate {
+    0% {
+      transform: translateY(10px);
+    }
+  
+    100% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .inote_logo_animation {
+    animation: inote_logo_vertical_translate 2s alternate-reverse infinite
+      ease-in-out both;
+  }
+  

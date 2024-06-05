@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg bg-success">
+  <div class="container-fluid d-flex align-items-center">
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand text-white" href="#">
+        <img src="../../../assets/logo-alone.png" alt="Inote logo" class=" border-danger" id="inote-logo" />
+        Inote
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="ms-4 nav-item dropdown order-lg-2">
+      <a class="nav-link dropdown-toggle inote-link-normal" role="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <img src="../assets/admin.png" alt="user profile img"
+          class="img-fluid rounded-circle  border border border-secondary-subtle" id="user-profile">
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <div class="ms-1 me-1 fw-bold ">{{this.currentConnectUser?.pseudo}}</div>
+        <div class="ms-1 me-1 text-success fw-bold  fs-6 fst-italic ">{{this.currentConnectUser?.username}}</div>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item inote-link-normal">{{this.lang.pickMsg(this.profileManagementPath)}}</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item inote-link-normal" (keypress)="true" (click)="onSignOut()">{{this.lang.pickMsg(this.signoutPath)}}</a></li>
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center ">
+        <li class="nav-item">
+          <a class="nav-link active text-white inote-link-normal">{{this.lang.pickMsg(this.myBoardsPath)}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white inote-link-normal">{{this.lang.pickMsg(this.myTeamsPath)}}</a>
+        </li>
+
+      </ul>
+      <app-language-selector class="me-3 ms-3"></app-language-selector>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-secondary border border-white" type="submit">{{this.lang.pickMsg(this.searchPath)}}</button>
+      </form>
+    </div>
+  </div>
+</nav>

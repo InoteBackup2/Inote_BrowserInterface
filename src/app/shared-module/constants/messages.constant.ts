@@ -1,0 +1,70 @@
+export const Msg = {
+    landing_page:{
+        SLOGAN:"Take note...Wherever you are",
+        SHORT_DESCRIPTION:"Inote offers a remote solution that lets you retrieve your notes at any time retrieve your notes at any time by simply logging in.",
+        QUICK_REGISTRATION:"Quick registration"
+    },
+    publicNavBar:{
+        SIGN_IN: "Sign in"
+    },
+    protectedNavBar:{
+        PROFILE_MANAGEMENT:"Profile management",
+        SIGNOUT:"Sign out",
+        MY_BOARDS:"My Boards",
+        MY_TEAMS:"My Teams",
+        SEARCH:"Search"
+    },
+    register:{
+        ACCOUNT_CREATION: "Account creation"
+    },
+    registerForm:{
+        PSEUDO: "Pseudonyme",
+        EMAIL: "Email",
+        PASSWORD: "Password"
+    },
+    signIn:{
+        CONNECTION:"Connection"
+    },
+    signInForm:{
+        EMAIL: "Email",
+        PASSWORD: "Password",
+        FORGOTTEN_PASSWORD: "Forgotten password ?",
+        SIGN_IN:"Sign in"
+    },
+    footer:{
+        WEBSITE_SECTIONS:"Website sections",
+        CONTACT: "Contact",
+        TERMS_AND_CONDITIONS: "Terms & Conditions",
+        PRIVACY_AND_SECURITY: "Privacy & Security",
+        COOKIES:"Cookies",
+        FOLLOW_US_ON_SOCIAL_NETWORKS:"Follow us on social networks"
+    },
+    toasts:{
+        titles:{
+            USER_ACCOUNT_ACTIVATION:"User account activation",
+            OPERATION_SUCCESS: "Operation success"
+        },
+        prompts:{
+            ENTER_ACTIVATION_CODE_SENT_BY_MAIL:"Please enter activation code sent on your email"
+        },
+        errors:{
+            titles:{
+                DETECTED_ANOMALY:"Detected anomaly",
+                REQUEST_HAS_FAILED:"Request has failed"
+            }
+        }
+    },
+    user:{
+        errors:{
+            RECOVERY_CURRENT_USER_FAILED:"Recovery current user failed"
+        }
+    },
+    auth:{
+        errors:{
+            NULL_TOKEN_VALUE:"Null token value",
+            USER_LOGIN_FAILED:"User login failed",
+            CHANGE_PASSWORD_FAILED:"Change password failed"
+        }
+    }
+    
+}
