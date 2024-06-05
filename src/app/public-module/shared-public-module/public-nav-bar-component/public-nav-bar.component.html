@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg bg-success bg-gradient">
+    <div class="container-fluid d-inline-flex">
+      <h1>
+            <a class="navbar-brand text-white h1" href="#">
+                <img src="../../../assets/logo_small.svg" alt="Inote logo" class="w-25">
+                Inote
+            </a>
+        </h1>
+       
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item me-auto inoteNavLink">
+                   <a (click)="onLogin()" class="inote-link-normal text-white">{{this.lang.pickMsg(this.signInPath)}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <app-language-selector class="me-3"></app-language-selector>
+</nav>

@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BackEndPoints } from "../../../public-module/shared-public-module/__enums/back-end-points.enum";
-import { PublicUserResponseDto } from "../../../shared-module/dto/public-user-response.dto";
+import { BackEndPoints } from "../../../shared-module/enums/back-end-points.enum";
+import { PublicUserResponseDto } from "../../../shared-module/dtos/public-user-response.dto";
 
 @Injectable()
 export class ProtectedUserService {

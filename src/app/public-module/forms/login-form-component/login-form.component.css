@@ -1,0 +1,21 @@
+#email-pristine {
+    visibility: hidden;
+}
+
+#email-valide {
+    visibility: hidden;
+}
+
+#pwd-pristine {
+    visibility: hidden;
+}
+
+#pwd-valide {
+    visibility: hidden;
+}
+a:hover {
+    cursor:pointer;
+    text-decoration: none;
+    
+}
+

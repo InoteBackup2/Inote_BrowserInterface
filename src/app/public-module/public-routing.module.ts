@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingPageComponent } from './__functionnalities/landing-page/landing-page.component';
-import { LoginComponent } from './__functionnalities/login/login.component';
-import { PageNotFoundComponent } from './__functionnalities/page-not-found/page-not-found.component';
-import { RegisterComponent } from './__functionnalities/register/register.component';
+import { LandingPageComponent } from './landing-page-component/landing-page.component';
+import { LoginComponent } from './login-component/login.component';
+import { PageNotFoundComponent } from './page-not-found-component/page-not-found.component';
+import { RegisterComponent } from './register-component/register.component';
+import { Urn } from '../shared-module/enums/urn.enum';
 
 const publicRoutes: Routes = [
-    {path:'home', component:LandingPageComponent},
-    {path:'login', component:LoginComponent},
-    {path:'page-not-found', component:PageNotFoundComponent},
-    {path:'register', component:RegisterComponent}
+    {path:Urn.HOME, component:LandingPageComponent},
+    {path:Urn.SIGN_IN, component:LoginComponent},
+    {path:Urn.REGISTER, component:RegisterComponent},
+    {path:Urn.DASHBOARD, component:RegisterComponent},
+    {path:Urn.PAGE_NOT_FOUND, component:PageNotFoundComponent},
 ];
 
 @NgModule({

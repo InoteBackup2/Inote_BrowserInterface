@@ -1,30 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BorderMouseDirective } from './border-mouse.directive';
-import { FooterComponent } from './footer/footer.component';
-import { BorderMouseNoInitialColorDirective } from './border-mouse-no-initial-color.directive';
-import { SpinLoaderComponent } from './spin-loader/spin-loader.component';
-import { SharedComponent } from './shared/shared.component';
-import { AutofocusDirective } from './autofocus.directive';
+import { BorderMouseDirective } from './directives/border-mouse.directive';
+import { FooterComponent } from './footer-component/footer.component';
+import { BorderMouseNoInitialColorDirective } from './directives/border-mouse-no-initial-color.directive';
+import { SpinLoaderComponent } from './spin-loader-component/spin-loader.component';
+import { LanguageSelectorComponent } from './language-selector-component/language-selector.component';
+
 @NgModule({
   declarations: [
     BorderMouseDirective,
     FooterComponent,
     BorderMouseNoInitialColorDirective,
     SpinLoaderComponent,
-    SharedComponent,
-    AutofocusDirective,
-    
-  ],
+    LanguageSelectorComponent
+    ],
   imports: [
-    CommonModule],
+    CommonModule,],
   exports:[
     FooterComponent,
     BorderMouseDirective,
     BorderMouseNoInitialColorDirective,
     SpinLoaderComponent,
-    SharedComponent,
-    AutofocusDirective,
+    LanguageSelectorComponent
   ],
 
 })

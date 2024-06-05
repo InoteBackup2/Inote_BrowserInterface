@@ -1,23 +1,24 @@
 import { NgModule } from '@angular/core';
 import { type LoadChildrenCallback, RouterModule, type Routes } from '@angular/router';
+import { Urn } from './shared-module/enums/urn.enum';
 
 const loadChildrenCallback: LoadChildrenCallback = () => import('./public-module/public.module').then(m => m.PublicModule);
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: Urn.HOME,
     loadChildren: loadChildrenCallback
   },
   {
-    path: 'login',
+    path: Urn.SIGN_IN,
     loadChildren: loadChildrenCallback
   },
   {
-    path: 'page-not-found',
+    path: Urn.PAGE_NOT_FOUND,
     loadChildren: loadChildrenCallback
   },
   {
-    path: 'subscribe',
+    path: Urn.REGISTER,
     loadChildren: loadChildrenCallback
   },
   {
