@@ -4,7 +4,7 @@ import { SharedProtectedModule } from './shared-protected-module/shared-protecte
 import { ProtectedRoutingModule } from './protected-routing.module';
 import { UserModule } from './shared-protected-module/user-module/user.module';
 import { FormsModule } from '@angular/forms';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard-component/dashboard.component';
 
 @NgModule({
     declarations: [

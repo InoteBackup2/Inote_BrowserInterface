@@ -1,0 +1,29 @@
+<div class="modal fade" #modal id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content bg-success d-flex flex-column p-4">
+
+      <!-- Generic content -->
+      <button type="button" class="btn-close align-self-end" data-bs-dismiss="modal" aria-label="Close"></button>
+      <h5 class="modal-title text-center" id="staticBackdropLabel">{{this.modalTitle}}</h5>
+      <div class="modal-body">
+        <p class="inote-small-comment">{{this.modalPurpose}}</p>
+      </div>
+
+      <!-- Specific content -->
+      <form #toto="ngForm">
+        <div class="align-items-center input-group input-group-sm mb-3 mx-auto">
+          <span class="d-flex flex-column input-group-text" id="inputGroup-sizing-sm">Code d'authentification</span>
+          <input type="text" class="form-control" id="activation" aria-describedby="inputGroup-sizing-sm" required
+            pattern="[0-9]{6}$" [(ngModel)]="this.activationCode" name="activation" #code_activation="ngModel"
+            placeholder="Entrez le code (validité 15mn)" />
+        </div>
+        <button (click)="onSendAuthCode()" type="button" class="mt-2 btn btn-secondary border border-white"
+          [disabled]="!toto.valid">
+          Envoyer
+        </button>
+      </form>
+
+    </div>
+  </div>
+</div>

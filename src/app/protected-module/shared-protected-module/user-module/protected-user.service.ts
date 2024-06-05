@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BackEndPoints } from "../../../public-module/shared-public-module/back-end-points.enum";
-import { PublicUserResponseDto } from "../../../shared-module/dto/public-user-response.dto";
+import { BackEndPoints } from "../../../shared-module/enums/back-end-points.enum";
+import { PublicUserResponseDto } from "../../../shared-module/dtos/public-user-response.dto";
 
 @Injectable()
 export class ProtectedUserService {
@@ -55,7 +55,7 @@ export class ProtectedUserService {
     // Headers definitions
     const headers = new HttpHeaders({
       "Content-Type": "plain/text",
-      Authorization: `Bearer ${bearer}`,
+      Authorization: `bearer ${bearer}`,
     });
 
     return this.http.get<PublicUserResponseDto>(
@@ -86,8 +86,7 @@ export class ProtectedUserService {
       "Authorization": "bearer " + bearer
      };
     
-
-    return this.http.post(
+     return this.http.post(
       // Url
       BackEndPoints.SIGN_OUT,
       null,
@@ -98,7 +97,6 @@ export class ProtectedUserService {
 
         // headers injection
         headers: headers,
-
 
         // Get full Http response
         observe: "response",
