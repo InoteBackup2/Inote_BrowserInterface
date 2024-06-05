@@ -24,7 +24,8 @@
       "url": "http://localhost:4200/",
       "runtimeExecutable": "/usr/bin/brave-browser",
 				"runtimeArgs": [
-					"--remote-debugging-port=9222"
+					"--remote-debugging-port=9222",
+          "--no-first-run"
 				]
     },
     {
@@ -35,7 +36,8 @@
       "url": "http://localhost:9876/debug.html",
       "runtimeExecutable": "/usr/bin/brave-browser",
 				"runtimeArgs": [
-					"--remote-debugging-port=9222"
+					"--remote-debugging-port=9222",
+          "--no-first-run"
 				]
     }
   ]
