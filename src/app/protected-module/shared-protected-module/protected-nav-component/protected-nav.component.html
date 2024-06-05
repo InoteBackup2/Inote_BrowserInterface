@@ -2,7 +2,7 @@
   <div class="container-fluid d-flex align-items-center">
     <div class="d-flex align-items-center">
       <a class="navbar-brand text-white" href="#">
-        <img src="../../../assets/logo-alone.png" alt="Inote logo" class=" border-danger" id="inote-logo" />
+        <img src="../../../assets/logo-alone.png" alt="Inote logo" id="inote-logo" />
         Inote
       </a>
     </div>
@@ -26,11 +26,12 @@
         <li>
           <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item inote-link-normal" (keypress)="true" (click)="onSignOut()">{{this.lang.pickMsg(this.signoutPath)}}</a></li>
+        <li><a class="dropdown-item inote-link-normal" (keypress)="true"
+            (click)="onSignOut()">{{this.lang.pickMsg(this.signoutPath)}}</a></li>
       </ul>
     </div>
-    <div class="collapse navbar-collapse border border-danger" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center border border-danger">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center">
         <li class="nav-item">
           <a class="nav-link active text-white inote-link-normal">{{this.lang.pickMsg(this.myBoardsPath)}}</a>
         </li>
@@ -38,15 +39,11 @@
           <a class="nav-link text-white inote-link-normal">{{this.lang.pickMsg(this.myTeamsPath)}}</a>
         </li>
       </ul>
-      <!-- <button class="btn btn-secondary border border-danger"> toto</button> -->
-      <app-language-selector class="  border border-primary "></app-language-selector>
-
-
-     
-
-      <form class="d-flex border border-warning" role="search">
+      <app-language-selector></app-language-selector>
+      <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-secondary border border-white" type="submit">{{this.lang.pickMsg(this.searchPath)}}</button>
+        <button class="btn btn-secondary border border-white"
+          type="submit">{{this.lang.pickMsg(this.searchPath)}}</button>
       </form>
     </div>
   </div>
