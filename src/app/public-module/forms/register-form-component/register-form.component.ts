@@ -96,14 +96,21 @@ export class RegisterFormComponent {
         if (response.status === HttpStatusCode.Created) {
           this.openModal();
         } else {
-          this.toastr.warning(this.lang.pickMsg(Msg.toasts.errors.titles.REQUEST_HAS_FAILED),
+          if(response.status === HttpStatusCode.Unauthorized ){
+            console.log("toto");
+          }
+          else{
+            console.log("titi") ;
+            this.toastr.warning(this.lang.pickMsg(Msg.toasts.errors.titles.REQUEST_HAS_FAILED),
           this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
             {timeOut: AppProperties.TOASTER_TIMEOUT}
-          );
+          );    
+          }
         }
       },
 
       (error) => {
+        console.log("tutu");
         this.errorResponseDto = JSON.parse(error.error);
         this.toastr.error(this.errorResponseDto.detail,
           this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),

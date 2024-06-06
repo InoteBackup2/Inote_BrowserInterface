@@ -2,6 +2,7 @@ export enum Urn {
     REGISTER = "register",
     ACTIVATE="activation",
     SIGN_IN="sign-in",
+    REFRESH_TOKEN="refresh-token",
     GET_CURRENT_USER="current-user",
     SIGN_OUT="sign-out",
     CHANGE_PASSWORD="change-password",
