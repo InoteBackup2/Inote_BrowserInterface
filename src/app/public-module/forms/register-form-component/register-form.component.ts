@@ -14,10 +14,7 @@ import { Urn } from "../../../shared-module/enums/urn.enum";
 @Component({
   selector: "app-register-form-component",
   templateUrl: "./register-form.component.html",
-  styleUrls: [
-    "./register-form.component.css",
-    "../../../../styles.css",
-  ],
+  styleUrls: ["./register-form.component.css", "../../../../styles.css"],
 })
 export class RegisterFormComponent {
   // RELATING TEMPLATE VARIABLES
@@ -26,21 +23,20 @@ export class RegisterFormComponent {
   // @ViewChild retrieves a reference to one of the component's child elements, and provides access to its methods
   @ViewChild(ModalActivateUserComponent) modal!: ModalActivateUserComponent;
 
-  pseudoPath:string=Msg.registerForm.PSEUDO;
-  emailPath:string=Msg.registerForm.EMAIL;
-  pwdPath:string=Msg.registerForm.PASSWORD;
-  
+  pseudoPath: string = Msg.registerForm.PSEUDO;
+  emailPath: string = Msg.registerForm.EMAIL;
+  pwdPath: string = Msg.registerForm.PASSWORD;
 
   username!: string;
   password!: string;
   pseudonyme!: string;
   activation_success: boolean = false;
- 
+
   // HTTP
   // ==============================================
   /* Request */
   registerRequestBody!: RegisterRequestDto;
-  
+
   /* Response */
   errorResponseDto!: ErrorResponseDto;
 
@@ -69,7 +65,8 @@ export class RegisterFormComponent {
   openModal() {
     this.modal.openModal(
       this.lang.pickMsg(Msg.toasts.titles.USER_ACCOUNT_ACTIVATION),
-      this.lang.pickMsg(Msg.toasts.prompts.ENTER_ACTIVATION_CODE_SENT_BY_MAIL));
+      this.lang.pickMsg(Msg.toasts.prompts.ENTER_ACTIVATION_CODE_SENT_BY_MAIL)
+    );
   }
 
   closeModal() {
@@ -96,25 +93,21 @@ export class RegisterFormComponent {
         if (response.status === HttpStatusCode.Created) {
           this.openModal();
         } else {
-          if(response.status === HttpStatusCode.Unauthorized ){
-            console.log("toto");
-          }
-          else{
-            console.log("titi") ;
-            this.toastr.warning(this.lang.pickMsg(Msg.toasts.errors.titles.REQUEST_HAS_FAILED),
-          this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-            {timeOut: AppProperties.TOASTER_TIMEOUT}
-          );    
-          }
+          this.toastr.warning(
+            this.lang.pickMsg(Msg.toasts.errors.titles.REQUEST_HAS_FAILED),
+            this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+            { timeOut: AppProperties.TOASTER_TIMEOUT }
+          );
         }
       },
 
       (error) => {
-        console.log("tutu");
         this.errorResponseDto = JSON.parse(error.error);
-        this.toastr.error(this.errorResponseDto.detail,
+        this.toastr.error(
+          this.errorResponseDto.detail,
           this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-          { timeOut: AppProperties.TOASTER_TIMEOUT});
+          { timeOut: AppProperties.TOASTER_TIMEOUT }
+        );
       }
     );
   }
