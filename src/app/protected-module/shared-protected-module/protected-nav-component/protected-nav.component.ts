@@ -1,3 +1,5 @@
+import { SignInResponseDto } from "./../../../public-module/shared-public-module/dtos/sign-in-response.dto";
+import { RefreshTokenRequestDto } from "./../dtos/refresh-token-request.dto";
 import { ErrorResponseDto } from "../../../shared-module/dtos/error-response.dto";
 import { Component, OnInit } from "@angular/core";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -9,7 +11,7 @@ import { Router } from "@angular/router";
 import { HttpStatusCode } from "axios";
 import { ToastrService } from "ngx-toastr";
 import { AppProperties } from "../../../app.properties";
-import { Urn } from '../../../shared-module/enums/urn.enum';
+import { Urn } from "../../../shared-module/enums/urn.enum";
 import { LanguageManagerService } from "../../../shared-module/services/language-manager.service";
 import { Msg } from "../../../shared-module/constants/messages.constant";
 
@@ -19,14 +21,13 @@ import { Msg } from "../../../shared-module/constants/messages.constant";
   styleUrls: ["./protected-nav.component.css"],
 })
 export class ProtectedNavComponent implements OnInit {
-  
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-  profileManagementPath:string=Msg.protectedNavBar.PROFILE_MANAGEMENT;
-  signoutPath:string=Msg.protectedNavBar.SIGNOUT;
-  myBoardsPath:string=Msg.protectedNavBar.MY_BOARDS;
-  myTeamsPath:string=Msg.protectedNavBar.MY_TEAMS;
-  searchPath:string=Msg.protectedNavBar.SEARCH;
+  profileManagementPath: string = Msg.protectedNavBar.PROFILE_MANAGEMENT;
+  signoutPath: string = Msg.protectedNavBar.SIGNOUT;
+  myBoardsPath: string = Msg.protectedNavBar.MY_BOARDS;
+  myTeamsPath: string = Msg.protectedNavBar.MY_TEAMS;
+  searchPath: string = Msg.protectedNavBar.SEARCH;
 
   currentConnectUser!: PublicUserResponseDto | null;
 
@@ -44,9 +45,11 @@ export class ProtectedNavComponent implements OnInit {
   getCurrentUserMsgToDisplay!: string | null;
   signOutResponseStatus!: number;
   signOutResponseBody!: string | null;
+  refreshTokenRequestDto!: RefreshTokenRequestDto;
 
   /* Response */
   errorResponseDto!: ErrorResponseDto;
+
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
@@ -62,31 +65,136 @@ export class ProtectedNavComponent implements OnInit {
   // ==============================================
   ngOnInit(): void {
     this.token = this.tokenService.getToken();
-    if (this.token) {
-      this.userService.getCurrentUser(this.token).subscribe(
-        (response) => {
-          if (response.status !== HttpStatusCode.Ok || response.body === null) {
-            this.toastr.error(
-              this.lang.pickMsg(Msg.user.errors.RECOVERY_CURRENT_USER_FAILED),
-              this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-              {timeOut: AppProperties.TOASTER_TIMEOUT}
-            );
-          } else {
-            this.currentConnectUser = response.body;
-          }
-        },
+    // token is not present
+    if (!this.token) {
+      this.toastr.error(
+        this.lang.pickMsg(Msg.auth.errors.NULL_TOKEN_VALUE),
+        this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+        { timeOut: AppProperties.TOASTER_TIMEOUT }
+      );
+      throw new Error(Msg.auth.errors.NULL_TOKEN_VALUE);
+    }
 
-        // Error case
-        (error) => {
-          this.errorResponseDto = JSON.parse(error.error);
+    // User informations recuperation with token
+    this.userService.getCurrentUser(this.token).subscribe(
+      // Current user recup success
+      (response) => {
+        if (response.status !== HttpStatusCode.Ok || response.body === null) {
+          // Should be catched in error
           this.toastr.error(
-          this.errorResponseDto.detail,
-          this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-            {timeOut: AppProperties.TOASTER_TIMEOUT}
+            this.lang.pickMsg(Msg.user.errors.RECOVERY_CURRENT_USER_FAILED),
+            this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+            { timeOut: AppProperties.TOASTER_TIMEOUT }
+          );
+          throw new Error("Response should not have empty body");
+        }
+
+        // SUCCES OF OPERATION : Get user informations for display in navBar
+        this.currentConnectUser = response.body;
+      },
+
+      // Error case
+      (error) => {
+        this.errorResponseDto = error.error;
+        if (
+          this.errorResponseDto.status === HttpStatusCode.Unauthorized &&
+          this.errorResponseDto.detail === "The JWT has expired"
+        ) {
+          // Send of refresh token
+          const refreshToken = this.tokenService.getRefreshToken();
+
+          // Refresh token won't be null
+          if (refreshToken === null) {
+            this.toastr.error(
+              this.lang.pickMsg(
+                Msg.toasts.errors.details.USER_SHOULD_HAVE_A_REFRESH_TOKEN
+              ),
+              this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+              { timeOut: AppProperties.TOASTER_TIMEOUT }
+            );
+            throw new Error(
+              Msg.toasts.errors.details.USER_SHOULD_HAVE_A_REFRESH_TOKEN
+            );
+          }
+
+          this.refreshTokenRequestDto = {
+            refresh: refreshToken,
+          };
+          this.sendRefreshtoken(this.refreshTokenRequestDto).then(
+            (response) => {
+              const signInResponseDto: SignInResponseDto = response;
+              if (signInResponseDto === null) {
+                // Should be catch in error
+                this.toastr.error(
+                  this.lang.pickMsg(
+                    Msg.auth.errors.REFRESH_TOKEN_REQUEST_FAILED
+                  ),
+                  this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+                  { timeOut: AppProperties.TOASTER_TIMEOUT }
+                );
+                throw new Error(Msg.auth.errors.REFRESH_TOKEN_REQUEST_FAILED);
+              }
+              // Save credentials in local storage
+              this.tokenService.saveToken(signInResponseDto.bearer);
+              this.tokenService.saveRefreshToken(signInResponseDto.refresh);
+
+              // Get current with new bearer
+              this.userService
+                .getCurrentUser(signInResponseDto.bearer)
+                .subscribe(
+                  (response) => {
+                    if (
+                      response.status !== HttpStatusCode.Ok ||
+                      response.body === null
+                    ) {
+                      // Should be catched in error
+                      this.toastr.error(
+                        this.lang.pickMsg(
+                          Msg.user.errors.RECOVERY_CURRENT_USER_FAILED
+                        ),
+                        this.lang.pickMsg(
+                          Msg.toasts.errors.titles.DETECTED_ANOMALY
+                        ),
+                        { timeOut: AppProperties.TOASTER_TIMEOUT }
+                      );
+                      throw new Error(
+                        Msg.user.errors.RECOVERY_CURRENT_USER_FAILED
+                      );
+                    }
+                    // SUCCESS OF OPERATION
+                    this.currentConnectUser = response.body;
+                  },
+
+                  (error) => {
+                    // FAILED OPERATION
+                    const errorResponseDto: ErrorResponseDto = error.error;
+
+                    this.toastr.error(
+                      errorResponseDto.detail,
+                      this.lang.pickMsg(
+                        Msg.toasts.errors.titles.DETECTED_ANOMALY
+                      ),
+                      { timeOut: AppProperties.TOASTER_TIMEOUT }
+                    );
+                    throw new Error(
+                      Msg.auth.errors.REFRESH_TOKEN_REQUEST_FAILED
+                    );
+                  }
+                );
+            },
+            // Send refresh token failed
+            (error) => {
+              this.toastr.error(
+                error,
+                this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+                { timeOut: AppProperties.TOASTER_TIMEOUT }
+              );
+              throw new Error(error);
+            }
           );
         }
-      );
-    }
+      }
+    );
   }
 
   // TEMPLATE CALLBACKS METHODS
@@ -104,11 +212,11 @@ export class ProtectedNavComponent implements OnInit {
         // Response case
         (response) => {
           if (response.status !== HttpStatusCode.Ok || response.body === null) {
-              this.toastr.error(
-                this.lang.pickMsg(Msg.user.errors.RECOVERY_CURRENT_USER_FAILED),
-                this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-                {timeOut: AppProperties.TOASTER_TIMEOUT}
-              );
+            this.toastr.error(
+              this.lang.pickMsg(Msg.auth.errors.USER_SIGNOUT_FAILED),
+              this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+              { timeOut: AppProperties.TOASTER_TIMEOUT }
+            );
           } else {
             this.tokenService.removeToken();
             this.router.navigate([Urn.HOME]);
@@ -118,23 +226,97 @@ export class ProtectedNavComponent implements OnInit {
         // Error case
         (error) => {
           this.errorResponseDto = JSON.parse(error.error);
-          this.toastr.error(
-            this.errorResponseDto.detail,
-            this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-            {timeOut: AppProperties.TOASTER_TIMEOUT}
-          );
+          if (
+            this.errorResponseDto.status === HttpStatusCode.Unauthorized &&
+            this.errorResponseDto.detail === "The JWT has expired"
+          ) {
+            const refreshToken = this.tokenService.getRefreshToken();
+            if (refreshToken === null) {
+              this.toastr.error(
+                this.lang.pickMsg(
+                  Msg.toasts.errors.details.USER_SHOULD_HAVE_A_REFRESH_TOKEN
+                ),
+                this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+                { timeOut: AppProperties.TOASTER_TIMEOUT }
+              );
+            } else {
+              this.refreshTokenRequestDto = {
+                refresh: refreshToken,
+              };
+              this.sendRefreshtoken(this.refreshTokenRequestDto).then(
+                () => {
+                  this.tokenService.removeRefreshToken();
+                  this.tokenService.removeToken();
+                  this.router.navigate([Urn.HOME]);
+                },
+                (error) => {
+                  this.toastr.error(
+                    error,
+                    this.lang.pickMsg(
+                      Msg.toasts.errors.titles.DETECTED_ANOMALY
+                    ),
+                    { timeOut: AppProperties.TOASTER_TIMEOUT }
+                  );
+                }
+              );
+            }
+          } else {
+            this.toastr.error(
+              this.errorResponseDto.detail,
+              this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+              { timeOut: AppProperties.TOASTER_TIMEOUT }
+            );
+          }
         }
       );
     } else {
       this.toastr.error(
+        // Connected user should have a non null token value
         this.lang.pickMsg(Msg.auth.errors.NULL_TOKEN_VALUE),
         this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-        {timeOut: AppProperties.TOASTER_TIMEOUT}
+        { timeOut: AppProperties.TOASTER_TIMEOUT }
       );
     }
   }
 
   onSearchRequested() {
     this.requestedSearch = !this.requestedSearch;
+  }
+
+  /**
+   * Send refresh token
+   *
+   * @param refreshTokenRequestDto that contains refresh token value
+   * @returns promise than contains new jwt and refresh token values
+   *
+   * @author atsuhikoMochizuki
+   * @since 2024-06-06
+   */
+  sendRefreshtoken(
+    refreshTokenRequestDto: RefreshTokenRequestDto
+  ): Promise<SignInResponseDto> {
+    const promise: Promise<SignInResponseDto> = new Promise(
+      (resolve, reject) => {
+        this.userService.sendRefreshToken(refreshTokenRequestDto).subscribe(
+          (response) => {
+            if (
+              response.status !== HttpStatusCode.Created ||
+              response.body === null
+            ) {
+              reject("Refresh token request has failed");
+            } else {
+              const signInResponseDto: SignInResponseDto = response.body;
+              resolve(signInResponseDto);
+            }
+          },
+          (error) => {
+            const errorResponseDto: ErrorResponseDto = error.error;
+            reject(errorResponseDto.detail);
+          }
+        );
+      }
+    );
+
+    return promise;
   }
 }

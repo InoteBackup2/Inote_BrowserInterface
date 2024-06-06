@@ -74,6 +74,7 @@ export class LoginFormComponent {
         if (response.status === HttpStatusCode.Ok && response.body!== null) {
           this.signInResponseDto = response.body;
           this.tokenService.saveToken(this.signInResponseDto.bearer);
+          this.tokenService.saveRefreshToken(this.signInResponseDto.refresh);
           this.router.navigate([Urn.DASHBOARD]);
         } else {
           this.toastr.error(
@@ -85,7 +86,7 @@ export class LoginFormComponent {
       },
 
       (error) => {
-        this.errorResponseDto = JSON.parse(error.error);
+        this.errorResponseDto = error.error;
         this.toastr.error(
           this.errorResponseDto.detail,
           this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
@@ -118,7 +119,7 @@ export class LoginFormComponent {
           }
         },
         (error) => {
-          this.errorResponseDto = JSON.parse(error.error);
+          this.errorResponseDto = error.error;
           this.toastr.error(
             this.errorResponseDto.detail,
             this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),

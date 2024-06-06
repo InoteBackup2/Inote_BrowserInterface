@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BackEndPoints } from "../../../shared-module/enums/back-end-points.enum";
 import { PublicUserResponseDto } from "../../../shared-module/dtos/public-user-response.dto";
+import { RefreshTokenRequestDto } from "../dtos/refresh-token-request.dto";
+import { SignInResponseDto } from "../../../public-module/shared-public-module/dtos/sign-in-response.dto";
 
 @Injectable()
 export class ProtectedUserService {
@@ -99,6 +101,22 @@ export class ProtectedUserService {
         headers: headers,
 
         // Get full Http response
+        observe: "response",
+      }
+    );
+  }
+
+  sendRefreshToken(refreshTokenRequestDto:RefreshTokenRequestDto): Observable<HttpResponse<SignInResponseDto>>{
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    });
+
+    return this.http.post<SignInResponseDto>(
+      BackEndPoints.REFRESH_TOKEN,
+      JSON.stringify(refreshTokenRequestDto),
+      {
+        headers: headers,
+        reportProgress: true,
         observe: "response",
       }
     );

@@ -51,6 +51,9 @@ export const Msg = {
             titles:{
                 DETECTED_ANOMALY:"Detected anomaly",
                 REQUEST_HAS_FAILED:"Request has failed"
+            },
+            details:{
+                USER_SHOULD_HAVE_A_REFRESH_TOKEN:"User does not have any refresh token"
             }
         }
     },
@@ -63,7 +66,9 @@ export const Msg = {
         errors:{
             NULL_TOKEN_VALUE:"Null token value",
             USER_LOGIN_FAILED:"User login failed",
-            CHANGE_PASSWORD_FAILED:"Change password failed"
+            CHANGE_PASSWORD_FAILED:"Change password failed",
+            REFRESH_TOKEN_REQUEST_FAILED:"Request to send refresh token failed",
+            USER_SIGNOUT_FAILED:"User signout failed"
         }
     }
     

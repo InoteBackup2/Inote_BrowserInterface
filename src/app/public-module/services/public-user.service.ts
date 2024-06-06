@@ -31,7 +31,7 @@ export class PublicUserService {
     // Headers definitions
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
-      // Authorization: ` ${HttpConstants.headers.auth.BEARER}`,
+
     });
 
     return this.http.post(

@@ -6,8 +6,10 @@ export const fr: Map<string, string> = new Map([
     [Msg.toasts.titles.USER_ACCOUNT_ACTIVATION, "Activation du compte utilisateur"],
     [Msg.toasts.titles.OPERATION_SUCCESS, "Succès de l'opération"],
     [Msg.toasts.prompts.ENTER_ACTIVATION_CODE_SENT_BY_MAIL, "Entrez SVP le code d'activation envoyé sur l'adresse mail que vous avez fourni lors de la création du compte"],
-    [Msg.toasts.errors.titles.REQUEST_HAS_FAILED, "La requête a échouée (cause inconnue"],
+    [Msg.toasts.errors.titles.REQUEST_HAS_FAILED, "La requête a échouée (cause inconnue)"],
+    [Msg.toasts.errors.details.USER_SHOULD_HAVE_A_REFRESH_TOKEN, "L'utilisateur ne possède aucun refresh token"],
     [Msg.auth.errors.CHANGE_PASSWORD_FAILED, "L'opération de changement du mot de passe a échouée"],
+    [Msg.auth.errors.USER_SIGNOUT_FAILED, "La déconnexion de l'utilisateur a échoué"],
     [Msg.landing_page.SLOGAN,"Notez...Où que vous soyez."],
     [Msg.landing_page.SHORT_DESCRIPTION,"Inote offre une solution déportée avec laquelle vous pouvez à tout moment retrouver vos notes à l'aide d'une simple connexion"],
     [Msg.landing_page.QUICK_REGISTRATION,"Inscription rapide"],
@@ -31,4 +33,5 @@ export const fr: Map<string, string> = new Map([
     [Msg.protectedNavBar.MY_BOARDS,"Mes Tableaux"],
     [Msg.protectedNavBar.MY_TEAMS,"Mes Equipes"],
     [Msg.protectedNavBar.SEARCH,"Rechercher"],
+
 ]);
