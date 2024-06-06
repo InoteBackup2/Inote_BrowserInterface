@@ -49,7 +49,7 @@ export class ProtectedNavComponent implements OnInit {
 
   /* Response */
   errorResponseDto!: ErrorResponseDto;
-  // signInResponseDto!: SignInResponseDto;
+
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
