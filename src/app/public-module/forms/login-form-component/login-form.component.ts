@@ -74,6 +74,7 @@ export class LoginFormComponent {
         if (response.status === HttpStatusCode.Ok && response.body!== null) {
           this.signInResponseDto = response.body;
           this.tokenService.saveToken(this.signInResponseDto.bearer);
+          this.tokenService.saveRefreshToken(this.signInResponseDto.refresh);
           this.router.navigate([Urn.DASHBOARD]);
         } else {
           this.toastr.error(

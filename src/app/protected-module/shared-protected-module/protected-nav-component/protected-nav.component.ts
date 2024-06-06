@@ -1,3 +1,5 @@
+import { SignInResponseDto } from "./../../../public-module/shared-public-module/dtos/sign-in-response.dto";
+import { RefreshTokenRequestDto } from "./../dtos/refresh-token-request.dto";
 import { ErrorResponseDto } from "../../../shared-module/dtos/error-response.dto";
 import { Component, OnInit } from "@angular/core";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -9,7 +11,7 @@ import { Router } from "@angular/router";
 import { HttpStatusCode } from "axios";
 import { ToastrService } from "ngx-toastr";
 import { AppProperties } from "../../../app.properties";
-import { Urn } from '../../../shared-module/enums/urn.enum';
+import { Urn } from "../../../shared-module/enums/urn.enum";
 import { LanguageManagerService } from "../../../shared-module/services/language-manager.service";
 import { Msg } from "../../../shared-module/constants/messages.constant";
 
@@ -19,14 +21,13 @@ import { Msg } from "../../../shared-module/constants/messages.constant";
   styleUrls: ["./protected-nav.component.css"],
 })
 export class ProtectedNavComponent implements OnInit {
-  
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-  profileManagementPath:string=Msg.protectedNavBar.PROFILE_MANAGEMENT;
-  signoutPath:string=Msg.protectedNavBar.SIGNOUT;
-  myBoardsPath:string=Msg.protectedNavBar.MY_BOARDS;
-  myTeamsPath:string=Msg.protectedNavBar.MY_TEAMS;
-  searchPath:string=Msg.protectedNavBar.SEARCH;
+  profileManagementPath: string = Msg.protectedNavBar.PROFILE_MANAGEMENT;
+  signoutPath: string = Msg.protectedNavBar.SIGNOUT;
+  myBoardsPath: string = Msg.protectedNavBar.MY_BOARDS;
+  myTeamsPath: string = Msg.protectedNavBar.MY_TEAMS;
+  searchPath: string = Msg.protectedNavBar.SEARCH;
 
   currentConnectUser!: PublicUserResponseDto | null;
 
@@ -44,9 +45,13 @@ export class ProtectedNavComponent implements OnInit {
   getCurrentUserMsgToDisplay!: string | null;
   signOutResponseStatus!: number;
   signOutResponseBody!: string | null;
+  refreshTokenRequestDto!: RefreshTokenRequestDto;
 
   /* Response */
   errorResponseDto!: ErrorResponseDto;
+  errorResponseDto2!: ErrorResponseDto;
+
+  signInResponseDto!: SignInResponseDto;
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
@@ -69,7 +74,7 @@ export class ProtectedNavComponent implements OnInit {
             this.toastr.error(
               this.lang.pickMsg(Msg.user.errors.RECOVERY_CURRENT_USER_FAILED),
               this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-              {timeOut: AppProperties.TOASTER_TIMEOUT}
+              { timeOut: AppProperties.TOASTER_TIMEOUT }
             );
           } else {
             this.currentConnectUser = response.body;
@@ -80,9 +85,9 @@ export class ProtectedNavComponent implements OnInit {
         (error) => {
           this.errorResponseDto = JSON.parse(error.error);
           this.toastr.error(
-          this.errorResponseDto.detail,
-          this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-            {timeOut: AppProperties.TOASTER_TIMEOUT}
+            this.errorResponseDto.detail,
+            this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+            { timeOut: AppProperties.TOASTER_TIMEOUT }
           );
         }
       );
@@ -104,11 +109,11 @@ export class ProtectedNavComponent implements OnInit {
         // Response case
         (response) => {
           if (response.status !== HttpStatusCode.Ok || response.body === null) {
-              this.toastr.error(
-                this.lang.pickMsg(Msg.user.errors.RECOVERY_CURRENT_USER_FAILED),
-                this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-                {timeOut: AppProperties.TOASTER_TIMEOUT}
-              );
+            this.toastr.error(
+              this.lang.pickMsg(Msg.auth.errors.USER_SIGNOUT_FAILED),
+              this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+              { timeOut: AppProperties.TOASTER_TIMEOUT }
+            );
           } else {
             this.tokenService.removeToken();
             this.router.navigate([Urn.HOME]);
@@ -118,23 +123,82 @@ export class ProtectedNavComponent implements OnInit {
         // Error case
         (error) => {
           this.errorResponseDto = JSON.parse(error.error);
-          this.toastr.error(
-            this.errorResponseDto.detail,
-            this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-            {timeOut: AppProperties.TOASTER_TIMEOUT}
-          );
+          if (
+            this.errorResponseDto.status === HttpStatusCode.Unauthorized &&
+            this.errorResponseDto.detail === "The JWT has expired"
+          ) {
+            const refreshToken = this.tokenService.getRefreshToken();
+            if (refreshToken === null) {
+              this.toastr.error(
+                this.lang.pickMsg(
+                  Msg.toasts.errors.details.USER_SHOULD_HAVE_A_REFRESH_TOKEN
+                ),
+                this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+                { timeOut: AppProperties.TOASTER_TIMEOUT }
+              );
+            } else {
+              this.refreshTokenRequestDto = {
+                refresh: refreshToken,
+              };
+              this.sendRefreshtoken(this.refreshTokenRequestDto);
+            }
+          } else {
+            this.toastr.error(
+              this.errorResponseDto.detail,
+              this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+              { timeOut: AppProperties.TOASTER_TIMEOUT }
+            );
+          }
         }
       );
     } else {
       this.toastr.error(
+        // Connected user should have a non null token value
         this.lang.pickMsg(Msg.auth.errors.NULL_TOKEN_VALUE),
         this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-        {timeOut: AppProperties.TOASTER_TIMEOUT}
+        { timeOut: AppProperties.TOASTER_TIMEOUT }
       );
     }
   }
 
   onSearchRequested() {
     this.requestedSearch = !this.requestedSearch;
+  }
+
+  /**
+   * Send the refresh token
+   * 
+   * @param refreshTokenRequestDto that contains the refresh token value
+   * 
+   * @author atsuhikoMochizuki
+   * @since 2024-06-06
+   */
+  sendRefreshtoken(refreshTokenRequestDto: RefreshTokenRequestDto) {
+    this.userService.sendRefreshToken(refreshTokenRequestDto).subscribe(
+      (response) => {
+        if (
+          response.status !== HttpStatusCode.Created ||
+          response.body === null
+        ) {
+          this.toastr.error(
+            this.lang.pickMsg(Msg.auth.errors.REFRESH_TOKEN_REQUEST_FAILED),
+            this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+            { timeOut: AppProperties.TOASTER_TIMEOUT }
+          );
+        } else {
+          this.tokenService.removeRefreshToken();
+          this.tokenService.removeToken();
+          this.router.navigate([Urn.HOME]);
+        }
+      },
+      (error) => {
+        this.errorResponseDto2 = error.error;
+        this.toastr.error(
+          this.errorResponseDto2.detail,
+          this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+          { timeOut: AppProperties.TOASTER_TIMEOUT }
+        );
+      }
+    );
   }
 }
