@@ -86,7 +86,7 @@ export class LoginFormComponent {
       },
 
       (error) => {
-        this.errorResponseDto = JSON.parse(error.error);
+        this.errorResponseDto = error.error;
         this.toastr.error(
           this.errorResponseDto.detail,
           this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
@@ -119,7 +119,7 @@ export class LoginFormComponent {
           }
         },
         (error) => {
-          this.errorResponseDto = JSON.parse(error.error);
+          this.errorResponseDto = error.error;
           this.toastr.error(
             this.errorResponseDto.detail,
             this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
