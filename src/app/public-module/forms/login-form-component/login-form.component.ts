@@ -1,7 +1,7 @@
 import { LanguageManagerService } from "./../../../shared-module/services/language-manager.service";
 import { SignInResponseDto } from "../../shared-public-module/dtos/sign-in-response.dto";
 import { SignInRequestDto } from "../../shared-public-module/dtos/sign-in-request.dto";
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { PublicUserService } from "../../services/public-user.service";
 import { Router } from "@angular/router";
 import { TokenService } from "../../../core-module/services/token.service";
@@ -14,6 +14,7 @@ import { ToastrService } from "ngx-toastr";
 import { Msg } from "../../../shared-module/constants/messages.constant";
 import { AppProperties } from "../../../app.properties";
 import { ErrorResponseDto } from "../../../shared-module/dtos/error-response.dto";
+import { ModalForgottenPasswordComponent } from "../../shared-public-module/modals/modal-forgotten-password/modal-forgotten-password.component";
 
 @Component({
   selector: "app-login-form-component",
@@ -23,6 +24,9 @@ import { ErrorResponseDto } from "../../../shared-module/dtos/error-response.dto
 export class LoginFormComponent {
   // RELATING TEMPLATE VARIABLES
   // ==============================================
+    // @ViewChild retrieves a reference to one of the component's child elements, and provides access to its methods
+    @ViewChild(ModalForgottenPasswordComponent) modalForgottenPassword!: ModalForgottenPasswordComponent;
+
   emailPath:string=Msg.webpage_staticText.signInForm.EMAIL;
   pwdPath:string=Msg.webpage_staticText.signInForm.PASSWORD;
   forgottenPwd:string=Msg.webpage_staticText.signInForm.FORGOTTEN_PASSWORD;
@@ -97,6 +101,9 @@ export class LoginFormComponent {
   }
 
   onChangePasswordAsked() {
+    this.closeForgottenPasswordModal();
+
+
     this.changePasswordRequestBody = {
       email: this.email,
     };
@@ -107,7 +114,7 @@ export class LoginFormComponent {
         (response) => {
           this.askedChangePassword = true;
           if (response.status === HttpStatusCode.Ok) {
-            this.changePassword_success = true;
+            this.openForgottenPasswordModal();
           } else {
             this.toastr.error(
               this.lang.pickMsg(Msg.auth.errors.CHANGE_PASSWORD_FAILED),
@@ -136,8 +143,49 @@ export class LoginFormComponent {
   }
 
   onForgottenPassword() {
-    this.authenticationByMailService.setCurrentStep(
-      AuthenticationByMailSteps.REQUEST_AUTH_CODE
+    this.closeForgottenPasswordModal();
+
+
+    this.changePasswordRequestBody = {
+      email: this.email,
+    };
+
+    this.publicUserservice
+      .askChangePassword(this.changePasswordRequestBody)
+      .subscribe(
+        (response) => {
+          this.askedChangePassword = true;
+          if (response.status === HttpStatusCode.Ok) {
+            this.openForgottenPasswordModal();
+          } else {
+            this.toastr.error(
+              this.lang.pickMsg(Msg.auth.errors.CHANGE_PASSWORD_FAILED),
+              this.lang.pickMsg(
+                Msg.toasts.errors.titles.DETECTED_ANOMALY
+              ),
+              { timeOut: AppProperties.TOASTER_TIMEOUT }
+            );
+          }
+        },
+        (error) => {
+          this.errorResponseDto = error.error;
+          this.toastr.error(
+            this.errorResponseDto.detail,
+            this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+            { timeOut: AppProperties.TOASTER_TIMEOUT }
+          );
+        }
+      );
+  }
+
+  openForgottenPasswordModal() {
+    this.modalForgottenPassword.openModal(
+      this.lang.pickMsg(Msg.toasts.titles.CHANGE_PASSWORD),
+      this.lang.pickMsg(Msg.toasts.prompts.ENTER_AUTHENTICATION_CODE_SENT_BY_MAIL)
     );
+  }
+
+  closeForgottenPasswordModal() {
+    this.modalForgottenPassword.closeModal();
   }
 }

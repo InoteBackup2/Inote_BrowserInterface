@@ -21,7 +21,9 @@ export const Msg = {
         registerForm:{
             PSEUDO: "Pseudonyme",
             EMAIL: "Email",
-            PASSWORD: "Password"
+            PASSWORD: "Password",
+            ACCOUNT_IS_CREATED:"Your account is now activated. You can now log in by clicking on the button below:",
+            LOG_IN: "Login"
         },
         signIn:{
             CONNECTION:"Connection"
@@ -41,15 +43,22 @@ export const Msg = {
             FOLLOW_US_ON_SOCIAL_NETWORKS:"Follow us",
             ALL_RIGTHS_RESERVED:"All rights reserved"
         },
+        modal_activate_user:{
+            AUTHENTICATION_CODE:"Authentication code",
+            ENTER_AUTHENTICATION_CODE:"Please enter code (validity: 15mn)",
+            SEND_AUTHENTICATION_CODE: "Send"
+        }
     },
     
     toasts:{
         titles:{
             USER_ACCOUNT_ACTIVATION:"User account activation",
-            OPERATION_SUCCESS: "Operation success"
+            OPERATION_SUCCESS: "Operation success",
+            CHANGE_PASSWORD: "Change password"
         },
         prompts:{
-            ENTER_ACTIVATION_CODE_SENT_BY_MAIL:"Please enter activation code sent on your email"
+            ENTER_ACTIVATION_CODE_SENT_BY_MAIL:"Please enter activation code sent on your email",
+            ENTER_AUTHENTICATION_CODE_SENT_BY_MAIL:"Please enter temporary authentication code sent on your email"
         },
         errors:{
             titles:{

@@ -20,11 +20,11 @@ import { AppProperties } from "./../../../../app.properties";
 const $: any = window["$"];
 
 @Component({
-  selector: "app-modal-component",
-  templateUrl: "./modal-activate-user.component.html",
-  styleUrls: ["../../../../../styles.css"],
+  selector: 'app-modal-forgotten-password',
+  templateUrl: './modal-forgotten-password.component.html',
+  styles: ``
 })
-export class ModalActivateUserComponent {
+export class ModalForgottenPasswordComponent {
   // RELATING TEMPLATE VARIABLES
   // ==============================================
 
