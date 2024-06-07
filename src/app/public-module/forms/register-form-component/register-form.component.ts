@@ -23,9 +23,9 @@ export class RegisterFormComponent {
   // @ViewChild retrieves a reference to one of the component's child elements, and provides access to its methods
   @ViewChild(ModalActivateUserComponent) modal!: ModalActivateUserComponent;
 
-  pseudoPath: string = Msg.registerForm.PSEUDO;
-  emailPath: string = Msg.registerForm.EMAIL;
-  pwdPath: string = Msg.registerForm.PASSWORD;
+  pseudoPath: string = Msg.webpage_staticText.registerForm.PSEUDO;
+  emailPath: string = Msg.webpage_staticText.registerForm.EMAIL;
+  pwdPath: string = Msg.webpage_staticText.registerForm.PASSWORD;
 
   username!: string;
   password!: string;

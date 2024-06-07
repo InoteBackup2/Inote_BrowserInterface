@@ -23,10 +23,10 @@ import { ErrorResponseDto } from "../../../shared-module/dtos/error-response.dto
 export class LoginFormComponent {
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-  emailPath:string=Msg.signInForm.EMAIL;
-  pwdPath:string=Msg.signInForm.PASSWORD;
-  forgottenPwd:string=Msg.signInForm.FORGOTTEN_PASSWORD;
-  signIn:string=Msg.signInForm.SIGN_IN;
+  emailPath:string=Msg.webpage_staticText.signInForm.EMAIL;
+  pwdPath:string=Msg.webpage_staticText.signInForm.PASSWORD;
+  forgottenPwd:string=Msg.webpage_staticText.signInForm.FORGOTTEN_PASSWORD;
+  signIn:string=Msg.webpage_staticText.signInForm.SIGN_IN;
   
   
   email!: string;

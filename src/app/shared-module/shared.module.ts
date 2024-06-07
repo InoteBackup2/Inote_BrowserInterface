@@ -5,6 +5,7 @@ import { FooterComponent } from './footer-component/footer.component';
 import { BorderMouseNoInitialColorDirective } from './directives/border-mouse-no-initial-color.directive';
 import { SpinLoaderComponent } from './spin-loader-component/spin-loader.component';
 import { LanguageSelectorComponent } from './language-selector-component/language-selector.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { LanguageSelectorComponent } from './language-selector-component/languag
     LanguageSelectorComponent
     ],
   imports: [
-    CommonModule,],
+    CommonModule,
+  FontAwesomeModule],
   exports:[
     FooterComponent,
     BorderMouseDirective,

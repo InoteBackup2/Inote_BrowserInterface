@@ -10,7 +10,7 @@ export class RegisterComponent {
 
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-  accountCreationPath:string=Msg.register.ACCOUNT_CREATION;
+  accountCreationPath:string=Msg.webpage_staticText.register.ACCOUNT_CREATION;
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
