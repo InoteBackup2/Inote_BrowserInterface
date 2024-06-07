@@ -15,9 +15,9 @@ export class LandingPageComponent {
 
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-  sloganPath:string=Msg.landing_page.SLOGAN;
-  shortDescriptionPath:string=Msg.landing_page.SHORT_DESCRIPTION;
-  quickRegistrationPath:string=Msg.landing_page.QUICK_REGISTRATION;
+  sloganPath:string=Msg.webpage_staticText.landing_page.SLOGAN;
+  shortDescriptionPath:string=Msg.webpage_staticText.landing_page.SHORT_DESCRIPTION;
+  quickRegistrationPath:string=Msg.webpage_staticText.landing_page.QUICK_REGISTRATION;
   
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================

@@ -9,12 +9,16 @@
   }
 
 .inote-link-normal {
-   text-decoration: none;
+    text-decoration: none;
     cursor:pointer;
 }
 
 .inote-small-comment{
     font-size: smaller;
+}
+
+.inote-list-without-points{
+  list-style-type: none;  
 }
 
 .inoteNavLink {

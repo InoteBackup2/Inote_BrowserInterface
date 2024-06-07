@@ -9,7 +9,7 @@ import { LanguageManagerService } from '../../shared-module/services/language-ma
 export class LoginComponent{
    // RELATING TEMPLATE VARIABLES
   // ==============================================
-  connectionPath:string=Msg.signIn.CONNECTION;
+  connectionPath:string=Msg.webpage_staticText.signIn.CONNECTION;
 
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR

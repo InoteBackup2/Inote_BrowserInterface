@@ -23,11 +23,11 @@ import { Msg } from "../../../shared-module/constants/messages.constant";
 export class ProtectedNavComponent implements OnInit {
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-  profileManagementPath: string = Msg.protectedNavBar.PROFILE_MANAGEMENT;
-  signoutPath: string = Msg.protectedNavBar.SIGNOUT;
-  myBoardsPath: string = Msg.protectedNavBar.MY_BOARDS;
-  myTeamsPath: string = Msg.protectedNavBar.MY_TEAMS;
-  searchPath: string = Msg.protectedNavBar.SEARCH;
+  profileManagementPath: string = Msg.webpage_staticText.protectedNavBar.PROFILE_MANAGEMENT;
+  signoutPath: string = Msg.webpage_staticText.protectedNavBar.SIGNOUT;
+  myBoardsPath: string = Msg.webpage_staticText.protectedNavBar.MY_BOARDS;
+  myTeamsPath: string = Msg.webpage_staticText.protectedNavBar.MY_TEAMS;
+  searchPath: string = Msg.webpage_staticText.protectedNavBar.SEARCH;
 
   currentConnectUser!: PublicUserResponseDto | null;
 
