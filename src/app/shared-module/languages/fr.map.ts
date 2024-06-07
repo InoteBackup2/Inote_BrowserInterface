@@ -5,7 +5,9 @@ export const fr: Map<string, string> = new Map([
     [Msg.user.errors.RECOVERY_CURRENT_USER_FAILED, "La récupération de l'utilisateur courant a échoué"],
     [Msg.toasts.titles.USER_ACCOUNT_ACTIVATION, "Activation du compte utilisateur"],
     [Msg.toasts.titles.OPERATION_SUCCESS, "Succès de l'opération"],
+    [Msg.toasts.titles.CHANGE_PASSWORD, "Changement du mot de passe"],
     [Msg.toasts.prompts.ENTER_ACTIVATION_CODE_SENT_BY_MAIL, "Entrez SVP le code d'activation envoyé sur l'adresse mail que vous avez fourni lors de la création du compte"],
+    [Msg.toasts.prompts.ENTER_AUTHENTICATION_CODE_SENT_BY_MAIL, "Entrez SVP le code d'authentification provisoire envoyé sur l'adresse mail que vous avez fourni lors de la création du compte"],
     [Msg.toasts.errors.titles.REQUEST_HAS_FAILED, "La requête a échouée (cause inconnue)"],
     [Msg.toasts.errors.details.USER_SHOULD_HAVE_A_REFRESH_TOKEN, "L'utilisateur ne possède aucun refresh token"],
     [Msg.auth.errors.CHANGE_PASSWORD_FAILED, "L'opération de changement du mot de passe a échouée"],
@@ -18,6 +20,8 @@ export const fr: Map<string, string> = new Map([
     [Msg.webpage_staticText.registerForm.EMAIL,"Courriel"],
     [Msg.webpage_staticText.registerForm.PASSWORD,"Mot de passe"],
     [Msg.webpage_staticText.register.ACCOUNT_CREATION,"Création de compte"],
+    [Msg.webpage_staticText.registerForm.ACCOUNT_IS_CREATED,"Votre compte est à présent activé. Vous pouvez dès à présent vous y connecter en cliquant sur le bouton ci-dessous: "],
+    [Msg.webpage_staticText.registerForm.LOG_IN,"Se connecter"],
     [Msg.webpage_staticText.signIn.CONNECTION,"Création de compte"],
     [Msg.webpage_staticText.signInForm.EMAIL,"Courriel"],
     [Msg.webpage_staticText.signInForm.PASSWORD,"Mot de passe"],
@@ -34,5 +38,7 @@ export const fr: Map<string, string> = new Map([
     [Msg.webpage_staticText.protectedNavBar.MY_BOARDS,"Mes Tableaux"],
     [Msg.webpage_staticText.protectedNavBar.MY_TEAMS,"Mes Equipes"],
     [Msg.webpage_staticText.protectedNavBar.SEARCH,"Rechercher"],
-
+    [Msg.webpage_staticText.modal_activate_user.AUTHENTICATION_CODE,"Code d'authentification"],
+    [Msg.webpage_staticText.modal_activate_user.ENTER_AUTHENTICATION_CODE,"Entrez le code (validité 15 mn)"],
+    [Msg.webpage_staticText.modal_activate_user.SEND_AUTHENTICATION_CODE,"Envoyer"],
 ]);

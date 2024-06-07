@@ -1,9 +1,9 @@
 <div [ngSwitch]="this.activation_success">
 
   <div *ngSwitchCase=true>
-    <p>Votre compte est à présent activé. Vous pouvez dès lors vous y connecter en cliquant sur le bouton suivant:</p>
+    <p>{{this.lang.pickMsg(this.createdAccountPath)}}</p>
     <button type="button" (click)="this.onLogin()" class="mt-2 btn btn-secondary ms-lg-auto border border-white">
-      Se connecter
+      {{this.lang.pickMsg(this.loginPath)}}
     </button>
   </div>
 
