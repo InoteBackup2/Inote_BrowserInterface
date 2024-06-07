@@ -6,6 +6,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   Output,
   ViewChild,
 } from "@angular/core";
@@ -30,7 +31,8 @@ export class ModalActivateUserComponent {
 
   // Parent-child communication
   @Output() valueChange = new EventEmitter<string>();
-
+  @Input() email!:string;
+  
   // Miscelleanous
   activationCode!: string;
   toasterMsg: string | undefined;
@@ -38,6 +40,8 @@ export class ModalActivateUserComponent {
   @ViewChild("modal") modal!: ElementRef;
   modalTitle: string = "";
   modalPurpose: string = "";
+
+  
 
   authenticationCodePath:string=Msg.webpage_staticText.modal_activate_user.AUTHENTICATION_CODE;
   enterCodePath:string=Msg.webpage_staticText.modal_activate_user.ENTER_AUTHENTICATION_CODE;
@@ -54,7 +58,7 @@ export class ModalActivateUserComponent {
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
   constructor(
-    private PublicUserService: PublicUserService,
+    private publicUserService: PublicUserService,
     private toastr: ToastrService,
     public lang: LanguageManagerService
   ) {}
@@ -90,7 +94,7 @@ export class ModalActivateUserComponent {
       code: this.activationCode,
     };
 
-    this.PublicUserService.activateUser(this.activationRequestBody).subscribe(
+    this.publicUserService.activateUser(this.activationRequestBody).subscribe(
       (response) => {
         if (response.status === HttpStatusCode.Ok) {
           if (response.body) this.toasterMsg = response.body;

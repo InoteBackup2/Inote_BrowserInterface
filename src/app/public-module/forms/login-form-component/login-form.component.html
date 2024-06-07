@@ -1,50 +1,33 @@
-<!-- LOGIN FORM -->
 <form (ngSubmit)="OnSubmit()" #loginForm="ngForm">
 
   <!-- EMAIL FIELD -->
-  <!-- status informations of input -->
   <div class="input-group input-group-sm mb-3 mx-auto">
     <span class="input-group-text" id="inputGroup-sizing-sm">{{this.lang.pickMsg(this.emailPath)}}</span>
-    <input type="text" class="form-control" id="email" aria-describedby="inputGroup-sizing-sm" required autofocus
+    <input type="text" class="form-control" id="email" aria-describedby="inputGroup-sizing-sm" required
       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="this.email" name="email" #ref_email="ngModel" />
   </div>
 
   <!-- PASSWORD FIELD -->
-  <div class="input-group input-group-sm  mx-auto">
+  <div class="input-group input-group-sm mb-1 mx-auto">
     <span class="input-group-text" id="inputGroup-sizing-sm">{{this.lang.pickMsg(this.pwdPath)}}</span>
     <input type="password" class="form-control" id="pwd" aria-describedby="inputGroup-sizing-sm" required
-      [(ngModel)]="this.password" name="pwd" #ref_pwd="ngModel" />
+      pattern="[a-zA-Z0-9!@#$%^&*_=+-]{8,12}" [(ngModel)]="this.password" name="password" #pwdA="ngModel" />
   </div>
   <!-- Forgotten password link -->
-  <a class="d-flex justify-content-end fst-italic mt-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+  <a class="d-flex justify-content-end fst-italic" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
     (click)="onForgottenPassword()"
     [ngStyle]="ref_email.valid ? {'text-decoration':'none','color':'white'}:{'color': 'transparent','pointer-events':'none'}">
     {{this.lang.pickMsg(this.forgottenPwd)}}
   </a>
 
-  <!-- Login button -->
   <div class="d-flex flex-grow-0 justify-content-center">
     <button type="submit" class="mt-2 btn btn-secondary ms-lg-auto border border-white"
       [disabled]="!loginForm.form.valid">
-      {{this.lang.pickMsg(this.signIn)}}
+      Continuer
     </button>
   </div>
+
+  <!-- Activation modal windows -->
+  <app-modal-forgotten-password [email]="this.email"
+    (valueChange)="actOnSuccessEmitedByChild($event)"></app-modal-forgotten-password>
 </form>
-
-<!-- PASSWORD CHANGE MODAL -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="d-flex flex-column align-items-center modal-content bg-success">
-
-      <!-- Start of modal content -->
-
-      <button (click)="onCloseNewPasswordModal()" type="button" class="btn-close align-self-end" data-bs-dismiss="modal"
-        aria-label="Close"></button>
-      <app-send-auth-code-and-act class="p-3" [emailWhereCodeSended]="this.email"></app-send-auth-code-and-act>
-
-      <!-- End of modal content -->
-
-    </div>
-  </div>
-</div>

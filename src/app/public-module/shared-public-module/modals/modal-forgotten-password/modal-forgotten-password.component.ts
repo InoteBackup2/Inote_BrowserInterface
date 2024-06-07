@@ -1,11 +1,11 @@
 import { ErrorResponseDto } from "../../../../shared-module/dtos/error-response.dto";
 import { HttpStatusCode } from "@angular/common/http";
 import { PublicUserService } from "../../../services/public-user.service";
-import { ActivationRequestDto } from "../../dtos/activation-request.dto";
 import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   Output,
   ViewChild,
 } from "@angular/core";
@@ -13,6 +13,7 @@ import { ToastrService } from "ngx-toastr";
 import { LanguageManagerService } from "../../../../shared-module/services/language-manager.service";
 import { Msg } from "../../../../shared-module/constants/messages.constant";
 import { AppProperties } from "./../../../../app.properties";
+import { NewPasswordRequestDto } from "../../dtos/new-password-request.dto";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -20,9 +21,9 @@ import { AppProperties } from "./../../../../app.properties";
 const $: any = window["$"];
 
 @Component({
-  selector: 'app-modal-forgotten-password',
-  templateUrl: './modal-forgotten-password.component.html',
-  styles: ``
+  selector: "app-modal-forgotten-password",
+  templateUrl: "./modal-forgotten-password.component.html",
+  styleUrls: ["../../../../../styles.css"],
 })
 export class ModalForgottenPasswordComponent {
   // RELATING TEMPLATE VARIABLES
@@ -30,23 +31,37 @@ export class ModalForgottenPasswordComponent {
 
   // Parent-child communication
   @Output() valueChange = new EventEmitter<string>();
+  @Input() email!: string;
 
   // Miscelleanous
-  activationCode!: string;
+  authenticationCode!: string;
   toasterMsg: string | undefined;
+  newPassword!: string;
+  confirmedPassword!: string;
 
   @ViewChild("modal") modal!: ElementRef;
-  modalTitle: string = "";
-  modalPurpose: string = "";
+  modalTitle: string =
+    Msg.webpage_staticText.modal_change_password.CHANGE_PASSWORD;
+  modalPurpose: string =
+    Msg.webpage_staticText.modal_change_password
+      .AUTHENTICATION_CODE_NEEDED_ON_CHANGE_PASSWORD;
 
-  authenticationCodePath:string=Msg.webpage_staticText.modal_activate_user.AUTHENTICATION_CODE;
-  enterCodePath:string=Msg.webpage_staticText.modal_activate_user.ENTER_AUTHENTICATION_CODE;
-  sendCodePath:string=Msg.webpage_staticText.modal_activate_user.SEND_AUTHENTICATION_CODE;
+  authenticationCodePath: string =
+    Msg.webpage_staticText.modal_change_password.AUTHENTICATION_CODE;
+  enterCodePath: string =
+    Msg.webpage_staticText.modal_change_password.ENTER_AUTHENTICATION_CODE;
+  passwordPath: string = Msg.webpage_staticText.modal_change_password.PASSWORD;
+  sendNewPasswordPath: string =
+    Msg.webpage_staticText.modal_change_password.SEND;
+  enterNewPasswordPath: string =
+    Msg.webpage_staticText.modal_change_password.ENTER_NEW_PASSWORD;
+  confirmNewPasswordPath: string =
+    Msg.webpage_staticText.modal_change_password.CONFIRM_PASSWORD;
 
   // HTTP
   // ==============================================
   /* Request */
-  activationRequestBody!: ActivationRequestDto;
+  newPasswordRequestDto!: NewPasswordRequestDto;
 
   /* Response */
   errorResponseDto!: ErrorResponseDto;
@@ -54,7 +69,7 @@ export class ModalForgottenPasswordComponent {
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
   constructor(
-    private PublicUserService: PublicUserService,
+    private publicUserService: PublicUserService,
     private toastr: ToastrService,
     public lang: LanguageManagerService
   ) {}
@@ -65,7 +80,10 @@ export class ModalForgottenPasswordComponent {
   // TEMPLATE CALLBACKS METHODS
   // ==============================================
   openModal(title: string, purpose: string) {
-    this.activationCode = "";
+    this.authenticationCode = "";
+    this.newPassword="";
+    this.confirmedPassword="";
+
     this.modalTitle = title;
     this.modalPurpose = purpose;
     $(this.modal?.nativeElement).modal("show");
@@ -80,43 +98,48 @@ export class ModalForgottenPasswordComponent {
   }
 
   /**
-   * Activate the newly created user account
+   * Send new password
    *
    * @author atsuhikoMochizuki
-   * @since 2024-05-27
+   * @since 2024-06-77
    */
-  onSendAuthCode() {
-    this.activationRequestBody = {
-      code: this.activationCode,
+  onSendnewPwd() {
+    this.newPasswordRequestDto = {
+      code: this.authenticationCode,
+      email: this.email,
+      password: this.newPassword,
     };
 
-    this.PublicUserService.activateUser(this.activationRequestBody).subscribe(
-      (response) => {
-        if (response.status === HttpStatusCode.Ok) {
-          if (response.body) this.toasterMsg = response.body;
-          this.toastr.success(
-            this.toasterMsg,
-            this.lang.pickMsg(Msg.toasts.titles.OPERATION_SUCCESS),
-            { timeOut: AppProperties.TOASTER_TIMEOUT }
-          );
-          this.emitSuccess();
-        } else {
-          this.toastr.warning(
-            this.lang.pickMsg(Msg.toasts.errors.titles.REQUEST_HAS_FAILED),
+    this.publicUserService
+      .sendNewPassword(this.newPasswordRequestDto)
+      .subscribe(
+        
+        (response) => {
+          if (response.status === HttpStatusCode.Ok) {
+            if (response.body) this.toasterMsg = response.body;
+            this.toastr.success(
+              this.toasterMsg,
+              this.lang.pickMsg(Msg.toasts.titles.OPERATION_SUCCESS),
+              { timeOut: AppProperties.TOASTER_TIMEOUT }
+            );
+            this.emitSuccess();
+          } else {
+            this.toastr.error(
+              this.lang.pickMsg(Msg.toasts.errors.titles.REQUEST_HAS_FAILED),
+              this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
+              { timeOut: AppProperties.TOASTER_TIMEOUT }
+            );
+          }
+        },
+
+        (error) => {
+          this.errorResponseDto = JSON.parse(error.error);
+          this.toastr.error(
+            this.errorResponseDto.detail,
             this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
             { timeOut: AppProperties.TOASTER_TIMEOUT }
           );
         }
-      },
-
-      (error) => {
-        this.errorResponseDto = JSON.parse(error.error);
-        this.toastr.error(
-          this.errorResponseDto.detail,
-          this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-          { timeOut: AppProperties.TOASTER_TIMEOUT }
-        );
-      }
-    );
+      );
   }
 }

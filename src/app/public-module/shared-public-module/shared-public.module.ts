@@ -23,6 +23,7 @@ import { ModalForgottenPasswordComponent } from './modals/modal-forgotten-passwo
         PublicNavBarComponent,
         SendAuthCodeAndActComponent,
         ModalActivateUserComponent,
+        ModalForgottenPasswordComponent
     ],
     imports: [RouterModule, CommonModule, FormsModule, SharedModule]
 })

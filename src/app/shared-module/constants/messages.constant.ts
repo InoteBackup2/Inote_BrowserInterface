@@ -47,9 +47,18 @@ export const Msg = {
             AUTHENTICATION_CODE:"Authentication code",
             ENTER_AUTHENTICATION_CODE:"Please enter code (validity: 15mn)",
             SEND_AUTHENTICATION_CODE: "Send"
+        },
+        modal_change_password:{
+            CHANGE_PASSWORD:"Password change",
+            AUTHENTICATION_CODE:"Authentication code",
+            ENTER_AUTHENTICATION_CODE:"Please enter code (validity: 15mn)",
+            AUTHENTICATION_CODE_NEEDED_ON_CHANGE_PASSWORD:"To be able to change your password, you must first input the temporary authentication code sent to your email address",
+            SEND:"Send",
+            ENTER_NEW_PASSWORD:"Enter new password",
+            PASSWORD:"Password",
+            CONFIRM_PASSWORD:"Confirm password"
         }
     },
-    
     toasts:{
         titles:{
             USER_ACCOUNT_ACTIVATION:"User account activation",
@@ -59,6 +68,7 @@ export const Msg = {
         prompts:{
             ENTER_ACTIVATION_CODE_SENT_BY_MAIL:"Please enter activation code sent on your email",
             ENTER_AUTHENTICATION_CODE_SENT_BY_MAIL:"Please enter temporary authentication code sent on your email"
+            
         },
         errors:{
             titles:{
