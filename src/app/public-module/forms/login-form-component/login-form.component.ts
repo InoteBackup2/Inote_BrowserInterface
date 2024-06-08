@@ -6,7 +6,6 @@ import { PublicUserService } from "../../services/public-user.service";
 import { Router } from "@angular/router";
 import { TokenService } from "../../../core-module/services/token.service";
 import { ChangePasswordRequestDto } from "../../shared-public-module/dtos/change-password-request.dto";
-import { AuthenticationByMailService } from "../../shared-public-module/services/authentication-by-mail.service";
 import { HttpStatusCode } from "@angular/common/http";
 import { Urn } from "../../../shared-module/enums/urn.enum";
 import { ToastrService } from "ngx-toastr";
@@ -53,7 +52,6 @@ export class LoginFormComponent implements OnInit{
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
   constructor(
-    private authenticationByMailService: AuthenticationByMailService,
     private publicUserservice: PublicUserService,
     private tokenService: TokenService,
     private router: Router,
