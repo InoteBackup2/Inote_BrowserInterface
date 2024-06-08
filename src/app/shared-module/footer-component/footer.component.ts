@@ -1,22 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Msg } from '../constants/messages.constant';
 import { LanguageManagerService } from '../services/language-manager.service';
+import { faInstagram, faLinkedin,faFacebook,faTwitter } from '@fortawesome/free-brands-svg-icons';
+
+
 
 @Component({
   selector: 'app-footer-component',
   templateUrl: 'footer.component.html',
-  styleUrl: 'footer.component.css'
+  styleUrls: ['../../../styles.css']
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit{
 
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-  siteSectionsPath:string=Msg.footer.WEBSITE_SECTIONS;
-  contactPath:string=Msg.footer.CONTACT;
-  termsAndConditionsPath:string=Msg.footer.TERMS_AND_CONDITIONS;
-  privacyAndSecurityPath:string=Msg.footer.PRIVACY_AND_SECURITY;
-  cookiesPath:string=Msg.footer.COOKIES;
-  followUsPath:string=Msg.footer.FOLLOW_US_ON_SOCIAL_NETWORKS;
+  siteSectionsPath:string=Msg.webpage_staticText.footer.WEBSITE_SECTIONS;
+  contactPath:string=Msg.webpage_staticText.footer.CONTACT;
+  termsAndConditionsPath:string=Msg.webpage_staticText.footer.TERMS_AND_CONDITIONS;
+  privacyAndSecurityPath:string=Msg.webpage_staticText.footer.PRIVACY_AND_SECURITY;
+  cookiesPath:string=Msg.webpage_staticText.footer.COOKIES;
+  followUsPath:string=Msg.webpage_staticText.footer.FOLLOW_US_ON_SOCIAL_NETWORKS;
+  allReservedRightsPath: string=Msg.webpage_staticText.footer.ALL_RIGTHS_RESERVED;
+
+  currentDate!:string;
+  
+  // Icons
+  faInstagram=faInstagram;
+  faTwitter=faTwitter;
+  faFacebook=faFacebook;
+  faLinkedin=faLinkedin;
   
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
@@ -24,5 +36,11 @@ export class FooterComponent {
   constructor(
     public lang: LanguageManagerService
   ) {}
+
+   // INITIALIZATION (by ngOnInit)
+  // ==============================================
+  ngOnInit(): void {
+   this.currentDate = new Date().toLocaleDateString();
+  }
 
 }

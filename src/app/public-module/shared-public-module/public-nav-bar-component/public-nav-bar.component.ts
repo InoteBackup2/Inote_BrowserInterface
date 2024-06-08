@@ -13,7 +13,7 @@ export class PublicNavBarComponent {
 
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-  signInPath: string = Msg.publicNavBar.SIGN_IN;
+  signInPath: string = Msg.webpage_staticText.publicNavBar.SIGN_IN;
   
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================

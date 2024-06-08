@@ -21,11 +21,13 @@ export class RegisterFormComponent {
   // ==============================================
 
   // @ViewChild retrieves a reference to one of the component's child elements, and provides access to its methods
-  @ViewChild(ModalActivateUserComponent) modal!: ModalActivateUserComponent;
+  @ViewChild(ModalActivateUserComponent) modalActivateUser!: ModalActivateUserComponent;
 
-  pseudoPath: string = Msg.registerForm.PSEUDO;
-  emailPath: string = Msg.registerForm.EMAIL;
-  pwdPath: string = Msg.registerForm.PASSWORD;
+  pseudoPath: string = Msg.webpage_staticText.registerForm.PSEUDO;
+  emailPath: string = Msg.webpage_staticText.registerForm.EMAIL;
+  pwdPath: string = Msg.webpage_staticText.registerForm.PASSWORD;
+  createdAccountPath:string = Msg.webpage_staticText.registerForm.ACCOUNT_IS_CREATED;
+  loginPath:string = Msg.webpage_staticText.registerForm.LOG_IN;
 
   username!: string;
   password!: string;
@@ -57,20 +59,20 @@ export class RegisterFormComponent {
   // ==============================================
   actOnSuccessEmitedByChild(value: string) {
     if (value === "activation success") {
-      this.closeModal();
+      this.closeActivateUserModal();
       this.activation_success = true;
     }
   }
 
-  openModal() {
-    this.modal.openModal(
+  openActivateUserModal() {
+    this.modalActivateUser.openModal(
       this.lang.pickMsg(Msg.toasts.titles.USER_ACCOUNT_ACTIVATION),
       this.lang.pickMsg(Msg.toasts.prompts.ENTER_ACTIVATION_CODE_SENT_BY_MAIL)
     );
   }
 
-  closeModal() {
-    this.modal.closeModal();
+  closeActivateUserModal() {
+    this.modalActivateUser.closeModal();
   }
 
   /**
@@ -80,7 +82,7 @@ export class RegisterFormComponent {
    * @since 2024-05-27
    */
   onSubmitRegister() {
-    this.closeModal();
+    this.closeActivateUserModal();
 
     this.registerRequestBody = {
       pseudo: this.pseudonyme,
@@ -91,7 +93,7 @@ export class RegisterFormComponent {
     this.publicUserService.addUser(this.registerRequestBody).subscribe(
       (response) => {
         if (response.status === HttpStatusCode.Created) {
-          this.openModal();
+          this.openActivateUserModal();
         } else {
           this.toastr.warning(
             this.lang.pickMsg(Msg.toasts.errors.titles.REQUEST_HAS_FAILED),

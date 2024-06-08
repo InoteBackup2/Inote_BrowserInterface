@@ -13,14 +13,14 @@
       <!-- Specific content -->
       <form #toto="ngForm">
         <div class="align-items-center input-group input-group-sm mb-3 mx-auto">
-          <span class="d-flex flex-column input-group-text" id="inputGroup-sizing-sm">Code d'authentification</span>
+          <span class="d-flex flex-column input-group-text" id="inputGroup-sizing-sm">{{this.lang.pickMsg(this.authenticationCodePath)}}</span>
           <input type="text" class="form-control" id="activation" aria-describedby="inputGroup-sizing-sm" required
             pattern="[0-9]{6}$" [(ngModel)]="this.activationCode" name="activation" #code_activation="ngModel"
-            placeholder="Entrez le code (validité 15mn)" />
+            placeholder={{this.lang.pickMsg(this.enterCodePath)}} />
         </div>
         <button (click)="onSendAuthCode()" type="button" class="mt-2 btn btn-secondary border border-white"
           [disabled]="!toto.valid">
-          Envoyer
+          {{this.lang.pickMsg(this.sendCodePath)}}
         </button>
       </form>
 
