@@ -5,6 +5,9 @@ import { BackEndPoints } from "../../../shared-module/enums/back-end-points.enum
 import { PublicUserResponseDto } from "../../../shared-module/dtos/public-user-response.dto";
 import { RefreshTokenRequestDto } from "../dtos/refresh-token-request.dto";
 import { SignInResponseDto } from "../../../public-module/shared-public-module/dtos/sign-in-response.dto";
+import { Role } from "../../../shared-module/enums/role.enum";
+import { TokenService } from "../../../core-module/services/token.service";
+import { HttpStatusCode } from "axios";
 
 @Injectable()
 export class ProtectedUserService {
@@ -14,7 +17,7 @@ export class ProtectedUserService {
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private tokenService: TokenService) {}
 
   // SERVICE METHODS
   // ==============================================
@@ -72,23 +75,22 @@ export class ProtectedUserService {
     );
   }
 
-  
   /**
    * Signout current user identified by bearer
    *
    * @param {string} bearer
    * @returns {Observable<HttpResponse<string>>}
-   * 
+   *
    * @author atsuhikoMochizuki
    * @since 2024-05-27
    */
   signOut(bearer: string): Observable<HttpResponse<string>> {
-    const headers = { 
+    const headers = {
       "content-type": "application/json",
-      "Authorization": "bearer " + bearer
-     };
-    
-     return this.http.post(
+      Authorization: "bearer " + bearer,
+    };
+
+    return this.http.post(
       // Url
       BackEndPoints.SIGN_OUT,
       null,
@@ -106,7 +108,9 @@ export class ProtectedUserService {
     );
   }
 
-  sendRefreshToken(refreshTokenRequestDto:RefreshTokenRequestDto): Observable<HttpResponse<SignInResponseDto>>{
+  sendRefreshToken(
+    refreshTokenRequestDto: RefreshTokenRequestDto
+  ): Observable<HttpResponse<SignInResponseDto>> {
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
     });
@@ -201,4 +205,44 @@ export class ProtectedUserService {
   //     }
   //   }
   // }
+
+  /**
+   * Check if user is admin
+   *
+   * @param bearer the Jwt
+   *
+   * @returns an Observable containing true if current connected user is admin else false
+   *
+   * @author atsuhikoMochizuki
+   * @since 2024-06-10
+   */
+  isAdmin(bearer: string): Observable<boolean> {
+    const isAdminObservable: Observable<boolean> = new Observable(
+      (observer) => {
+        const token: string | null = this.tokenService.getToken();
+
+        if (token) {
+          this.getCurrentUser(bearer).subscribe((response) => {
+            if (
+              response.body !== null &&
+              response.status == HttpStatusCode.Ok
+            ) {
+              const user: PublicUserResponseDto = response.body;
+              if (user.role === Role.ADMIN) {
+                observer.next(true);
+              } else {
+                observer.next(false);
+              }
+            } else {
+              observer.next(false);
+            }
+          });
+        } else {
+          observer.next(false);
+        }
+      }
+    );
+
+    return isAdminObservable;
+  }
 }
