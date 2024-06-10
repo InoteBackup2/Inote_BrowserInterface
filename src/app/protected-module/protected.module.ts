@@ -5,10 +5,12 @@ import { ProtectedRoutingModule } from './protected-routing.module';
 import { UserModule } from './shared-protected-module/user-module/user.module';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard-component/dashboard.component';
+import { UserManagementComponent } from './user-management-component/user-management.component';
 
 @NgModule({
     declarations: [
-        DashboardComponent
+        DashboardComponent,
+        UserManagementComponent
     ],
     imports: [
         CommonModule,

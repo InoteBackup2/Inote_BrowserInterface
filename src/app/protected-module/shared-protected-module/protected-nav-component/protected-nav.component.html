@@ -38,6 +38,9 @@
         <li class="nav-item">
           <a class="nav-link text-white inote-link-normal">{{this.lang.pickMsg(this.myTeamsPath)}}</a>
         </li>
+        <li  class="nav-item" *ngIf="this.currentConnectUser?.role===this.roleAdmin">
+          <a (click)="this.onUserManagement()" class="nav-link text-danger inote-link-normal">{{this.lang.pickMsg(this.userManagementPath)}}</a>
+        </li>
       </ul>
       <app-language-selector></app-language-selector>
       <form class="d-flex" role="search">

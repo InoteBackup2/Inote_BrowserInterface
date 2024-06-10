@@ -13,7 +13,8 @@ export const Msg = {
             SIGNOUT:"Sign out",
             MY_BOARDS:"My Boards",
             MY_TEAMS:"My Teams",
-            SEARCH:"Search"
+            SEARCH:"Search",
+            USERS_MANAGMENT: "Managing users"
         },
         register:{
             ACCOUNT_CREATION: "Account creation"
@@ -93,6 +94,11 @@ export const Msg = {
             CHANGE_PASSWORD_FAILED:"Change password failed",
             REFRESH_TOKEN_REQUEST_FAILED:"Request to send refresh token failed",
             USER_SIGNOUT_FAILED:"User signout failed"
+        }
+    },
+    guards:{
+        errors:{
+            CURRENT_USER_RECUP_FAILED:"Recovery of the current user failed"
         }
     }
     

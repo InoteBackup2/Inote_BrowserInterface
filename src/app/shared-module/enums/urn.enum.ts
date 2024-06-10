@@ -9,5 +9,6 @@ export enum Urn {
     NEW_PASSWORD="new-password",
     HOME = "home",
     DASHBOARD = "dashboard",
-    PAGE_NOT_FOUND="page-not-found"
+    PAGE_NOT_FOUND="page-not-found",
+    USERS_MANAGEMENT = "users-management"
 }

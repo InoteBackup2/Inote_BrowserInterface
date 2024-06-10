@@ -83,6 +83,7 @@ export const fr: Map<string, string> = new Map([
   [Msg.webpage_staticText.protectedNavBar.MY_BOARDS, "Mes Tableaux"],
   [Msg.webpage_staticText.protectedNavBar.MY_TEAMS, "Mes Equipes"],
   [Msg.webpage_staticText.protectedNavBar.SEARCH, "Rechercher"],
+  [Msg.webpage_staticText.protectedNavBar.USERS_MANAGMENT, "Gestion des utilisateurs"],
   [
     Msg.webpage_staticText.modal_activate_user.AUTHENTICATION_CODE,
     "Code d'authentification",
