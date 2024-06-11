@@ -10,5 +10,6 @@ export enum Urn {
     HOME = "home",
     DASHBOARD = "dashboard",
     PAGE_NOT_FOUND="page-not-found",
-    USERS_MANAGEMENT = "users-management"
+    USERS_MANAGEMENT = "users-management",
+    USER = "user"
 }

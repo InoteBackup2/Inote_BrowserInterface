@@ -11,5 +11,6 @@ export const BackEndPoints = {
   SIGN_OUT: `${ROOT_PATH}/auth/${Urn.SIGN_OUT}`,
   CHANGE_PASSWORD_REQUEST: `${ROOT_PATH}/auth/${Urn.CHANGE_PASSWORD}`,
   NEW_PASSWORD: `${ROOT_PATH}/auth/${Urn.NEW_PASSWORD}`,
-  REFRESH_TOKEN: `${ROOT_PATH}/auth/${Urn.REFRESH_TOKEN}`
+  REFRESH_TOKEN: `${ROOT_PATH}/auth/${Urn.REFRESH_TOKEN}`,
+  USER:`${ROOT_PATH}/auth/${Urn.USER}`
 } as const;
