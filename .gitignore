@@ -10,6 +10,7 @@ typings/
 .angular/cache/
 e2e/*.js
 e2e/*.map
+coverage/
 
 ## File systems ##
 .DS_Store/
