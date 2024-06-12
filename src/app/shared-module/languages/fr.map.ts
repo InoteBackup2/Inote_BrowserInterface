@@ -1,5 +1,6 @@
 import { Msg } from "../constants/messages.constant";
 
+/** French translation key-value dictionary */
 export const fr: Map<string, string> = new Map([
   [Msg.toasts.errors.titles.DETECTED_ANOMALY, "Anomalie détectée"],
   [
@@ -121,5 +122,5 @@ export const fr: Map<string, string> = new Map([
   [
     Msg.webpage_staticText.modal_change_password.CONFIRM_PASSWORD,
     "Confirmation du mot de passe",
-  ],
+  ]
 ]);

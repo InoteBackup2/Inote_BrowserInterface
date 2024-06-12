@@ -1,8 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { NgModule } from '@angular/core';
 
-@NgModule() class AnyModule{};
+@NgModule() class AnyModule{}
 
+/**
+ * Factorized module spec description
+ * @param moduleType Angular module class
+ */
 export const describeModule = function(moduleType: typeof AnyModule){
     describe(moduleType.name, () => {
         beforeEach(() => {
@@ -16,4 +20,4 @@ export const describeModule = function(moduleType: typeof AnyModule){
             expect(module).toBeTruthy();
         })
     });
-}
+};

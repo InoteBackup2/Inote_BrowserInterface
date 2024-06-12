@@ -13,7 +13,7 @@ import {
 import { ToastrService } from "ngx-toastr";
 import { LanguageManagerService } from "../../../../shared-module/services/language-manager.service";
 import { Msg } from "../../../../shared-module/constants/messages.constant";
-import { AppProperties } from "./../../../../app.properties";
+import { environment as env } from "./../../../../../environments/environment";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -101,14 +101,14 @@ export class ModalActivateUserComponent {
           this.toastr.success(
             this.toasterMsg,
             this.lang.pickMsg(Msg.toasts.titles.OPERATION_SUCCESS),
-            { timeOut: AppProperties.TOASTER_TIMEOUT }
+            { timeOut: env.TOASTER_TIMEOUT }
           );
           this.emitSuccess();
         } else {
           this.toastr.warning(
             this.lang.pickMsg(Msg.toasts.errors.titles.REQUEST_HAS_FAILED),
             this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-            { timeOut: AppProperties.TOASTER_TIMEOUT }
+            { timeOut: env.TOASTER_TIMEOUT }
           );
         }
       },
@@ -118,7 +118,7 @@ export class ModalActivateUserComponent {
         this.toastr.error(
           this.errorResponseDto.detail,
           this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-          { timeOut: AppProperties.TOASTER_TIMEOUT }
+          { timeOut: env.TOASTER_TIMEOUT }
         );
       }
     );

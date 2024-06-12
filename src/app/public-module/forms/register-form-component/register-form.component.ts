@@ -8,7 +8,7 @@ import { HttpStatusCode } from "@angular/common/http";
 import { ModalActivateUserComponent } from "../../shared-public-module/modals/modal-activate-user-component/modal-activate-user.component";
 import { Msg } from "../../../shared-module/constants/messages.constant";
 import { LanguageManagerService } from "../../../shared-module/services/language-manager.service";
-import { AppProperties } from "../../../app.properties";
+import { environment as env } from "../../../../environments/environment";
 import { Urn } from "../../../shared-module/enums/urn.enum";
 
 @Component({
@@ -98,7 +98,7 @@ export class RegisterFormComponent {
           this.toastr.warning(
             this.lang.pickMsg(Msg.toasts.errors.titles.REQUEST_HAS_FAILED),
             this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-            { timeOut: AppProperties.TOASTER_TIMEOUT }
+            { timeOut: env.TOASTER_TIMEOUT }
           );
         }
       },
@@ -108,7 +108,7 @@ export class RegisterFormComponent {
         this.toastr.error(
           this.errorResponseDto.detail,
           this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-          { timeOut: AppProperties.TOASTER_TIMEOUT }
+          { timeOut: env.TOASTER_TIMEOUT }
         );
       }
     );

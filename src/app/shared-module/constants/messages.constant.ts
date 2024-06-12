@@ -1,3 +1,4 @@
+/** Translatable texts */
 export const Msg = {
     webpage_staticText:{
         landing_page:{
@@ -94,6 +95,5 @@ export const Msg = {
             REFRESH_TOKEN_REQUEST_FAILED:"Request to send refresh token failed",
             USER_SIGNOUT_FAILED:"User signout failed"
         }
-    }
-    
-}
+    } 
+} as const ;

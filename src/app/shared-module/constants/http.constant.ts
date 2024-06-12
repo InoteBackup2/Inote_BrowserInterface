@@ -5,4 +5,4 @@ export const HttpConstants = {
             REFRESH:"refresh"
         }
     }
-} 
+} as const;

@@ -10,7 +10,7 @@ import { HttpStatusCode } from "@angular/common/http";
 import { Urn } from "../../../shared-module/enums/urn.enum";
 import { ToastrService } from "ngx-toastr";
 import { Msg } from "../../../shared-module/constants/messages.constant";
-import { AppProperties } from "../../../app.properties";
+import { environment as env } from "../../../../environments/environment";
 import { ErrorResponseDto } from "../../../shared-module/dtos/error-response.dto";
 import { ModalForgottenPasswordComponent } from "../../shared-public-module/modals/modal-forgotten-password/modal-forgotten-password.component";
 
@@ -90,7 +90,7 @@ export class LoginFormComponent implements OnInit{
           this.toastr.error(
             this.lang.pickMsg(Msg.auth.errors.USER_LOGIN_FAILED),
             this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-            { timeOut: AppProperties.TOASTER_TIMEOUT }
+            { timeOut: env.TOASTER_TIMEOUT }
           );
         }
       },
@@ -100,7 +100,7 @@ export class LoginFormComponent implements OnInit{
         this.toastr.error(
           this.errorResponseDto.detail,
           this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-          { timeOut: AppProperties.TOASTER_TIMEOUT }
+          { timeOut: env.TOASTER_TIMEOUT }
         );
       }
     );
@@ -125,7 +125,7 @@ export class LoginFormComponent implements OnInit{
             this.toastr.error(
               this.lang.pickMsg(Msg.auth.errors.CHANGE_PASSWORD_FAILED),
               this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-              { timeOut: AppProperties.TOASTER_TIMEOUT }
+              { timeOut: env.TOASTER_TIMEOUT }
             );
           }
         },
@@ -135,7 +135,7 @@ export class LoginFormComponent implements OnInit{
           this.toastr.error(
             this.errorResponseDto.detail,
             this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-            { timeOut: AppProperties.TOASTER_TIMEOUT }
+            { timeOut: env.TOASTER_TIMEOUT }
           );
         }
       );

@@ -10,7 +10,7 @@ import { PublicUserResponseDto } from "../../../shared-module/dtos/public-user-r
 import { Router } from "@angular/router";
 import { HttpStatusCode } from "axios";
 import { ToastrService } from "ngx-toastr";
-import { AppProperties } from "../../../app.properties";
+import { environment as env } from "../../../../environments/environment";
 import { Urn } from "../../../shared-module/enums/urn.enum";
 import { LanguageManagerService } from "../../../shared-module/services/language-manager.service";
 import { Msg } from "../../../shared-module/constants/messages.constant";
@@ -70,7 +70,7 @@ export class ProtectedNavComponent implements OnInit {
       this.toastr.error(
         this.lang.pickMsg(Msg.auth.errors.NULL_TOKEN_VALUE),
         this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-        { timeOut: AppProperties.TOASTER_TIMEOUT }
+        { timeOut: env.TOASTER_TIMEOUT }
       );
       throw new Error(Msg.auth.errors.NULL_TOKEN_VALUE);
     }
@@ -84,7 +84,7 @@ export class ProtectedNavComponent implements OnInit {
           this.toastr.error(
             this.lang.pickMsg(Msg.user.errors.RECOVERY_CURRENT_USER_FAILED),
             this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-            { timeOut: AppProperties.TOASTER_TIMEOUT }
+            { timeOut: env.TOASTER_TIMEOUT }
           );
           throw new Error("Response should not have empty body");
         }
@@ -110,7 +110,7 @@ export class ProtectedNavComponent implements OnInit {
                 Msg.toasts.errors.details.USER_SHOULD_HAVE_A_REFRESH_TOKEN
               ),
               this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-              { timeOut: AppProperties.TOASTER_TIMEOUT }
+              { timeOut: env.TOASTER_TIMEOUT }
             );
             throw new Error(
               Msg.toasts.errors.details.USER_SHOULD_HAVE_A_REFRESH_TOKEN
@@ -130,7 +130,7 @@ export class ProtectedNavComponent implements OnInit {
                     Msg.auth.errors.REFRESH_TOKEN_REQUEST_FAILED
                   ),
                   this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-                  { timeOut: AppProperties.TOASTER_TIMEOUT }
+                  { timeOut: env.TOASTER_TIMEOUT }
                 );
                 throw new Error(Msg.auth.errors.REFRESH_TOKEN_REQUEST_FAILED);
               }
@@ -155,7 +155,7 @@ export class ProtectedNavComponent implements OnInit {
                         this.lang.pickMsg(
                           Msg.toasts.errors.titles.DETECTED_ANOMALY
                         ),
-                        { timeOut: AppProperties.TOASTER_TIMEOUT }
+                        { timeOut: env.TOASTER_TIMEOUT }
                       );
                       throw new Error(
                         Msg.user.errors.RECOVERY_CURRENT_USER_FAILED
@@ -174,7 +174,7 @@ export class ProtectedNavComponent implements OnInit {
                       this.lang.pickMsg(
                         Msg.toasts.errors.titles.DETECTED_ANOMALY
                       ),
-                      { timeOut: AppProperties.TOASTER_TIMEOUT }
+                      { timeOut: env.TOASTER_TIMEOUT }
                     );
                     throw new Error(
                       Msg.auth.errors.REFRESH_TOKEN_REQUEST_FAILED
@@ -187,7 +187,7 @@ export class ProtectedNavComponent implements OnInit {
               this.toastr.error(
                 error,
                 this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-                { timeOut: AppProperties.TOASTER_TIMEOUT }
+                { timeOut: env.TOASTER_TIMEOUT }
               );
               throw new Error(error);
             }
@@ -215,7 +215,7 @@ export class ProtectedNavComponent implements OnInit {
             this.toastr.error(
               this.lang.pickMsg(Msg.auth.errors.USER_SIGNOUT_FAILED),
               this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-              { timeOut: AppProperties.TOASTER_TIMEOUT }
+              { timeOut: env.TOASTER_TIMEOUT }
             );
           } else {
             this.tokenService.removeToken();
@@ -237,7 +237,7 @@ export class ProtectedNavComponent implements OnInit {
                   Msg.toasts.errors.details.USER_SHOULD_HAVE_A_REFRESH_TOKEN
                 ),
                 this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-                { timeOut: AppProperties.TOASTER_TIMEOUT }
+                { timeOut: env.TOASTER_TIMEOUT }
               );
             } else {
               this.refreshTokenRequestDto = {
@@ -255,7 +255,7 @@ export class ProtectedNavComponent implements OnInit {
                     this.lang.pickMsg(
                       Msg.toasts.errors.titles.DETECTED_ANOMALY
                     ),
-                    { timeOut: AppProperties.TOASTER_TIMEOUT }
+                    { timeOut: env.TOASTER_TIMEOUT }
                   );
                 }
               );
@@ -264,7 +264,7 @@ export class ProtectedNavComponent implements OnInit {
             this.toastr.error(
               this.errorResponseDto.detail,
               this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-              { timeOut: AppProperties.TOASTER_TIMEOUT }
+              { timeOut: env.TOASTER_TIMEOUT }
             );
           }
         }
@@ -274,7 +274,7 @@ export class ProtectedNavComponent implements OnInit {
         // Connected user should have a non null token value
         this.lang.pickMsg(Msg.auth.errors.NULL_TOKEN_VALUE),
         this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY),
-        { timeOut: AppProperties.TOASTER_TIMEOUT }
+        { timeOut: env.TOASTER_TIMEOUT }
       );
     }
   }
