@@ -3,7 +3,7 @@
     color: white;
 }
 
-#fullPageHeight_withNavBar{
+.fullPageHeight_withNavBar{
     height: 90vh;
     width: 100%;
   }

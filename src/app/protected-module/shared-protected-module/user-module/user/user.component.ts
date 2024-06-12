@@ -1,41 +1,75 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../user';
-import { ActivatedRoute, Router } from '@angular/router';
-
+import { ErrorResponseDto } from "./../../../../shared-module/dtos/error-response.dto";
+import { PublicUserResponseDto } from "./../../../../shared-module/dtos/public-user-response.dto";
+import { Component, Input, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ProtectedUserService } from "../protected-user.service";
+import { TokenService } from "../../../../core-module/services/token.service";
+import { ToastrService } from "ngx-toastr";
+import { LanguageManagerService } from "../../../../shared-module/services/language-manager.service";
+import { Msg } from "../../../../shared-module/constants/messages.constant";
+import { HttpStatusCode } from "axios";
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styles: ``
+  selector: "app-user",
+  templateUrl: "./user.component.html",
+  styleUrl: `./../../../../../styles.css`,
 })
 export class UserComponent implements OnInit {
-  user!: User | undefined;
+  @Input() username!: string;
+
+  publicUserResponseDto!: PublicUserResponseDto;
+  errorResponseDto!:ErrorResponseDto;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService) { }
+    private userService: ProtectedUserService,
+    private toaster: ToastrService,
+    private tokenService: TokenService,
+    public lang: LanguageManagerService
+  ) {}
 
   ngOnInit(): void {
-
-    /* RÃ©cupÃ©ration de l'id indiquÃ© dans la route courante */
-    const userId: string | null = this.route.snapshot.paramMap.get('id');
-
-    if (userId) {
-      this.userService.getUserById(+userId).subscribe(user=>this.user = user);
+    const bearer: string | null = this.tokenService.getToken();
+    if (!bearer) {
+      this.toaster.warning(
+        this.lang.pickMsg(Msg.auth.errors.NULL_TOKEN_VALUE),
+        this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY)
+      );
+    } else {
+      this.userService.getUserByUsername(this.username, bearer).subscribe(
+        (response) => {
+          if (response.status !== HttpStatusCode.Ok || response.body === null) {
+            this.toaster.error(
+              this.lang.pickMsg(
+                Msg.user.errors.RECOVERY_OF_THE_REQUESTED_USER_HAS_FAILED
+              ),
+              this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY)
+            );
+          } else {
+            this.publicUserResponseDto = response.body;
+          }
+        },
+        (error) => {
+          this.errorResponseDto=error;
+          this.toaster.error(
+            this.lang.pickMsg(this.errorResponseDto.detail),
+            this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY)
+          );
+        }
+      );
     }
   }
 
- deleteUser(user:User){
-    // this.userService.deleteUserById(user.id)
-    // .subscribe(()=>this.goToUserList());
-  }
+  // deleteUser(user: User) {
+  //   // this.userService.deleteUserById(user.id)
+  //   // .subscribe(()=>this.goToUserList());
+  // }
 
-  goToUserList() {
-    // this.router.navigate(['/users']);
-  }
+  // GOTOUSERLIST() {
+  //   // THIS.ROUTER.NAVIGATE(['/USERS']);
+  // }
 
-  gotToEditUser(user: User) {
-    // this.router.navigate(['/edit/user/', user.id])
-  }
+  // GOTTOEDITUSER(USER: USER) {
+  //   // THIS.ROUTER.NAVIGATE(['/EDIT/USER/', USER.ID])
+  // }
 }
-

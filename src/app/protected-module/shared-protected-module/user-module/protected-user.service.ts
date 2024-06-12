@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, tap } from "rxjs";
+import { Observable} from "rxjs";
 import { BackEndPoints } from "../../../shared-module/enums/back-end-points.enum";
 import { PublicUserResponseDto } from "../../../shared-module/dtos/public-user-response.dto";
 import { RefreshTokenRequestDto } from "../dtos/refresh-token-request.dto";
@@ -8,7 +8,7 @@ import { SignInResponseDto } from "../../../public-module/shared-public-module/d
 import { Role } from "../../../shared-module/enums/role.enum";
 import { TokenService } from "../../../core-module/services/token.service";
 import { HttpStatusCode } from "axios";
-import { Urn } from "../../../shared-module/enums/urn.enum";
+import { GetUserRequestDto } from "../../../public-module/shared-public-module/dtos/get-user-request.dto";
 
 @Injectable()
 export class ProtectedUserService {
@@ -164,26 +164,49 @@ export class ProtectedUserService {
 
   // }
 
-  getUserById(userId:number,
-    bearer: string
-  ): Observable<HttpResponse<PublicUserResponseDto>> {
-    // Headers definitions
+  getUserByUsername(
+      username: string,
+      bearer: string)
+      : Observable<HttpResponse<PublicUserResponseDto>> {
+   
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
       Authorization: `bearer ${bearer}`,
     });
 
-    return this.http.get<PublicUserResponseDto>(
-      // Url
-      `BackEndPoints.USER/${userId}`,
+    const getUserRequestDto: GetUserRequestDto = {
+      "username":username
+    };
 
-      // Options
+    return this.http.post<PublicUserResponseDto>(
+      `${BackEndPoints.GET_USER}`, 
+      getUserRequestDto,
       {
-        headers: headers,
-        observe: "response",
-      }
-    );
+      headers: headers,
+      observe: "response",
+    });
   }
+
+  // getUserById(userId:number,
+  //   bearer: string
+  // ): Observable<HttpResponse<PublicUserResponseDto>> {
+  //   // Headers definitions
+  //   const headers = new HttpHeaders({
+  //     "Content-Type": "application/json",
+  //     Authorization: `bearer ${bearer}`,
+  //   });
+
+  //   return this.http.get<PublicUserResponseDto>(
+  //     // Url
+  //     `BackEndPoints.USER/${userId}`,
+
+  //     // Options
+  //     {
+  //       headers: headers,
+  //       observe: "response",
+  //     }
+  //   );
+  // }
 
   // updateUser(user: User): Observable<null> {
   //   //Déclaration du header pour pouvoir y insérer les données
@@ -269,7 +292,7 @@ export class ProtectedUserService {
               response.status == HttpStatusCode.Ok
             ) {
               const user: PublicUserResponseDto = response.body;
-              
+
               if (user.role === Role.ADMIN) {
                 observer.next(true);
               } else {

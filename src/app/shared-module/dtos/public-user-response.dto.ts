@@ -1,7 +1,7 @@
 import { Role } from "../enums/role.enum";
 
 export type PublicUserResponseDto = {
-  readonly pseudo: string;
+  readonly pseudonyme: string;
    readonly username: string;
 
     readonly avatar: string;

@@ -7,6 +7,11 @@ export const fr: Map<string, string> = new Map([
     "La récupération de l'utilisateur courant a échoué",
   ],
   [
+    Msg.user.errors.RECOVERY_OF_THE_REQUESTED_USER_HAS_FAILED,
+    "La récupération de l'utilisateur demandé a échoué",
+  ],
+  
+  [
     Msg.toasts.titles.USER_ACCOUNT_ACTIVATION,
     "Activation du compte utilisateur",
   ],

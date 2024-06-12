@@ -11,5 +11,5 @@ export enum Urn {
     DASHBOARD = "dashboard",
     PAGE_NOT_FOUND="page-not-found",
     USERS_MANAGEMENT = "users-management",
-    USER = "user"
+    GET_USER = "get-user"
 }

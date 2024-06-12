@@ -6,6 +6,7 @@ import { UserFilterPipe } from './user-filter-pipe.pipe';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
+import { SharedModule } from '../../../shared-module/shared.module';
 
 @NgModule({
   declarations: [UserFilterPipe, UserComponent],
@@ -13,7 +14,8 @@ import { UserComponent } from './user/user.component';
     CommonModule,
    FontAwesomeModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   providers:[
     ProtectedUserService
