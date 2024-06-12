@@ -124,6 +124,8 @@
 				"username": "moch",
 				"askForPassword": true
 			}
-		]
+		],
+    "coverage-gutters.showGutterCoverage": true,
+    "coverage-gutters.showLineCoverage": true
   }
 }
