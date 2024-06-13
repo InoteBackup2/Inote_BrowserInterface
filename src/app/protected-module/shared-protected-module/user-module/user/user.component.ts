@@ -14,10 +14,18 @@ import { HttpStatusCode } from "axios";
   styleUrl: `./../../../../../styles.css`,
 })
 export class UserComponent implements OnInit {
+  // RELATING TEMPLATE VARIABLES
+  // ==============================================
   @Input() username!: string;
 
+  toolTips_teamsPath: string = Msg.webpage_staticText.user.TOOLTIP_TEAMS;
+  toolTips_editPath: string = Msg.webpage_staticText.user.TOOLTIP_EDIT;
+  toolTips_deletePath: string = Msg.webpage_staticText.user.TOOLTIP_DELETE;
+  toolTips_changeRolePath: string =
+    Msg.webpage_staticText.user.TOOLTIP_CHANGE_ROLE;
+
   publicUserResponseDto!: PublicUserResponseDto;
-  errorResponseDto!:ErrorResponseDto;
+  errorResponseDto!: ErrorResponseDto;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,7 +58,7 @@ export class UserComponent implements OnInit {
           }
         },
         (error) => {
-          this.errorResponseDto=error;
+          this.errorResponseDto = error;
           this.toaster.error(
             this.lang.pickMsg(this.errorResponseDto.detail),
             this.lang.pickMsg(Msg.toasts.errors.titles.DETECTED_ANOMALY)

@@ -44,6 +44,12 @@ export const Msg = {
             FOLLOW_US_ON_SOCIAL_NETWORKS:"Follow us",
             ALL_RIGTHS_RESERVED:"All rights reserved"
         },
+        user:{
+            TOOLTIP_TEAMS:"Teams",
+            TOOLTIP_EDIT:"Edit",
+            TOOLTIP_DELETE:"Delete",
+            TOOLTIP_CHANGE_ROLE:"Change role"
+        },
         modal_activate_user:{
             AUTHENTICATION_CODE:"Authentication code",
             ENTER_AUTHENTICATION_CODE:"Please enter code (validity: 15mn)",

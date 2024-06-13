@@ -128,4 +128,20 @@ export const fr: Map<string, string> = new Map([
     Msg.webpage_staticText.modal_change_password.CONFIRM_PASSWORD,
     "Confirmation du mot de passe",
   ],
+  [
+    Msg.webpage_staticText.user.TOOLTIP_CHANGE_ROLE,
+    "Affecter un autre rôle"
+  ],
+  [
+    Msg.webpage_staticText.user.TOOLTIP_DELETE,
+    "Supprimer"
+  ],
+  [
+    Msg.webpage_staticText.user.TOOLTIP_EDIT,
+    "Editer"
+  ],
+  [
+    Msg.webpage_staticText.user.TOOLTIP_TEAMS,
+    "Equipes"
+  ],
 ]);
