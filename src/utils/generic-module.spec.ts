@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { NgModule } from '@angular/core';
 
-@NgModule() class AnyModule{};
+@NgModule() class AnyModule{}
 
 export const describeModule = function(moduleType: typeof AnyModule){
     describe(moduleType.name, () => {

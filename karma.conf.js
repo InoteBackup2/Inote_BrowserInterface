@@ -26,15 +26,25 @@ module.exports = function (config) {
     jasmineHtmlReporter: {
       suppressAll: true // removes the duplicated traces
     },
+    preprocessors: {
+      'src/**/*.js': 'coverage'
+    },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/inote-web-interface'),
       subdir: '.',
       reporters: [
-        { type: 'html' },
-        { type: 'text-summary' }
+        {
+          type: 'lcov',
+          subdir: 'lcov'
+        },
+        {
+          type: 'text-summary',
+          subdir: 'summary' ,
+          file: 'coverage.txt'
+        }
       ]
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'coverage', 'kjhtml'],
     browsers: [
       'ChromeHeadless',
       'FirefoxHeadless'
