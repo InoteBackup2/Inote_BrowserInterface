@@ -18,12 +18,13 @@ echo "
  ==============================================================================                                 
 "
 actualBranch=$(git rev-parse --abbrev-ref HEAD)
-echo $actualBranch
 
-echo -e "You are currently creating a commit on the branch \033[32m$actualBranch\033[0m, which will then be sent to the project's remote repository.
+echo -e "You are going to create a commit on the branch \033[32m$actualBranch\033[0m, which will then be sent to the project's remote repository.
 These changes will also be reflected in the root project.
 \033[33mPlease enter the subject of this commit: \033[0m"
 read TEXT
+
+echo "\nThanks. Starting operation..."
 
 echo -e -n "\033[93m -- Stagging last changes...\033[0m"
 git add .
