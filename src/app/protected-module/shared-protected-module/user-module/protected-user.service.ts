@@ -1,17 +1,19 @@
+import { ProtectedUserResponseDto } from './../dtos/protected-user-response.dto';
+import { SignInResponseDto } from './../../../public-module/shared-public-module/dtos/sign-in-response.dto';
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable} from "rxjs";
 import { BackEndPoints } from "../../../shared-module/enums/back-end-points.enum";
 import { PublicUserResponseDto } from "../../../shared-module/dtos/public-user-response.dto";
 import { RefreshTokenRequestDto } from "../dtos/refresh-token-request.dto";
-import { SignInResponseDto } from "../../../public-module/shared-public-module/dtos/sign-in-response.dto";
 import { Role } from "../../../shared-module/enums/role.enum";
 import { TokenService } from "../../../core-module/services/token.service";
 import { HttpStatusCode } from "axios";
-import { GetUserRequestDto } from "../../../public-module/shared-public-module/dtos/get-user-request.dto";
+import { GetUserRequestDto } from '../../../public-module/shared-public-module/dtos/get-user-request.dto';
 
 @Injectable()
 export class ProtectedUserService {
+  
   // HTTP
   // ==============================================
   /* Headers variables */
@@ -125,6 +127,24 @@ export class ProtectedUserService {
         observe: "response",
       }
     );
+  }
+
+  getAllUsers(bearer:string)
+    : Observable<HttpResponse<ProtectedUserResponseDto[]>> {
+      const headers = {
+        "content-type": "application/json",
+        Authorization: "bearer " + bearer,
+      };
+  
+      return this.http.get<ProtectedUserResponseDto[]>(
+        // Url
+        BackEndPoints.GET_ALL_USERS,
+        // Options
+        {
+          headers: headers,
+          observe: "response",
+        }
+      );
   }
 
   // getUserList(): Observable<User[]> {

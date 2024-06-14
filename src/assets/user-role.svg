@@ -1,6 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg fill="#000000" width="800px" height="800px" viewBox="0 0 52 52" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg">
-  <path d="M38.3,27.2A11.4,11.4,0,1,0,49.7,38.6,11.46,11.46,0,0,0,38.3,27.2Zm2,12.4a2.39,2.39,0,0,1-.9-.2l-4.3,4.3a1.39,1.39,0,0,1-.9.4,1,1,0,0,1-.9-.4,1.39,1.39,0,0,1,0-1.9l4.3-4.3a2.92,2.92,0,0,1-.2-.9,3.47,3.47,0,0,1,3.4-3.8,2.39,2.39,0,0,1,.9.2c.2,0,.2.2.1.3l-2,1.9a.28.28,0,0,0,0,.5L41.1,37a.38.38,0,0,0,.6,0l1.9-1.9c.1-.1.4-.1.4.1a3.71,3.71,0,0,1,.2.9A3.57,3.57,0,0,1,40.3,39.6Z" />
-  <circle cx="21.7" cy="14.9" r="12.9" />
-  <path d="M25.2,49.8c2.2,0,1-1.5,1-1.5h0a15.44,15.44,0,0,1-3.4-9.7,15,15,0,0,1,1.4-6.4.77.77,0,0,1,.2-.3c.7-1.4-.7-1.5-.7-1.5h0a12.1,12.1,0,0,0-1.9-.1A19.69,19.69,0,0,0,2.4,47.1c0,1,.3,2.8,3.4,2.8H24.9C25.1,49.8,25.1,49.8,25.2,49.8Z" />
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   fill="#000000"
+   width="18.192308"
+   height="18.461538"
+   viewBox="0 0 1.1825001 1.2"
+   data-name="Layer 1"
+   version="1.1"
+   id="svg198"
+   sodipodi:docname="user-role.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs202" />
+  <sodipodi:namedview
+     id="namedview200"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.65875"
+     inkscape:cx="-12.903226"
+     inkscape:cy="9.8671727"
+     inkscape:window-width="1366"
+     inkscape:window-height="708"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg198" />
+  <g
+     id="g207"
+     transform="matrix(0.025,0,0,0.025,-0.06,-0.05)">
+    <path
+       d="M 38.3,27.2 A 11.4,11.4 0 1 0 49.7,38.6 11.46,11.46 0 0 0 38.3,27.2 Z m 2,12.4 a 2.39,2.39 0 0 1 -0.9,-0.2 l -4.3,4.3 a 1.39,1.39 0 0 1 -0.9,0.4 1,1 0 0 1 -0.9,-0.4 1.39,1.39 0 0 1 0,-1.9 l 4.3,-4.3 a 2.92,2.92 0 0 1 -0.2,-0.9 3.47,3.47 0 0 1 3.4,-3.8 2.39,2.39 0 0 1 0.9,0.2 c 0.2,0 0.2,0.2 0.1,0.3 l -2,1.9 a 0.28,0.28 0 0 0 0,0.5 l 1.3,1.3 a 0.38,0.38 0 0 0 0.6,0 l 1.9,-1.9 C 43.7,35 44,35 44,35.2 a 3.71,3.71 0 0 1 0.2,0.9 3.57,3.57 0 0 1 -3.9,3.5 z"
+       id="path192" />
+    <circle
+       cx="21.700001"
+       cy="14.9"
+       r="12.9"
+       id="circle194" />
+    <path
+       d="m 25.2,49.8 c 2.2,0 1,-1.5 1,-1.5 v 0 a 15.44,15.44 0 0 1 -3.4,-9.7 15,15 0 0 1 1.4,-6.4 0.77,0.77 0 0 1 0.2,-0.3 c 0.7,-1.4 -0.7,-1.5 -0.7,-1.5 v 0 A 12.1,12.1 0 0 0 21.8,30.3 19.69,19.69 0 0 0 2.4,47.1 c 0,1 0.3,2.8 3.4,2.8 h 19.1 c 0.2,-0.1 0.2,-0.1 0.3,-0.1 z"
+       id="path196" />
+  </g>
 </svg>

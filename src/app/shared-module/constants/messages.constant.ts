@@ -91,6 +91,7 @@ export const Msg = {
     user:{
         errors:{
             RECOVERY_CURRENT_USER_FAILED:"Recovery current user failed",
+            RECOVERY_ALL_USERS_FAILED:"Recovery of all users failed",
             RECOVERY_OF_THE_REQUESTED_USER_HAS_FAILED : "Recovery of the requested user has failed"
         }
     },
