@@ -13,7 +13,8 @@ export const Msg = {
             SIGNOUT:"Sign out",
             MY_BOARDS:"My Boards",
             MY_TEAMS:"My Teams",
-            SEARCH:"Search"
+            SEARCH:"Search",
+            USERS_MANAGMENT: "Managing users"
         },
         register:{
             ACCOUNT_CREATION: "Account creation"
@@ -42,6 +43,12 @@ export const Msg = {
             COOKIES:"Cookies",
             FOLLOW_US_ON_SOCIAL_NETWORKS:"Follow us",
             ALL_RIGTHS_RESERVED:"All rights reserved"
+        },
+        user:{
+            TOOLTIP_TEAMS:"Teams",
+            TOOLTIP_EDIT:"Edit",
+            TOOLTIP_DELETE:"Delete",
+            TOOLTIP_CHANGE_ROLE:"Change role"
         },
         modal_activate_user:{
             AUTHENTICATION_CODE:"Authentication code",
@@ -83,7 +90,9 @@ export const Msg = {
     
     user:{
         errors:{
-            RECOVERY_CURRENT_USER_FAILED:"Recovery current user failed"
+            RECOVERY_CURRENT_USER_FAILED:"Recovery current user failed",
+            RECOVERY_ALL_USERS_FAILED:"Recovery of all users failed",
+            RECOVERY_OF_THE_REQUESTED_USER_HAS_FAILED : "Recovery of the requested user has failed"
         }
     },
     auth:{
@@ -93,6 +102,11 @@ export const Msg = {
             CHANGE_PASSWORD_FAILED:"Change password failed",
             REFRESH_TOKEN_REQUEST_FAILED:"Request to send refresh token failed",
             USER_SIGNOUT_FAILED:"User signout failed"
+        }
+    },
+    guards:{
+        errors:{
+            CURRENT_USER_RECUP_FAILED:"Recovery of the current user failed"
         }
     }
     

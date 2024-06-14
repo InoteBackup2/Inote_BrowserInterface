@@ -1,63 +1,83 @@
-.inoteNavLink{
-    text-decoration: none;
-    color: white;
+.inoteNavLink {
+  text-decoration: none;
+  color: white;
 }
 
-#fullPageHeight_withNavBar{
-    height: 90vh;
-    width: 100%;
-  }
+.fullPageHeight_withNavBar {
+  height: 90vh;
+  width: 100%;
+}
 
 .inote-link-normal {
-    text-decoration: none;
-    cursor:pointer;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.inote-small-comment{
-    font-size: smaller;
+.inote-small-comment {
+  font-size: smaller;
 }
 
-.inote-list-without-points{
-  list-style-type: none;  
+.inote-list-without-points {
+  list-style-type: none;
 }
 
 .inoteNavLink {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
+}
+
+/* Field of form is valid */
+.ng-valid [required] {
+  border-left: 5px solid green;
+}
+
+/* All element who aren't form not valid (input, select...) */
+.ng-invalid:not(form) {
+  border-left: 5px solid red;
+}
+
+#page {
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 10px; /* Hauteur du pied de page */
+}
+
+#page_without_nav {
+  height: 100vh;
+  width: 100%;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0; /* on le colle en bas */
+  width: 100%;
+  height: 100px; /* Hauteur du pied de page */
+}
+
+@keyframes inote_logo_vertical_translate {
+  0% {
+    transform: translateY(10px);
   }
-  
-  /* Field of form is valid */
-  .ng-valid [required] {
-    border-left: 5px solid green;
+
+  100% {
+    transform: translateY(-10px);
   }
-  
-  /* All element who aren't form not valid (input, select...) */
-  .ng-invalid:not(form) {
-    border-left: 5px solid red;
-  }
-  
-  #page {
-    height: 90vh;
-    width: 100%;
-  }
-  
-  #page_without_nav {
-    height: 100vh;
-    width: 100%;
-  }
-  
-  @keyframes inote_logo_vertical_translate {
-    0% {
-      transform: translateY(10px);
-    }
-  
-    100% {
-      transform: translateY(-10px);
-    }
-  }
-  
-  .inote_logo_animation {
-    animation: inote_logo_vertical_translate 2s alternate-reverse infinite
-      ease-in-out both;
-  }
-  
+}
+
+.inote_logo_animation {
+  animation: inote_logo_vertical_translate 2s alternate-reverse infinite
+    ease-in-out both;
+}
+
+.avatar {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  margin: 20px auto;
+}
+
+.sticker {
+  background-color: white;
+  width: 200px;
+  height: 250px;
+}

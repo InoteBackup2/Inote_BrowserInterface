@@ -14,6 +14,7 @@ import { AppProperties } from "../../../app.properties";
 import { Urn } from "../../../shared-module/enums/urn.enum";
 import { LanguageManagerService } from "../../../shared-module/services/language-manager.service";
 import { Msg } from "../../../shared-module/constants/messages.constant";
+import { Role } from "../../../shared-module/enums/role.enum";
 
 @Component({
   selector: "app-protected-nav-component",
@@ -23,11 +24,14 @@ import { Msg } from "../../../shared-module/constants/messages.constant";
 export class ProtectedNavComponent implements OnInit {
   // RELATING TEMPLATE VARIABLES
   // ==============================================
-  profileManagementPath: string = Msg.webpage_staticText.protectedNavBar.PROFILE_MANAGEMENT;
+  profileManagementPath: string =
+    Msg.webpage_staticText.protectedNavBar.PROFILE_MANAGEMENT;
   signoutPath: string = Msg.webpage_staticText.protectedNavBar.SIGNOUT;
   myBoardsPath: string = Msg.webpage_staticText.protectedNavBar.MY_BOARDS;
   myTeamsPath: string = Msg.webpage_staticText.protectedNavBar.MY_TEAMS;
   searchPath: string = Msg.webpage_staticText.protectedNavBar.SEARCH;
+  userManagementPath: string =
+    Msg.webpage_staticText.protectedNavBar.USERS_MANAGMENT;
 
   currentConnectUser!: PublicUserResponseDto | null;
 
@@ -35,6 +39,7 @@ export class ProtectedNavComponent implements OnInit {
   // ==============================================
   requestedSearch!: boolean;
   faMagnifyingGlass = faMagnifyingGlass;
+  roleAdmin: Role = Role.ADMIN;
 
   // HTTP
   // ==============================================
@@ -49,7 +54,6 @@ export class ProtectedNavComponent implements OnInit {
 
   /* Response */
   errorResponseDto!: ErrorResponseDto;
-
 
   // DEPENDENCIES INJECTIONS BY CONSTRUCTOR
   // ==============================================
@@ -318,5 +322,9 @@ export class ProtectedNavComponent implements OnInit {
     );
 
     return promise;
+  }
+
+  onUserManagement() {
+    this.router.navigate([Urn.USERS_MANAGEMENT]);
   }
 }

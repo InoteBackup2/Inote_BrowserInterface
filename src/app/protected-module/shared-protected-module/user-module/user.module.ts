@@ -5,17 +5,23 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserFilterPipe } from './user-filter-pipe.pipe';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { UserComponent } from './user-component/user.component';
+import { SharedModule } from '../../../shared-module/shared.module';
 
 @NgModule({
-  declarations: [UserFilterPipe],
+  declarations: [UserFilterPipe, UserComponent],
   imports: [
     CommonModule,
    FontAwesomeModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   providers:[
     ProtectedUserService
+  ],
+  exports:[
+    UserComponent
   ]
 })
 export class UserModule { }

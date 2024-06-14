@@ -17,7 +17,7 @@
           class="img-fluid rounded-circle  border border border-secondary-subtle" id="user-profile">
       </a>
       <ul class="dropdown-menu dropdown-menu-end">
-        <div class="ms-1 me-1 fw-bold ">{{this.currentConnectUser?.pseudo}}</div>
+        <div class="ms-1 me-1 fw-bold ">{{this.currentConnectUser?.pseudonyme}}</div>
         <div class="ms-1 me-1 text-success fw-bold  fs-6 fst-italic ">{{this.currentConnectUser?.username}}</div>
         <li>
           <hr class="dropdown-divider">
@@ -37,6 +37,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link text-white inote-link-normal">{{this.lang.pickMsg(this.myTeamsPath)}}</a>
+        </li>
+        <li  class="nav-item" *ngIf="this.currentConnectUser?.role===this.roleAdmin">
+          <a (click)="this.onUserManagement()" class="nav-link text-danger inote-link-normal">{{this.lang.pickMsg(this.userManagementPath)}}</a>
         </li>
       </ul>
       <app-language-selector></app-language-selector>

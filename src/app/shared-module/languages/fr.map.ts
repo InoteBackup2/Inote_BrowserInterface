@@ -7,6 +7,15 @@ export const fr: Map<string, string> = new Map([
     "La récupération de l'utilisateur courant a échoué",
   ],
   [
+    Msg.user.errors.RECOVERY_ALL_USERS_FAILED,
+    "La récupération de la liste des utilisateurs enregistrés a échoué",
+  ],
+  [
+    Msg.user.errors.RECOVERY_OF_THE_REQUESTED_USER_HAS_FAILED,
+    "La récupération de l'utilisateur demandé a échoué",
+  ],
+  
+  [
     Msg.toasts.titles.USER_ACCOUNT_ACTIVATION,
     "Activation du compte utilisateur",
   ],
@@ -83,6 +92,7 @@ export const fr: Map<string, string> = new Map([
   [Msg.webpage_staticText.protectedNavBar.MY_BOARDS, "Mes Tableaux"],
   [Msg.webpage_staticText.protectedNavBar.MY_TEAMS, "Mes Equipes"],
   [Msg.webpage_staticText.protectedNavBar.SEARCH, "Rechercher"],
+  [Msg.webpage_staticText.protectedNavBar.USERS_MANAGMENT, "Gestion des utilisateurs"],
   [
     Msg.webpage_staticText.modal_activate_user.AUTHENTICATION_CODE,
     "Code d'authentification",
@@ -121,5 +131,21 @@ export const fr: Map<string, string> = new Map([
   [
     Msg.webpage_staticText.modal_change_password.CONFIRM_PASSWORD,
     "Confirmation du mot de passe",
+  ],
+  [
+    Msg.webpage_staticText.user.TOOLTIP_CHANGE_ROLE,
+    "Affecter un autre rôle"
+  ],
+  [
+    Msg.webpage_staticText.user.TOOLTIP_DELETE,
+    "Supprimer"
+  ],
+  [
+    Msg.webpage_staticText.user.TOOLTIP_EDIT,
+    "Editer"
+  ],
+  [
+    Msg.webpage_staticText.user.TOOLTIP_TEAMS,
+    "Equipes"
   ],
 ]);
